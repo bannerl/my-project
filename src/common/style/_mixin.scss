@@ -1,0 +1,65 @@
+.border-1px{
+    position: relative;
+    &:after{
+        position: absolute;
+        display: block;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        font-size: 0;
+        border-bottom: 1px solid #ddd;
+        transform: scaleY(.5);
+        content: '.';
+         @media (-webkit-min-device-pixel-ratio:3),(min-device-pixel-ratio:3){
+            transform: scaleY(.3);
+        }
+        
+    }    
+}
+.border-1px-top{
+    position: relative;
+    &:before{
+        position: absolute;
+        display: block;
+        top: 0;
+        left: 0;
+        width: 100%;
+        font-size: 0;
+        border-top: 1px solid #ddd;
+        transform: scaleY(.5);
+        content: '.';
+    }    
+}
+.border-1px-right{
+    position:relative;
+    &:after{
+        position:absolute;
+        height: 100%;
+        right: 0;
+        top: 0;
+        border-right: 1px solid #ddd;
+        transform: scaleX(.5);
+        content: '';
+        @media (-webkit-min-device-pixel-ratio:3),(min-device-pixel-ratio:3){
+            transform: scaleX(.3);
+        }
+    }
+}
+@mixin borderlpx{
+    position:relative;
+    &:after{
+        position:absolute;
+        width: 100%;
+        left: 0;
+        top: 0;
+        border-bottom: 1px solid #ddd;
+        transform: scaleY(.5);
+        content: '';
+    }
+}
+@mixin bg-image($url){
+    background-image: url($url+'@2x.png');
+    @media (-webkit-min-device-pixel-ratio:3),(min-device-pixel-ratio:3){
+        background-image: url($url+'@3x.png');
+    }
+}
