@@ -28,11 +28,11 @@ export default [
           name: 'user',
           component:user
         },
-        {
-        	path: '/description',
-        	name: 'orderDescription',
-            component: orderDescription
-        },
+//      {
+//      	path: '/description',
+//      	name: 'orderDescription',
+//          component: orderDescription
+//      },
         {
         	path: '/orderList',
         	name: 'orderList',

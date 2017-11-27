@@ -1,6 +1,11 @@
 <style lang="scss" type="text/css">
 	
 	.user-wrapper{
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
 		.userInfo-wrapper{
 			display: flex;
 			align-items: center;
@@ -194,7 +199,7 @@
 					</mt-cell>
 				</div>
 			</div>
-			<slot name="text"></slot>
+			<slot name="fixed-navbar"></slot>
 			<user-edit v-on:close="toggleAcount" :show="acountShow" :userInfo="userInfos"></user-edit>
 		</div>
 	</transition>

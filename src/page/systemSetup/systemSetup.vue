@@ -5,7 +5,7 @@
 		left: 0;
 		width: 100%;
 		background: #f5f5f5;
-		height: 600px;
+		height: 100%;
 		.trade-details{
 			margin-top: 10px;
 			.iconfont{
