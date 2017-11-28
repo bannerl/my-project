@@ -73,9 +73,9 @@
 	import Vue from 'vue'
 	import BScroll from 'better-scroll'
 	import {formatTime} from '@/common/js/base.js'
-	import countEdit from 'components/countedit/countedit'
-	import lineDivide from 'components/linedivide/linedivide'
-	import ratingFilter from 'components/ratingfilter/ratingfilter'
+	import countEdit from '../countedit/countedit'
+	import lineDivide from '../linedivide/linedivide'
+	import ratingFilter from '../ratingfilter/ratingfilter'
 	const ALL = 2
 	const POSITIVE = 1
 	const NEGATIVE = 0
@@ -206,8 +206,7 @@
 </script>
 
 <style lang="scss"  type="text/css">
-@import '../../common/style/icon';
-@import '../../common/style/mixin';
+@import '../../../../common/style/mixin';
 .food-desc-page{
 	position: fixed;
 	top: 0;

@@ -1,5 +1,4 @@
 <style lang="scss" type="text/css">
-	
 	.user-wrapper{
 		position: absolute;
 		top: 0;
@@ -238,7 +237,7 @@
 		},
 		beforeRouteEnter (to, from, next) {
 		  next(vm => {
-		    if(from.name === "orderList" || from.name === "index") {
+		    if(from.name === "orderList" || from.name === "index" || from.name === null) {
 		    	vm.closeAnimation()
 		    }
 		  })

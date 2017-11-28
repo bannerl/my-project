@@ -167,7 +167,7 @@
 			</mt-header>
 			<div class="collection-list">
 				<ul class="collection-container">
-					<li class="item border-1px" v-for="collection in collections">
+					<li @click="intoSeller" class="item border-1px" v-for="collection in collections">
 						<div class="image">
 							<img width="60" height="60" :src="collection.image" />
 						</div>
@@ -236,6 +236,9 @@
 			},
 			returnPrev: function(){
 				this.$router.go(-1)
+			},
+			intoSeller: function() {
+				this.$router.push('/seller/goods')
 			}
 		},
 		created: function(){

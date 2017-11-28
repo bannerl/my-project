@@ -9,6 +9,10 @@ import discount from 'page/discount/discount'
 import score from 'page/score/score'
 import systemSetup from 'page/systemSetup/systemSetup'
 import collection from 'page/collection/collection'
+import seller from 'page/seller/seller'
+import goods from 'page/seller/children/goods/goods'
+import ratings from 'page/seller/children/ratings/ratings'
+import description from 'page/seller/children/seller/seller'
 
 
 export default [
@@ -64,6 +68,25 @@ export default [
         	path: '/collection',
         	name: 'collection',
         	component: collection
+        },
+        {
+        	path: '/seller',
+        	name: 'seller',
+        	component: seller,
+        	children: [
+	        	{
+	        		path: 'goods',
+	        		component: goods
+	        	},
+	        	{
+	        		path: 'description',
+	        		component: description
+	        	},
+	        	{
+	        		path: 'ratings',
+	        		component: ratings
+	        	}
+        	]
         }
       ]
     }
