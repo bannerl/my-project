@@ -15,19 +15,16 @@
   	<div class="main-top">
 	  	  <router-view>
 	  	  	<mt-tabbar slot="fixed-navbar" v-model="selected">
-	  	  		<div></div>
-				  <mt-tab-item id="food">
-				    <span slot="icon" v-if="selected!=='food'" class="fixed-icon iconfont icon-waimai"></span>
+				  <mt-tab-item id="index">
+				    <span slot="icon" v-if="selected!=='index'" class="fixed-icon iconfont icon-waimai"></span>
 				    <span slot="icon" style="font-size: 25px;" v-else class="fixed-icon iconfont icon-waimai1"></span>
 				    	外卖
 				  </mt-tab-item>
-				  <div @click="as">
-					  <mt-tab-item id="orderList">
-					     <span slot="icon" v-if="selected!=='orderList'" class="fixed-icon iconfont icon-mingxi"></span>
-					     <span slot="icon" style="font-size: 26px;" v-else class="fixed-icon iconfont icon-dingdan6"></span>
-					    	订单
-					  </mt-tab-item>
-				</div>	  
+				  <mt-tab-item id="orderList">
+				     <span slot="icon" v-if="selected!=='orderList'" class="fixed-icon iconfont icon-mingxi"></span>
+				     <span slot="icon" style="font-size: 26px;" v-else class="fixed-icon iconfont icon-dingdan6"></span>
+				    	订单
+				  </mt-tab-item>
 				  <mt-tab-item id="user">
 				     <span slot="icon" v-if="selected!=='user'" class="fixed-icon iconfont icon-wode2"></span>
 				     <span slot="icon" v-else class="fixed-icon iconfont icon-wode11"></span>
@@ -53,9 +50,6 @@
 	  	}
 	  },
 	  methods: {
-	  	ds: function(){
-	  		
-	  	}
 	  },
 	  computed: {
 	  	navbarFixedShow: function(){

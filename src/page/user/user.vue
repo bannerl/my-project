@@ -123,10 +123,17 @@
 	.indexFade-enter,.indexFade-leave-to{
 		transform: translate3d(-100%,0,0);
 	}
+	.userstop-enter-active,.userstop-leave-active{
+		transition: all .02s linear;
+		transform: translate3d(0,0,0);
+	}
+	.userstop-enter,.userstop-leave-to{
+		transform: translate3d(0,0,0);
+	}
 </style>
 <template>
 	<transition :name="indexFade">
-		<div class="user-wrapper" v-if="userInfos">
+		<div class="user-wrapper" v-if="userInfos" ref="userDom">
 			<mt-header title="">
 			  <div slot="left">
 			    <mt-button>我的</mt-button>
@@ -229,6 +236,22 @@
 				'systemFade'
 			])
 		},
+		beforeRouteEnter (to, from, next) {
+		  next(vm => {
+		    if(from.name === "orderList" || from.name === "index") {
+		    	vm.closeAnimation()
+		    }
+		  })
+		},
+		beforeRouteLeave (to, from, next) {
+			if(to.name === "orderList" || to.name === "index") {
+				//底部导航切换没有动画
+		    	this.$refs.userDom.style.display = "none"
+		    }else{
+		    	this.openAnimation()
+		    }
+			next(true)
+		},
 		methods: {
 			_initPage: function(){
 				let self = this
@@ -266,7 +289,18 @@
 				  position: 'bottom',
 				  duration: 1200
 				})
-			}
+			},
+			closeAnimation: function() {
+				let self = this
+				this.indexFade = "userstop"
+				//定时确保下次路由切换仍然有动画
+				setTimeout(function(){
+					self.indexFade = "indexFade"
+				},400)
+			},
+			openAnimation: function() {
+				this.indexFade = "indexFade"
+			},
 		},
 		updated: function(){
 		},

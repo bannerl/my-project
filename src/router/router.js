@@ -1,4 +1,5 @@
 import App from '../App'
+import index from 'page/index/index'
 import login from 'page/login/login'
 import user from 'page/user/user'
 import orderDescription from 'page/order/children/orderDescription'
@@ -8,6 +9,7 @@ import discount from 'page/discount/discount'
 import score from 'page/score/score'
 import systemSetup from 'page/systemSetup/systemSetup'
 import collection from 'page/collection/collection'
+
 
 export default [
     { path: '/',
@@ -28,11 +30,11 @@ export default [
           name: 'user',
           component:user
         },
-//      {
-//      	path: '/description',
-//      	name: 'orderDescription',
-//          component: orderDescription
-//      },
+        {
+        	path: '/index',
+        	name: 'index',
+            component: index
+        },
         {
         	path: '/orderList',
         	name: 'orderList',

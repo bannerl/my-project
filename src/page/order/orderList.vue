@@ -95,9 +95,16 @@
 	.ordersFade-enter,.ordersFade-leave-to{
 		transform: translate3d(-100%,0,0);
 	}
+	.orderstop-enter-active,.ordersFade-leave-active{
+		transition: all .02s linear;
+		transform: translate3d(0,0,0);
+	}
+	.ordersFade-enter,.ordersFade-leave-to{
+		transform: translate3d(0,0,0);
+	}
 </style>
 <template>
-	<transition name="ordersFade">
+	<transition :name="ordersFade">
 		<div class="orderList-wrapper" v-if="orders">
 			<div>
 				<mt-header title="订单列表">
@@ -149,7 +156,8 @@
 			return {
 				orders: data.user.orders,
 				orderInfo: {},
-				orderDescShow: false
+				orderDescShow: false,
+				ordersFade: "ordersFade"
 			}
 		},
 		methods: {
@@ -163,7 +171,18 @@
 			},
 			closeDesc: function(){
 				this.orderDescShow = !this.orderDescShow
+			},
+			closeAnimation: function() {
+				this.ordersFade = 'orderstop'
 			}
+		},
+		beforeRouteEnter (to, from, next) {
+		  next(vm => {
+		    if(from.name === "user" || from.name === "index") {
+		    	vm.closeAnimation()
+		    }
+		    
+		  })
 		},
 		watch:{
 			orderInfo: function(){
