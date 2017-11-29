@@ -9,7 +9,7 @@
 		.orderList{
 			position: absolute;
 			width: 100%;
-			top: 40px;
+			top: 84px;
 			bottom: 55px;
 			overflow: hidden;
 			.item{
@@ -108,14 +108,26 @@
 		<div class="orderList-wrapper" v-if="orders">
 			<div>
 				<mt-header title="订单列表">
-				  <router-link to="/" slot="left">
-				    <mt-button icon="back">返回</mt-button>
-				  </router-link>
-				  <mt-button slot="right">筛选</mt-button>
+						<mt-button slot="right">
+							<div @click="closeFilter">
+								筛选
+							</div>
+						</mt-button>
 				</mt-header>
+				<mt-navbar v-model="orderTypes">
+						<mt-tab-item id="0">
+							<div @click="allType">全部</div >
+						</mt-tab-item>
+						<mt-tab-item id="1">
+							<div @click="cancelType">已取消</div >
+						</mt-tab-item>
+						<mt-tab-item id="2">
+							<div @click="returnPay">退款</div >
+						</mt-tab-item>
+				</mt-navbar>
 				<div class="orderList" ref="orderList">
 					<ul>
-						<li class="item" v-for="order in orders">
+						<li v-show="fitlerOrder(order)" class="item" v-for="order in orders">
 							<div class="food-description">
 								<img class="orderImage" :src="order.image" width="66" height="66" />
 								<div class="content" @click="intoDescPage(order)">
@@ -140,6 +152,8 @@
 				<slot name="fixed-navbar"></slot>
 			</div>
 			<order-desc v-on:close="closeDesc" :orderInfo="orderInfo" :orderShow="orderDescShow"></order-desc>
+			<order-filter v-on:close="closeFilter" :timeFilter="timeFilter" :show="orderFilterShow"></order-filter>
+			
 		</div>
 	</transition>
 </template>
@@ -149,6 +163,11 @@
 	import BScroll from "better-scroll"
 	import {formatTime} from "../../common/js/base"
 	import orderDesc from "./children/orderDescription"
+	import orderFilter from "./children/orderFilter"
+	
+	const ALL = 0 
+	const CACEL = 1
+	const RETURNPAY = 2
 	
 	export default {
 		name: "orderList",
@@ -156,8 +175,11 @@
 			return {
 				orders: data.user.orders,
 				orderInfo: {},
-				orderDescShow: false,
-				ordersFade: "ordersFade"
+				orderDescShow: false, //详情页
+				orderFilterShow: false, //筛选页
+				ordersFade: "ordersFade", //动画名称
+				timeFilter: "", //筛选页事件筛选
+				orderTypes: ALL + '' //订单的类型
 			}
 		},
 		methods: {
@@ -169,11 +191,32 @@
 				this.orderInfo = data
 				this.orderDescShow = !this.orderDescShow
 			},
-			closeDesc: function(){
+			closeDesc: function () {
 				this.orderDescShow = !this.orderDescShow
+			},
+			closeFilter: function () {
+				this.orderFilterShow = !this.orderFilterShow
 			},
 			closeAnimation: function() {
 				this.ordersFade = 'orderstop'
+			},
+			fitlerOrder: function(order) {
+				//mint是字符串，这里隐式转换一下
+				let type = (this.orderTypes - 0)
+				if(type === ALL ) {
+					return true
+				}else {
+					return order.type === type
+				}
+			},
+			allType: function() {
+				this.orderTypes = ALL
+			},
+			cancelType: function() {
+				this.orderTypes = CACEL
+			},
+			returnPay: function() {
+				this.orderTypes = RETURNPAY
 			}
 		},
 		beforeRouteEnter (to, from, next) {
@@ -209,7 +252,8 @@
 			})
 		},
 		components: {
-			orderDesc
+			orderDesc,
+			orderFilter
 		}
 	}
 </script>
