@@ -32,17 +32,26 @@ export default [
         {
           path: '/user/:userId',
           name: 'user',
-          component:user
+          component:user,
+          meta: {
+          	pageTitle: "个人中心"
+          }
         },
         {
         	path: '/index',
         	name: 'index',
-            component: index
+            component: index,
+            meta: {
+	          pageTitle: "首页"
+	        }
         },
         {
         	path: '/orderList',
         	name: 'orderList',
-        	component: orderList
+        	component: orderList,
+        	meta: {
+	          pageTitle: "订单"
+	        }
         },
         {
         	path: '/wallet',

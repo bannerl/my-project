@@ -49,6 +49,8 @@
 
 <script>
 	import { MessageBox } from 'mint-ui'
+	import {setDocumentTitle} from "../../common/js/base"
+	
 	export default {
 		data() {
 			return {
@@ -60,6 +62,7 @@
 
 		},
 		beforeRouteEnter (to, from, next) {
+		  typeof to.meta.pageTitle !== undefined && setDocumentTitle(to.meta.pageTitle)
 		  next(vm => {
 		    if(from.name === "orderList" || from.name === "user") {
 		    	vm.closeAnimations()

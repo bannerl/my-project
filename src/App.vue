@@ -46,6 +46,7 @@
 	  data(){
 	  	return {
 	  		selected:'',
+	  		setTitle: 'ddsfdf'
 	  		//transitionName:'static'
 	  	}
 	  },

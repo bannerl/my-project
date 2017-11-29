@@ -215,6 +215,7 @@
 	import axios from 'axios'
 	import {mapState,mapMutations} from 'vuex'
 	import {getStore} from '@/common/js/savaLocal'
+	import {setDocumentTitle} from '@/common/js/base'
 	import userEdit from './children/userEdit'
 	import { Toast } from 'mint-ui'
 	
@@ -236,6 +237,7 @@
 			])
 		},
 		beforeRouteEnter (to, from, next) {
+		  typeof to.meta.pageTitle !== undefined && setDocumentTitle(to.meta.pageTitle)
 		  next(vm => {
 		    if(from.name === "orderList" || from.name === "index" || from.name === null) {
 		    	vm.closeAnimation()

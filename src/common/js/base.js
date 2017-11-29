@@ -1,4 +1,4 @@
-export function formatTime(time,fmt){
+export function formatTime(time,fmt) {
 	if(/(y+)/.test(fmt)){
 		fmt = fmt.replace(RegExp.$1,(time.getFullYear()+'').substr(4-RegExp.$1.length))
 	}
@@ -8,7 +8,7 @@ export function formatTime(time,fmt){
 		'h+':time.getHours(),
 		'm+':time.getMinutes()
 	}
-	for(let k in o){
+	for(let k in o) {
 		let str = `${k}`
 		if(new RegExp(`(${k})`).test(fmt)){
 		   let str = o[k] + ''
@@ -18,6 +18,22 @@ export function formatTime(time,fmt){
 	return fmt
 }
 
-function padLeftZero(str){
+function padLeftZero(str) {
 	return ('00'+str).substr(str.length)
 }
+
+export function setDocumentTitle (title) {
+    document.title = title;
+    let ua = navigator.userAgent;
+    if (/\bMicroMessenger\/([\d\.]+)/.test(ua) && /ip(hone|od|ad)/i.test(ua)) {
+        var i = document.createElement('iframe');
+        i.src = '/favicon.ico';
+        i.style.display = 'none';
+        i.onload = function () {
+            setTimeout(function () {
+                i.remove();
+            }, 9);
+        };
+        document.body.appendChild(i);
+    }
+};

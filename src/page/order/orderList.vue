@@ -161,7 +161,7 @@
 <script>
 	import data from "../../../data"
 	import BScroll from "better-scroll"
-	import {formatTime} from "../../common/js/base"
+	import {formatTime,setDocumentTitle} from "../../common/js/base"
 	import orderDesc from "./children/orderDescription"
 	import orderFilter from "./children/orderFilter"
 	
@@ -220,6 +220,7 @@
 			}
 		},
 		beforeRouteEnter (to, from, next) {
+			typeof to.meta.pageTitle !== undefined && setDocumentTitle(to.meta.pageTitle)
 		  next(vm => {
 		    if(from.name === "user" || from.name === "index") {
 		    	vm.closeAnimation()
