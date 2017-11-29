@@ -10,6 +10,7 @@ import score from 'page/score/score'
 import systemSetup from 'page/systemSetup/systemSetup'
 import collection from 'page/collection/collection'
 import seller from 'page/seller/seller'
+import receiveAddress from 'page/receiveAddress/receiveAddress'
 import goods from 'page/seller/children/goods/goods'
 import ratings from 'page/seller/children/ratings/ratings'
 import description from 'page/seller/children/seller/seller'
@@ -96,6 +97,14 @@ export default [
 	        		component: ratings
 	        	}
         	]
+        },
+        {
+        	path: '/address',
+        	name:'receiveAddress',
+        	component: receiveAddress,
+        	meta: {
+        		pageTitle: "收货地址"
+        	}
         }
       ]
     }

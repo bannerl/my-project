@@ -256,6 +256,8 @@
 		methods: {
 			_initPage: function(){
 				let self = this
+				//底部导航激活
+				self.$parent.selected = "user"
 				let id = getStore('user_id')
 				if(!self.loginStatus&&!id){
 					self.$router.push({name:'login'})

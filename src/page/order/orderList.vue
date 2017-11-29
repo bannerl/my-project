@@ -6,12 +6,19 @@
 		left: 0;
 		height: 100%;
 		width: 100%;
+		.mint-navbar{
+			position: relative;
+			z-index: 10;
+		}
 		.orderList{
-			position: absolute;
+			position: fixed;
 			width: 100%;
 			top: 84px;
 			bottom: 55px;
 			overflow: hidden;
+			.container{
+				padding-bottom: 10px;
+			}
 			.item{
 				position: relative;
 				margin: 14px 0 6px 0;
@@ -114,7 +121,7 @@
 							</div>
 						</mt-button>
 				</mt-header>
-				<mt-navbar v-model="orderTypes">
+				<mt-navbar v-model="orderTypes" class="border-1px">
 						<mt-tab-item id="0">
 							<div @click="allType">全部</div >
 						</mt-tab-item>
@@ -126,8 +133,8 @@
 						</mt-tab-item>
 				</mt-navbar>
 				<div class="orderList" ref="orderList">
-					<ul>
-						<li v-show="fitlerOrder(order)" class="item" v-for="order in orders">
+					<ul class="container">
+						<li v-show="fitlerOrder(order)&&timeSelected(order.time)" class="item" v-for="order in orders">
 							<div class="food-description">
 								<img class="orderImage" :src="order.image" width="66" height="66" />
 								<div class="content" @click="intoDescPage(order)">
@@ -152,7 +159,7 @@
 				<slot name="fixed-navbar"></slot>
 			</div>
 			<order-desc v-on:close="closeDesc" :orderInfo="orderInfo" :orderShow="orderDescShow"></order-desc>
-			<order-filter v-on:close="closeFilter" :timeFilter="timeFilter" :show="orderFilterShow"></order-filter>
+			<order-filter v-on:selected="timeFilter" v-on:close="closeFilter" :filterArr="filterArr" :show="orderFilterShow"></order-filter>
 			
 		</div>
 	</transition>
@@ -168,6 +175,7 @@
 	const ALL = 0 
 	const CACEL = 1
 	const RETURNPAY = 2
+	const filterArr = ['全部','近一个月','近三个月','近半年','近一年']
 	
 	export default {
 		name: "orderList",
@@ -178,8 +186,9 @@
 				orderDescShow: false, //详情页
 				orderFilterShow: false, //筛选页
 				ordersFade: "ordersFade", //动画名称
-				timeFilter: "", //筛选页事件筛选
-				orderTypes: ALL + '' //订单的类型
+				orderTypes: ALL + '',//订单的类型
+				filterArr: filterArr,
+				filterResult: 1, //时间筛选结果
 			}
 		},
 		methods: {
@@ -217,6 +226,25 @@
 			},
 			returnPay: function() {
 				this.orderTypes = RETURNPAY
+			},
+			timeFilter: function (index) {
+				console.log(index)
+				this.filterResult = index
+			},
+			timeSelected: function (time) {
+				let monthTime = 1000*60*60*24*30
+				let threeMTime = monthTime*3
+				let sixTime = monthTime*6
+				let yearTime = monthTime*12
+				let nowTime = new Date().getTime()
+				let arr = [nowTime,monthTime,threeMTime,sixTime,yearTime]
+				
+				let diff = nowTime - arr[this.filterResult]
+				if(time>diff) {
+					return true
+				} else {
+					return false
+				}
 			}
 		},
 		beforeRouteEnter (to, from, next) {
@@ -229,7 +257,29 @@
 		  })
 		},
 		watch:{
-			orderInfo: function(){
+			orderInfo: function() {
+				this.$nextTick(() => {
+					if(!this.scroll) {
+						this.scroll = new BScroll(this.$refs.orderList,{
+							'click': true
+						})
+					} else {
+						this.scroll.refresh()
+					}
+				})
+			},
+			orderTypes: function() {
+				this.$nextTick(() => {
+					if(!this.scroll) {
+						this.scroll = new BScroll(this.$refs.orderList,{
+							'click': true
+						})
+					} else {
+						this.scroll.refresh()
+					}
+				})
+			},
+			filterResult: function() {
 				this.$nextTick(() => {
 					if(!this.scroll) {
 						this.scroll = new BScroll(this.$refs.orderList,{
@@ -240,8 +290,11 @@
 					}
 				})
 			}
+			
 		},
 		created: function(){
+			//底部导航激活
+			this.$parent.selected = "orderList"
 			this.$nextTick(() => {
 				if(!this.scroll) {
 					this.scroll = new BScroll(this.$refs.orderList,{

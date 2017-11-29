@@ -8,6 +8,77 @@
 		z-index: 10;
 		background: #f5f5f5;
 		padding-bottom: 50px;
+		.sellerImage{
+			border-radius: 50%;
+		}
+		.space{
+			margin-top: 14px;
+		}
+		.address-wrapper{
+			font-size: 15px;
+			line-height: 18px;
+			.username{
+				margin-right: 4px;
+			}
+			.phone{
+				margin-right: 4px;
+			}
+		}
+		.noFlex{
+			.mint-cell-title{
+				flex: inherit;
+				width: 96px;
+			}
+			.mint-cell-value{
+				flex: 1;
+			}
+		}
+		.more-opration{
+			position: fixed;
+			bottom: 0;
+			left: 0;
+			height: 40px;
+			width: 100%;
+			display: flex;
+			background: #fff;
+			.item{
+				flex: 1;
+				line-height: 40px;
+				font-size: 15px;
+				text-align: center;
+				a.color{
+					color: #26a2ff;
+				}
+			}
+		}
+		.title{
+			color: #555;
+			span{
+				margin-left: 12px;
+			}
+		}
+		.delivery{
+			color: #555;
+		}
+		.discount{
+			color: #555;
+			span{
+				margin-left: 6px;
+			}
+		}
+		.price-wrapper{
+			.text{
+				color: #555;
+			}
+			.mark{
+				color: #ff318c;
+			}
+			.price{
+				color: #ff318c;
+				font-weight: 700;
+				font-size: 20px;
+			}
+		}
 	}
 	.orderDesc-enter-active,.orderDesc-leave-active{
 		transition: all .2s linear;
@@ -20,7 +91,7 @@
 <template>
 	<transition name="orderDesc">
 		<div v-if="orderInfo" v-show="orderShow" class="order-description">
-		<mt-header title="筛选">
+		<mt-header title="订单详情">
 		  <router-link to="/orderList" slot="left">
 		    <mt-button @click="close" icon="back">返回</mt-button>
 		  </router-link>
@@ -52,6 +123,12 @@
 		  	<span class="text">总计</span>
 		  	<span class="mark">￥</span>
 		  	<span class="price">{{orderInfo.price+orderInfo.deliveryPrice-orderInfo.discount}}</span>
+		  </div>
+		</mt-cell>
+		<mt-cell title="订单状态">
+		  <div class="price-wrapper">
+		  	<span class="text" v-show="orderInfo.type===1">已取消</span>
+		  	<span class="text" v-show="orderInfo.type===2">已退款</span>
 		  </div>
 		</mt-cell>
 		<mt-cell title="配送方:" class="space noFlex">
