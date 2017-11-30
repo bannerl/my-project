@@ -31,7 +31,8 @@ var goods = appData.goods;
 var user = appData.user;
 var users = appData.users;
 var ratings = appData.ratings;
-
+var address = appData.user.address;
+console.log(address)
 var apiRoutes = express.Router();
 
 apiRoutes.get('/seller',function (req,res){
@@ -66,6 +67,13 @@ apiRoutes.get('/users',function(req,res){
 		res.json({
 			status:0,
 			data:users
+		});
+});
+
+apiRoutes.get('/users/address',function(req,res){
+		res.json({
+			status:0,
+			data:address
 		});
 });
 

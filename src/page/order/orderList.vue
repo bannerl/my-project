@@ -157,6 +157,7 @@
 					</ul>
 				</div>
 				<slot name="fixed-navbar"></slot>
+			
 			</div>
 			<order-desc v-on:close="closeDesc" :orderInfo="orderInfo" :orderShow="orderDescShow"></order-desc>
 			<order-filter v-on:selected="timeFilter" v-on:close="closeFilter" :filterArr="filterArr" :show="orderFilterShow"></order-filter>

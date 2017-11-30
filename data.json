@@ -1652,7 +1652,22 @@
 			}		
 		],
 		"address": [
-		
+			{
+				"type": 0,
+				"address": "江干区东沙",
+				"position": "新元金沙家园\n4栋11楼1102",
+				"name": "bennt",
+				"sexType": 0,
+				"phone": "15787964835"
+			},
+			{
+				"type": 1,
+				"address": "江干区东沙",
+				"position": "智格小区\n5栋11楼1102",
+				"name": "王小肖",
+				"sexType": 0,
+				"phone": "18088964835"
+			}
 		]
 	},
 	"users":[
