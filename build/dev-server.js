@@ -32,7 +32,6 @@ var user = appData.user;
 var users = appData.users;
 var ratings = appData.ratings;
 var address = appData.user.address;
-console.log(address)
 var apiRoutes = express.Router();
 
 apiRoutes.get('/seller',function (req,res){

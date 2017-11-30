@@ -1,11 +1,11 @@
 import {
-//	RECORD_ADDRESS,
 //	ADD_CART,
 //	REDUCE_CART,
 //	INIT_BUYCART,
 //	CLEAR_CART,
 //	RECORD_SHOPDETAIL,
 	RECORD_USERINFO,
+	RECORD_ADDRESS,
 //	GET_USERINFO,
 //	CONFIRM_REMARK,
 //	CONFIRM_INVOICE,
@@ -40,6 +40,9 @@ export default {
 		state.loginStatus = true;
 		setStore('user_id', info.id);
 	},
+	[RECORD_ADDRESS](state,info) {
+		state.recordAddress.push(info)
+	}
 	//获取用户信息存入vuex
 //	[GET_USERINFO](state, info) {
 //		if (state.userInfo && (state.userInfo.username !== info.username)) {

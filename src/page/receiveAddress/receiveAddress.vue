@@ -25,9 +25,64 @@
 			width: 100%;
 			.mint-button{
 				height: 48px;
+				font-size: 16px;
 				background: #fff;
 				border-radius: 0;
-				color: #333;
+				color: #26a2ff;
+			}
+			.iconfont{
+				font-size: 19px;
+				color: #26A2FF;
+			}
+		}
+		.addressList-wrapper{
+			position: absolute;
+			top: 40px;
+			left: 0;
+			bottom: 40px;
+			width: 100%;
+			ul{
+				width: 100%;
+				padding-left: 14px;
+				box-sizing: border-box;
+				background: #fff;
+			}
+			.item{
+				position: relative;
+				display: flex;
+				align-items: center;
+				padding: 14px 10px 14px 0;
+				box-sizing: border-box; 
+				&:after{
+					@include border-1px();
+				}
+				&:last-child:after{
+					display: none;
+				}
+				.content{
+					flex: 1;
+					.title{
+						font-weight: 700;
+						padding: 6px 0;
+						font-size: 16px;
+					}
+					.user{
+						padding-top: 3px;
+						font-size: 13px;
+						color: #333;
+						i{
+							font-style: normal;
+							&.phone{
+								margin-left: 6px;
+							}
+						}
+					}
+				}
+				.iconfont{
+					margin-right: 8px;
+					font-size: 22px;
+					color: #aaa;
+				}
 			}
 		}
 	}
@@ -44,64 +99,69 @@
 		<div v-if="address" class="receiveAddress-wrapper">
 			<mt-header title="收货地址">
 			  <div slot="left">
-			    <mt-button @click="closePage" icon="back">返回</mt-button>
+			    <mt-button icon="back">返回</mt-button>
 			  </div>
 			   <div slot="right">
 			    <mt-button>编辑</mt-button>
 			  </div>
 			</mt-header>
-			
-			<div class="image">
+			<div class="image" v-show="!address">
 				<img width="100%" src="../../common/image/bg.jpg" alt="背景图片" />
-				{{address[0]}}
 			</div>
-			<div class="addressList-wrapper">
-				<ul>
-					<li class="item" v-for="item in address">
-							<h3 class="title">{{item.address}}</h3>
-							<p>
-								<i>{{item.name}}</i>
-								<i class="sexType" v-if="item.sexType===0">先生</i>
-								<i class="sexType" v-else-if="item.sexType===1">女士</i>
-								<i class="sexType" v-else></i>
-								<i class="phone">{{item.phone}}</i>
-							</p>
-						</mt-cell>
-					</li>
-				</ul>
+			<div class="addressList-wrapper" ref="scrollContainer">
+				<div>	
+					<ul>
+						<li class="item" v-for="item in address">
+							<div class="content">
+								<h3 class="title">{{item.position}}{{item.details}}</h3>
+								<p class="user">
+									<i>{{item.name}}</i>
+									<i class="sexType" v-if="item.sexType===0">先生</i>
+									<i class="sexType" v-else-if="item.sexType===1">女士</i>
+									<i class="sexType" v-else></i>
+									<i class="phone">{{item.phone}}</i>
+								</p>
+							</div>
+							<div @click="editAddress(item)" class="iconfont icon-xiugai1"></div>	
+							</mt-cell>
+						</li>
+					</ul>
+				</div>
 			</div>
 			<div class="addBtn" @click="addShow">
 				<mt-button type="primary" size="large" class="border-1px-top">
-				 	<span class="iconfont icon-dayuhao3"></span>
-				 	 添加
+				 	<span class="iconfont icon-jia3"></span>
+				 	 新增地址
 				</mt-button>
 				<div></div>
 			</div>
-			<add-address v-on:close="addShow" :show="addAddressShow"></add-address>
+			<add-address :address="addressed" v-on:close="addShow" :show="addAddressShow"></add-address>
 		</div>
 	</transition>
 </template>
 
 <script>
 	import axios from 'axios'
+	import {mapState} from 'vuex'
+	import BScroll from 'better-scroll'
 	import addAddress from './children/addAddress'
 	import {getStore} from '@/common/js/savaLocal'
 	import {getAddress} from '../../service/getData'
 	const noError = 0
 	
 	export default {
-		props: {
-			show: {
-				type: Boolean
-			}
-		},
 		data() {
 			return {
 				address: [],
-				addAddressShow: false
+				onlyAddress:[],
+				addAddressShow: false,
+				addressed: {}
 			}
 		},
 		computed: {
+			...mapState([
+				'recordAddress'
+			]),
 			acountShow: function(){
 				if(this.show){
 					return true
@@ -118,13 +178,31 @@
 			}
 		},
 		methods: {
-			closePage:function(){
-				
-			},
 			addShow:function() {
 				this.addAddressShow = !this.addAddressShow
+				
+				if(!this.addAddressShow&&this.recordAddress.length>0) {
+					this.address = this.onlyAddress
+					let arr = this.address.concat(this.recordAddress)
+					this.address = arr
+				}
+				
+				this._initBScroll()
 			},
-			
+			editAddress:function (data) {
+				this.addressed = data
+				this.addAddressShow = true
+			},
+			_initBScroll: function () {
+				if(!this.scroll) {
+					this.scroll = new BScroll(this.$refs.scrollContainer,{
+						'click':true
+					})
+				} else {
+					this.scroll.refresh()
+				}
+				
+			}
 		},
 		created: function() {
 			let result = []
@@ -139,9 +217,11 @@
 					}).then(function(res){
 						if(res.data.status === noError){
 							self.address = res.data.data
+							self.onlyAddress = res.data.data
 						}	
 					})
 				}
+				this._initBScroll()
 			})
 			
 		},

@@ -9,7 +9,7 @@ Vue.use(Vuex)
 const state = {
 	userInfo: null, //用户信息
 	loginStatus: false,//是否登录
-	
+	recordAddress: []
 //	latitude: '', // 当前位置纬度
 //	longitude: '', // 当前位置经度
 //	cartList: {}, // 加入购物车的商品列表
