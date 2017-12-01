@@ -68,6 +68,9 @@
 				<mt-field type="number" v-model="Info.phone" label="电话" placeholder="手机号码"></mt-field>
 				<mt-field v-model="Info.position" label="地址" placeholder="填写收货地址"></mt-field>
 				<mt-field v-model="Info.details" label="门牌号" placeholder="例: 8号楼304室"></mt-field>
+				<mt-cell title="是否设置为默认收货地址">
+				  <mt-switch v-model="defaultAddress"></mt-switch>
+				</mt-cell>
 			</div>
 			<div @click="savaAddress" class="confirm-wrapper">
 				<mt-button type="primary" size="large">确定</mt-button>	
@@ -78,7 +81,7 @@
 
 <script>
 	import axios from 'axios'
-	import {mapMutations} from 'vuex'
+	import {setStore ,getStore} from '../../../common/js/savaLocal'
 	import { Toast } from 'mint-ui'
 	
 	export default {
@@ -87,32 +90,38 @@
 				type: Boolean
 			},
 			address: {
-				type: Object
+				type: Object,
+				default: function() {
+					return {
+						name: ' ',
+						phone: ' ',
+						sexType: -1,
+						position: ' ',
+						details: ' '
+					}
+				}
+			},
+			editIndex: {
+				type:Number
 			}
 		},
 		data() {
 			return {
 				Info: {
-					name: '',
-					phone: '',
-					sexType: '',
-					position: '',
-					details: ''
+					sexType: -1,
 				},
+				defaultAddress:false
 			}
 		},
 		beforeUpdate: function() {
-			if(this.address) {
-				this.info = this.address
-			}
-		},
+		},	
 		watch: {
 			address: function(){
 				this.Info = this.address
 			},
 			Info: {
 				handler: function(val,oldval) {
-					if(val.phone.length>11){
+					if(val.phone !== undefined && val.phone.length>11){
 						Toast({
 						  message: '手机号输入不正确',
 						  position: 'bottom',
@@ -132,17 +141,7 @@
 			},
 		},
 		methods: {
-			...mapMutations([
-				'RECORD_ADDRESS'
-			]),
 			close: function(){
-				this.Info = {
-					name: '',
-					phone: '',
-					sexType: '',
-					position: '',
-					details: ''
-				},
 				this.$emit('close')
 			},
 			selectSex: function(number) {
@@ -152,12 +151,36 @@
 				if(this.Info.name&&this.Info.phone.length===11&&this.Info.position
 					&&this.Info.details) {
 					let info = {
-						name: this.Info.name,phone: this.Info.phone,
-						position: this.Info.position,details:this.Info.details,
-						sexType: this.Info.sexType
+						name: this.Info.name, phone: this.Info.phone,
+						position: this.Info.position, details: this.Info.details,
+						sexType: this.Info.sexType, type: this.Info.type
 					}
-					
-					this.RECORD_ADDRESS(info)
+					let _addressArr = []
+					if(getStore('addressArr')) {
+						_addressArr = getStore('addressArr')
+						_addressArr = JSON.parse(_addressArr)
+						
+						if(this.editIndex>=0) {
+							_addressArr.splice(this.editIndex,1,info)
+						} else {
+							_addressArr.push(info)
+						}
+					} else {
+						_addressArr.push(info)
+					}
+					setStore('addressArr',_addressArr)
+					let id = getStore('user_id')
+					//地址存到数据库
+//					axios.post('/api/users', {
+//					    userId: id,
+//					    address: _addressArr
+//				  	})
+//				  	.then(function (response) {
+//				    	console.log(response);
+//				  	})
+//				  	.catch(function (error) {
+//				    	console.log(error);
+//				  	})
 					this.$emit('close')
 				}
 			}

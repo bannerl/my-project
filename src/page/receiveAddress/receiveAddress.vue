@@ -65,6 +65,38 @@
 						font-weight: 700;
 						padding: 6px 0;
 						font-size: 16px;
+						.details{
+							margin-left: 6px;
+							font-style: normal;
+							font-weight: 700;
+							font-size: 16px;
+						}
+						.btn-in{
+							display: inline-block;
+							margin-left: 2px;
+							margin-top: 1px;
+							background: #26a2ff;
+						    color: #fff;
+						    height: 16px;
+						    width: 34px;
+						    text-align: center;
+						    font-size: 10px;
+						    overflow: hidden;
+						    vertical-align: text-top;
+						    border: 1px solid #26a2ff;
+						    box-sizing: border-box;
+						    .scale{
+						    	display: inline-block;
+							    font-size: 20px;
+							    text-align: center;
+							    width: 68px;
+							    height: 32px;
+							    line-height: 32px;
+							    transform: scale(0.5) translate3d(-50%, -50%, 0);
+							    margin: -1px -1px 0 0;
+							    font-style: normal;
+						    }
+						}
 					}
 					.user{
 						padding-top: 3px;
@@ -79,6 +111,9 @@
 					}
 				}
 				.iconfont{
+					position: absolute;
+					right: -9px;
+					padding: 20px;
 					margin-right: 8px;
 					font-size: 22px;
 					color: #aaa;
@@ -87,7 +122,7 @@
 		}
 	}
 	.fade-enter-active,.fade-leave-active{
-		transition: all .3s;
+		transition: all .2s;
 		transform: translate3d(0,0,0);
 	}
 	.fade-enter,.fade-leave-to{
@@ -98,11 +133,8 @@
 	<transition name="fade">
 		<div v-if="address" class="receiveAddress-wrapper">
 			<mt-header title="收货地址">
-			  <div slot="left">
+			  <div slot="left" @click="$router.go(-1)">
 			    <mt-button icon="back">返回</mt-button>
-			  </div>
-			   <div slot="right">
-			    <mt-button>编辑</mt-button>
 			  </div>
 			</mt-header>
 			<div class="image" v-show="!address">
@@ -111,9 +143,12 @@
 			<div class="addressList-wrapper" ref="scrollContainer">
 				<div>	
 					<ul>
-						<li class="item" v-for="item in address">
+						<li class="item" v-for="(item,i) in address" v-longtap="{fn:removeAddress,index:i}">
 							<div class="content">
-								<h3 class="title">{{item.position}}{{item.details}}</h3>
+								<h3 class="title">
+									{{item.position}}<i class="details">{{item.details}}</i>
+									<span v-show="item.type===0" class="btn-in"><i class="scale">默认</i></span>
+								</h3>
 								<p class="user">
 									<i>{{item.name}}</i>
 									<i class="sexType" v-if="item.sexType===0">先生</i>
@@ -122,7 +157,7 @@
 									<i class="phone">{{item.phone}}</i>
 								</p>
 							</div>
-							<div @click="editAddress(item)" class="iconfont icon-xiugai1"></div>	
+							<div @click="editAddress(item,i)" class="iconfont icon-xiugai1"></div>	
 							</mt-cell>
 						</li>
 					</ul>
@@ -135,33 +170,29 @@
 				</mt-button>
 				<div></div>
 			</div>
-			<add-address :address="addressed" v-on:close="addShow" :show="addAddressShow"></add-address>
+			<add-address :address="addressed" :editIndex="editIndex" v-on:close="addShow" :show="addAddressShow"></add-address>
 		</div>
 	</transition>
 </template>
 
 <script>
 	import axios from 'axios'
-	import {mapState} from 'vuex'
 	import BScroll from 'better-scroll'
+	import { MessageBox } from 'mint-ui'
 	import addAddress from './children/addAddress'
-	import {getStore} from '@/common/js/savaLocal'
-	import {getAddress} from '../../service/getData'
+	import { setStore , getStore } from '@/common/js/savaLocal'
 	const noError = 0
 	
 	export default {
 		data() {
 			return {
 				address: [],
-				onlyAddress:[],
 				addAddressShow: false,
-				addressed: {}
+				addressed: {},
+				editIndex: -1
 			}
 		},
 		computed: {
-			...mapState([
-				'recordAddress'
-			]),
 			acountShow: function(){
 				if(this.show){
 					return true
@@ -179,19 +210,42 @@
 		},
 		methods: {
 			addShow:function() {
-				this.addAddressShow = !this.addAddressShow
-				
-				if(!this.addAddressShow&&this.recordAddress.length>0) {
-					this.address = this.onlyAddress
-					let arr = this.address.concat(this.recordAddress)
-					this.address = arr
+				let arr = []
+				if(getStore('addressArr')){
+					arr = JSON.parse(getStore('addressArr'))
 				}
-				
-				this._initBScroll()
+				this.address = arr 
+				//在新增的时候清除编辑的值
+				this.editIndex = -1
+				if(!this.addAddressShow) {
+					this.addressed = {
+						sexType: -1,
+					}
+				}
+				this.addAddressShow = !this.addAddressShow
+				let self = this
+				setTimeout(function(){
+					self._initBScroll()
+				},1000)
 			},
-			editAddress:function (data) {
+			editAddress:function (data,i) {
 				this.addressed = data
+				this.editIndex = i
 				this.addAddressShow = true
+			},
+			removeAddress:function (index) {
+				let self =this
+				MessageBox.confirm('确定要删除该地址吗?',"删除地址").then(action => {
+					let arr = []
+					arr = JSON.parse(getStore('addressArr'))
+					arr.splice(index,1)
+					setStore('addressArr',arr)
+					self.address = arr
+					setTimeout(function(){
+						self._initBScroll()
+					})
+				},cancel=>{
+				})
 			},
 			_initBScroll: function () {
 				if(!this.scroll) {
@@ -216,8 +270,14 @@
 						}
 					}).then(function(res){
 						if(res.data.status === noError){
-							self.address = res.data.data
-							self.onlyAddress = res.data.data
+							let arr = []
+							if(getStore('addressArr') && getStore('addressArr') !== '[]'){
+								arr = JSON.parse(getStore('addressArr'))
+							} else {
+								arr = res.data.data
+								setStore('addressArr',arr)
+							}
+							self.address = arr
 						}	
 					})
 				}

@@ -1,3 +1,4 @@
+import Vue from 'vue'
 export function formatTime(time,fmt) {
 	if(/(y+)/.test(fmt)){
 		fmt = fmt.replace(RegExp.$1,(time.getFullYear()+'').substr(4-RegExp.$1.length))
@@ -37,3 +38,4 @@ export function setDocumentTitle (title) {
         document.body.appendChild(i);
     }
 };
+

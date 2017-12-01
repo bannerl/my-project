@@ -10,6 +10,8 @@ import 'mint-ui/lib/style.css'
 import '@/common/style/_mixin.scss'
 import '@/common/style/mintReset.scss'
 
+import '@/common/js/vue-touch.js'
+
 import App from './App'
 //console.log(store)
 //import seller from 'components/seller/seller'
