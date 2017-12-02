@@ -150,6 +150,9 @@
 			savaAddress: function() {
 				if(this.Info.name&&this.Info.phone.length===11&&this.Info.position
 					&&this.Info.details) {
+					if(this.defaultAddress) {
+						this.Info.type = 0
+					} 
 					let info = {
 						name: this.Info.name, phone: this.Info.phone,
 						position: this.Info.position, details: this.Info.details,

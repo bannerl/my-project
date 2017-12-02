@@ -95,6 +95,29 @@
 			}
 		}
 	}
+	.lead-wrapper{
+		background: #f5f5f5;
+		.content{
+			img{
+				margin-top: 60px;
+			}
+			.text{
+				margin: 20px auto 18px;
+				text-align: center;
+				font-size: 16px;
+				color: #777;
+				font-weight: 700;
+			}
+			.login{
+				text-align: center;
+				.mint-button{
+					font-size: 15px;
+					padding: 6px 30px;
+					background: rgba(29, 220, 100, 0.8);
+				}
+			}
+		}
+	}
 	.ordersFade-enter-active,.ordersFade-leave-active{
 		transition: all .2s linear;
 		transform: translate3d(0,0,0);
@@ -112,25 +135,25 @@
 </style>
 <template>
 	<transition :name="ordersFade">
-		<div class="orderList-wrapper" v-if="orders">
-			<div>
-				<mt-header title="订单列表">
-						<mt-button slot="right">
-							<div @click="closeFilter">
-								筛选
-							</div>
-						</mt-button>
+		<div class="orderList-wrapper" ref="userDom">
+			<div v-if="orders&&loginState">
+				<mt-header title="订单">
+					<mt-button slot="right">
+						<div @click="closeFilter">
+							筛选
+						</div>
+					</mt-button>
 				</mt-header>
 				<mt-navbar v-model="orderTypes" class="border-1px">
-						<mt-tab-item id="0">
-							<div @click="allType">全部</div >
-						</mt-tab-item>
-						<mt-tab-item id="1">
-							<div @click="cancelType">已取消</div >
-						</mt-tab-item>
-						<mt-tab-item id="2">
-							<div @click="returnPay">退款</div >
-						</mt-tab-item>
+					<mt-tab-item id="0">
+						<div @click="allType">全部</div >
+					</mt-tab-item>
+					<mt-tab-item id="1">
+						<div @click="cancelType">已取消</div >
+					</mt-tab-item>
+					<mt-tab-item id="2">
+						<div @click="returnPay">退款</div >
+					</mt-tab-item>
 				</mt-navbar>
 				<div class="orderList" ref="orderList">
 					<ul class="container">
@@ -158,9 +181,19 @@
 				</div>
 				<slot name="fixed-navbar"></slot>
 			</div>
+			<div class="lead-wrapper" v-else>
+				<mt-header title="订单"></mt-header>
+				<div class="content">
+					<img width="100%" src="../../common/image/orderList.jpg" alt="背景" />
+					<div class="text">登录后查看外卖订单</div>
+					<router-link class="login" to="/login">
+						<mt-button type="primary">立即登录</mt-button>
+					</router-link>
+				</div>
+				<slot name="fixed-navbar"></slot>
+			</div>
 			<order-desc v-on:close="closeDesc" :orderInfo="orderInfo" :orderShow="orderDescShow"></order-desc>
 			<order-filter v-on:selected="timeFilter" v-on:close="closeFilter" :filterArr="filterArr" :show="orderFilterShow"></order-filter>
-			
 		</div>
 	</transition>
 </template>
@@ -168,9 +201,10 @@
 <script>
 	import data from "../../../data"
 	import BScroll from "better-scroll"
-	import {formatTime,setDocumentTitle} from "../../common/js/base"
-	import orderDesc from "./children/orderDescription"
+	import {getStore} from '@/common/js/savaLocal'
 	import orderFilter from "./children/orderFilter"
+	import orderDesc from "./children/orderDescription"
+	import {formatTime,setDocumentTitle} from "../../common/js/base"
 	
 	const ALL = 0 
 	const CACEL = 1
@@ -189,6 +223,7 @@
 				orderTypes: ALL + '',//订单的类型
 				filterArr: filterArr,
 				filterResult: 1, //时间筛选结果
+				loginState: false
 			}
 		},
 		computed: {
@@ -230,7 +265,6 @@
 				this.orderTypes = RETURNPAY
 			},
 			timeFilter: function (index) {
-				console.log(index)
 				this.filterResult = index
 			},
 			timeSelected: function (time) {
@@ -257,6 +291,13 @@
 		    }
 		    
 		  })
+		},
+		beforeRouteLeave (to, from, next) {
+			if(to.name === "user" || to.name === "index") {
+				//底部导航切换没有动画
+		    	this.$refs.userDom.style.display = "none"
+		    	next(true)
+		    }
 		},
 		watch:{
 			orderInfo: function() {
@@ -297,15 +338,21 @@
 		created: function(){
 			//底部导航激活
 			this.$parent.selected = "orderList"
-			this.$nextTick(() => {
-				if(!this.scroll) {
-					this.scroll = new BScroll(this.$refs.orderList,{
-						'click': true
-					})
-				} else {
-					this.scroll.refresh()
-				}
-			})
+			let id = getStore('user_id')
+			if(!id) {
+				this.loginState = false
+			} else {
+				this.loginState = true
+				this.$nextTick(() => {
+					if(!this.scroll) {
+						this.scroll = new BScroll(this.$refs.orderList,{
+							'click': true
+						})
+					} else {
+						this.scroll.refresh()
+					}
+				})
+			}	
 		},
 		components: {
 			orderDesc,

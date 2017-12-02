@@ -4,8 +4,10 @@ import {
 //	INIT_BUYCART,
 //	CLEAR_CART,
 //	RECORD_SHOPDETAIL,
+	OUT_LOGIN,
 	RECORD_USERINFO,
 	RECORD_ADDRESS,
+	
 //	GET_USERINFO,
 //	CONFIRM_REMARK,
 //	CONFIRM_INVOICE,
@@ -42,7 +44,12 @@ export default {
 	},
 	[RECORD_ADDRESS](state,info) {
 		state.recordAddress.push(info)
+	},
+	[OUT_LOGIN](state) {
+		state.userInfo = {}
+		state.loginStatus = false
 	}
+	
 	//获取用户信息存入vuex
 //	[GET_USERINFO](state, info) {
 //		if (state.userInfo && (state.userInfo.username !== info.username)) {

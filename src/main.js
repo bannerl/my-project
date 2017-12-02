@@ -11,6 +11,7 @@ import '@/common/style/_mixin.scss'
 import '@/common/style/mintReset.scss'
 
 import '@/common/js/vue-touch.js'
+import '@/common/js/directive.js'
 
 import App from './App'
 //console.log(store)

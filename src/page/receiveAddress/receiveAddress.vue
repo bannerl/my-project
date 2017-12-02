@@ -233,12 +233,12 @@
 				this.editIndex = i
 				this.addAddressShow = true
 			},
-			removeAddress:function (index) {
+			removeAddress:function (args) {
 				let self =this
 				MessageBox.confirm('确定要删除该地址吗?',"删除地址").then(action => {
 					let arr = []
 					arr = JSON.parse(getStore('addressArr'))
-					arr.splice(index,1)
+					arr.splice(args.index,1)
 					setStore('addressArr',arr)
 					self.address = arr
 					setTimeout(function(){
@@ -263,7 +263,7 @@
 			let self = this
 			this.$nextTick( () => {
 				let id = getStore('user_id')
-				if(typeof id !== undefined) {
+				if(id) {
 					axios.get('/api/users/address',{
 						params: {
 							id:id

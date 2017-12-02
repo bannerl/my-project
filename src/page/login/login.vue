@@ -4,9 +4,7 @@
 		<transition name="fadeCode">
 			<div v-show="loginWay">
 				<mt-header title="登录">
-					<router-link to="/" slot="left">
-					    <mt-button icon="back">返回</mt-button>
-					</router-link>
+				    <mt-button @click="$router.go(-1)" icon="back" slot="left">返回</mt-button>
 					<router-link to="/login" slot="right">
 					    <mt-button @click="changeLogin">密码登录</mt-button>
 					</router-link>

@@ -85,7 +85,7 @@
 </style>
 <template>
 	<transition name="fade">
-		<div v-show="acountShow" class="userEdit-wrapper">
+		<div v-if="userInfo"  v-show="acountShow" class="userEdit-wrapper">
 			<mt-header title="账号与安全">
 			  <div slot="left">
 			    <mt-button @click="close" icon="back">返回</mt-button>
@@ -96,7 +96,9 @@
 				<span class="text">头像</span>
 				<img :src="userInfo.avatar" width="60" height="60" />
 			</label>
-			<mt-cell title="用户名" :class="{active:userInfo.nickName}" :value="userInfo.nickName"></mt-cell>
+			<div @click="openInputShow">
+				<mt-cell title="用户名" :class="{active:userInfo.nickName}" :value="userInfo.nickName"></mt-cell>
+			</div>
 			<div class="bindAcount">
 				<mt-cell class="title" title="账号绑定"></mt-cell>
 				<mt-cell class="phone" title="手机" :class="{active:userInfo.phone}" :value="userInfo.phone">
@@ -111,11 +113,14 @@
 				<mt-cell  title="登录密码" value="修改"></mt-cell>
 				<mt-cell title="支付密码" value="未设置"></mt-cell>
 			</div>
+			<line-input v-on:close="savaText" :inputText="userInfo.nickName" :show="inputShow" title="修改昵称" placeholder="请输入您的昵称"></line-input>
 		</div>
 	</transition>
 </template>
 
 <script>
+	import lineInput from 'components/lineInput/lineInput'
+	
 	export default {
 		props: {
 			userInfo: {
@@ -127,11 +132,13 @@
 		},
 		data() {
 			return {
+				inputShow:false
 			}
 		},
 		computed: {
 			acountShow: function(){
 				if(this.show){
+					this.inputShow = false
 					return true
 				}
 				return false
@@ -140,7 +147,17 @@
 		methods: {
 			close: function(){
 				this.$emit('close');
+			},
+			openInputShow: function() {
+				this.inputShow = !this.inputShow
+			},
+			savaText: function(text) {
+				this.inputShow = false
+				this.userInfo.nickName = text
 			}
+		},
+		components: {
+			lineInput
 		}
 		
 	}

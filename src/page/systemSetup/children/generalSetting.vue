@@ -52,7 +52,6 @@
 			  </div>
 			</mt-header>
 			<div class="safe-setting">
-				<mt-cell class="title" title="清除图片缓存" value="10M"></mt-cell>
 				<div @click="imageQuality">
 					<mt-cell title="非WIFI下图片质量" v-if="value[0]" :value="value[0].substring(0,2)"></mt-cell>
 					<mt-cell title="非WIFI下图片质量" v-else :value="defaultValue"></mt-cell>

@@ -40,14 +40,14 @@
 		}
 	}
 	.fade-enter-active,.fade-leave-active{
-		transition: all .2s linear;
+		transition: all .3s linear;
 		transform: translate3d(0,0,0);
 	}
 	.fade-enter,.fade-leave-to{
 		transform: translate3d(100%,0,0);
 	}
 	.fades-enter-active,.fades-leave-active{
-		transition: all .2s linear;
+		transition: all .3s linear;
 		transform: translate3d(-100%,0,0);
 	}
 	.fades-enter,.fades-leave-to{
@@ -74,7 +74,7 @@
 				<mt-cell class="wechat" title="关于饿了么"></mt-cell>
 			</div>
 			<div class="payment-setting">
-				<mt-button  class="signOut" size="large">退出登录</mt-button>
+				<mt-button @click="signOut" class="signOut" size="large">退出登录</mt-button>
 			</div>
 			<user-edit v-on:close="toggleAcount" :show="acountShow" :userInfo="userInfo"></user-edit>
 			<general-setting v-on:close="toggleGeneral" :show="generalShow"></general-setting>
@@ -84,7 +84,7 @@
 </template>
 
 <script>
-	import {getStore} from '@/common/js/savaLocal'
+	import { setStore, getStore} from '@/common/js/savaLocal'
 	import axios from 'axios'
 	import {mapState,mapMutations} from 'vuex'
 	import userEdit from 'page/user/children/userEdit'
@@ -107,6 +107,9 @@
 			
 		},
 		methods: {
+			...mapMutations([
+				'OUT_LOGIN'
+			]),
 			_initData: function(){
 				let self = this
 				let id = getStore('user_id').id
@@ -130,6 +133,11 @@
 			},
 			toggleAboutUs:function(){
 				this.aboutUsShow = !this.aboutUsShow
+			},
+			signOut: function() {
+				setStore('user_id','')
+				this.$router.go(-1)
+				this.OUT_LOGIN()
 			}
 		},
 		created: function(){

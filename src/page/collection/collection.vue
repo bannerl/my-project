@@ -242,6 +242,7 @@
 			}
 		},
 		created: function(){
+			let id = 
 			Indicator.open({
 			  spinnerType: 'snake'
 			})

@@ -28,10 +28,10 @@
 					font-size: 0;
 					color: #fff;
 					.iconfont{
+						margin-right: 8px;
 						font-size: 15px;
 					}
 					.mobilePhone{
-						margin-left: 8px;
 						font-size: 13px;
 						line-height: 20px;
 						vertical-align: -1px;
@@ -115,62 +115,79 @@
 			}
 		}
 	}
-	.indexFade-enter-active,.indexFade-leave-active{
-		transition: all .2s linear;
+	.fadeuser-enter-active,.fadeuser-leave-active{
+		transition: all .3s;
 		transform: translate3d(0,0,0);
 	}
-	.indexFade-enter,.indexFade-leave-to{
+	.fadeuser-enter,.fadeuser-leave-to{
 		transform: translate3d(-100%,0,0);
-	}
-	.userstop-enter-active,.userstop-leave-active{
-		transition: all .02s linear;
-		transform: translate3d(0,0,0);
-	}
-	.userstop-enter,.userstop-leave-to{
-		transform: translate3d(0,0,0);
 	}
 </style>
 <template>
-	<transition :name="indexFade">
-		<div class="user-wrapper" v-if="userInfos" ref="userDom">
+	<transition :name="fadeuser">
+		<div class="user-wrapper" ref="userDom">
 			<mt-header title="">
 			  <div slot="left">
 			    <mt-button>我的</mt-button>
 			  </div>
-			  <router-link to="/systemSetup" slot="right">
+			  <router-link v-if="userInfos" to="/systemSetup" slot="right">
+			  	<mt-button icon=" iconfont icon-shezhi"></mt-button>
+			  </router-link>
+			  <router-link v-else to="/login" slot="right">
 			  	<mt-button icon=" iconfont icon-shezhi"></mt-button>
 			  </router-link>
 			</mt-header>
 			<div class="userInfo-wrapper" @click="toggleAcount">
-				<div class="image">
-					<img width="72" height="72" :src="userInfos.avatar" />
+				<div class="image" >
+					<img v-if="userInfos" width="72" height="72" :src="userInfos.avatar" />
+					<img v-else  width="72" height="72" alt="头像" />
 				</div>
 				<div class="userInfo">
-					<div class="nickName">{{userInfos.nickName}}</div>
-					<div class="phone">
+					<div class="nickName" v-if="userInfos">{{userInfos.nickName}}</div>
+					<div class="nickName" v-else>立即登陆</div>
+					<div class="phone" v-if="userInfos">
 						<span class="iconfont icon-shouji"></span>
 						<span class="mobilePhone">{{userInfos.phone}}</span>
 					</div>
+					<div v-else class="phone text"><p class="mobilePhone">登陆后可享受更多特权</p></div>
 				</div>
 				<div class="right iconfont icon-dayuhao3"></div>
 			</div>
 			<div class="navbar-wrapper border-1px">
 				<div class="common wallet border-1px-right">
-					<router-link to="/wallet">
-						<div class="count">
+					<router-link to="/wallet" v-if="userInfos">
+						<div class="count" v-if="userInfos.money">
 							{{(userInfos.money-0).toFixed(2)}}
+							<span class="text">元</span>
+						</div>
+						<div class="count" v-else>
+							0.00
+							<span class="text">元</span>
+						</div>
+						<div class="text">钱包</div>
+					</router-link>
+					<router-link to="/login" v-else>
+						<div class="count">
+							0.00
 							<span class="text">元</span>
 						</div>
 						<div class="text">钱包</div>
 					</router-link>
 				</div>
 				<div class="common discounts border-1px-right">
-					<router-link to="/discount">
+					<router-link to="/discount" v-if="userInfos">
 						<div class="count" v-if="userInfos.discounts">
 							{{userInfos.discounts.length}}
 							<span class="text">个</span>
 						</div>
-						<div class="count" v-else="userInfos.discounts">
+						<div class="count" v-else>
+							0
+							<span class="text">个</span>
+						</div>
+						<div class="text">优惠</div>
+					</router-link>
+					<router-link to="/login" v-else>
+						<div class="count">
 							0
 							<span class="text">个</span>
 						</div>
@@ -178,9 +195,20 @@
 					</router-link>	
 				</div>
 				<div class="common score">
-					<router-link to="/score">
-						<div class="count">
+					<router-link to="/score" v-if="userInfos">
+						<div class="count" v-if="userInfos.score">
 							{{userInfos.score}}
+							<span class="text">个</span>
+						</div>
+						<div class="count" v-else>
+							0
+							<span class="text">个</span>
+						</div>
+						<div class="text">积分</div>
+					</router-link>
+					<router-link to="/login" v-else>
+						<div class="count">
+							0
 							<span class="text">个</span>
 						</div>
 						<div class="text">积分</div>
@@ -188,10 +216,16 @@
 				</div>
 			</div>
 			<div class="list-wrapper">
-				<mt-cell class="address" title="收货地址" to="/address" is-link>
+				<mt-cell class="address" v-if="userInfos" title="收货地址" to="/address" is-link>
 				  <span slot="icon" class="iconfont icon-dizhi1"></span>
 				</mt-cell>
-				<mt-cell class="collection" title="我的收藏" to="/collection" is-link>
+				<mt-cell class="address" v-else title="收货地址" to="/address" is-link>
+				  <span slot="icon" class="iconfont icon-dizhi1"></span>
+				</mt-cell>
+				<mt-cell class="collection" v-if="userInfos" title="我的收藏" to="/collection" is-link>
+				  <span slot="icon" class="iconfont icon-xin"></span>
+				</mt-cell>
+				<mt-cell class="collection" v-else title="我的收藏" to="/collection" is-link>
 				  <span slot="icon" class="iconfont icon-xin"></span>
 				</mt-cell>
 				<div @click="helpingMessage">
@@ -227,7 +261,8 @@
 			return {
 				userInfos: {},
 				acountShow: false, //控制账号安全的打开
-				indexFade: 'indexFade'
+				fadeuser: 'fadeuser',
+				animationShow:false,
 			}
 		},
 		computed: {
@@ -238,9 +273,15 @@
 		},
 		beforeRouteEnter (to, from, next) {
 		  typeof to.meta.pageTitle !== undefined && setDocumentTitle(to.meta.pageTitle)
+		 
 		  next(vm => {
 		    if(from.name === "orderList" || from.name === "index" || from.name === null) {
 		    	vm.closeAnimation()
+		    }else {
+		    	 if(to.name !== "orderList" && to.name !== "index") {
+					//底部导航切换没有动画
+			    	vm.$refs.userDom.style.display = "block"
+			    }
 		    }
 		  })
 		},
@@ -248,10 +289,16 @@
 			if(to.name === "orderList" || to.name === "index") {
 				//底部导航切换没有动画
 		    	this.$refs.userDom.style.display = "none"
-		    }else{
-		    	this.openAnimation()
 		    }
-			next(true)
+			else{
+		    	
+		    }
+		    if(this.acountShow) {
+		    	this.acountShow = false
+		    	next(false)
+		    } else {
+		    	next(true)
+		    }
 		},
 		methods: {
 			_initPage: function(){
@@ -260,7 +307,7 @@
 				self.$parent.selected = "user"
 				let id = getStore('user_id')
 				if(!self.loginStatus&&!id){
-					self.$router.push({name:'login'})
+//					self.$router.push({name:'login'})
 				}
 				if(id){
 					let self = this
@@ -277,6 +324,10 @@
 				
 			},
 			toggleAcount: function(){
+				let id = getStore('user_id')
+				if(!id) {
+					this.$router.push('/login')
+				}
 				this.acountShow = !this.acountShow
 			},
 			helpingMessage: function(){
@@ -294,18 +345,24 @@
 				})
 			},
 			closeAnimation: function() {
+				this.animationShow = true
 				let self = this
-				this.indexFade = "userstop"
+				self.indexFade = "useredStop"
 				//定时确保下次路由切换仍然有动画
 				setTimeout(function(){
 					self.indexFade = "indexFade"
 				},400)
 			},
 			openAnimation: function() {
-				this.indexFade = "indexFade"
+				this.animationShow = true
+//				this.indexFade = "indexFade"
 			},
 		},
-		updated: function(){
+		mounted: function(){
+			let id = getStore('user_id')
+			if(!id) {
+				this.userInfos = {}
+			}
 		},
 		created: function(){
 			let self = this
