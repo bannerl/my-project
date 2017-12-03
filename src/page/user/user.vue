@@ -315,12 +315,14 @@
 				  		if(res.data.status === noError){
 				  			self.userInfos=res.data.data;
 				  		}	
-			  		});
+			  		})
+				} else {
+					this.userInfos = this.UserInfo
 				}
 				if(this.systemFade){
 					this.acountShow = true
 				}
-				this.userInfos = this.UserInfo
+				
 				
 			},
 			toggleAcount: function(){

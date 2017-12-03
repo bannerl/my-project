@@ -32,6 +32,9 @@ var user = appData.user;
 var users = appData.users;
 var ratings = appData.ratings;
 var address = appData.user.address;
+var index = appData.index;
+var shops = appData.shops;
+var category = appData.category;
 var apiRoutes = express.Router();
 
 apiRoutes.get('/seller',function (req,res){
@@ -62,6 +65,21 @@ apiRoutes.get('/user',function(req,res){
 		});
 });
 
+apiRoutes.get('/shops',function(req,res){
+	console.log(req.query)
+		res.json({
+			status:0,
+			data:shops
+		});
+});
+
+apiRoutes.get('/category',function(req,res){
+		res.json({
+			status:0,
+			data:category
+		});
+});
+
 apiRoutes.get('/users',function(req,res){
 		res.json({
 			status:0,
@@ -73,6 +91,13 @@ apiRoutes.get('/users/address',function(req,res){
 		res.json({
 			status:0,
 			data:address
+		});
+});
+
+apiRoutes.get('/index',function(req,res){
+		res.json({
+			status:0,
+			data:index
 		});
 });
 

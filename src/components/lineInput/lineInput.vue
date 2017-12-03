@@ -62,7 +62,7 @@
 			</mt-header>
 			<div class="input">
 				<div class="border-t-b">
-					<input v-if="inputShow" v-model="inputText" :placeholder="placeholder"
+					<input v-if="inputShow" v-model="inputTexts" :placeholder="placeholder"
 						 v-focus />
 				</div>
 			</div>
@@ -93,7 +93,8 @@
 		},
 		data() {
 			return {
-				inputShow: false
+				inputShow: false,
+				inputTexts: this.inputText
 			}
 		},
 		computed: {
@@ -119,7 +120,7 @@
 					  duration: 1200
 					})
 				} else {
-					this.$emit('close',this.inputText)
+					this.$emit('close',this.inputTexts)
 				}
 			}
 		},

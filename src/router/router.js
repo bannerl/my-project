@@ -14,7 +14,10 @@ import receiveAddress from 'page/receiveAddress/receiveAddress'
 import goods from 'page/seller/children/goods/goods'
 import ratings from 'page/seller/children/ratings/ratings'
 import description from 'page/seller/children/seller/seller'
-
+import addressSearch from 'page/addressSearch/addressSearch'
+import searchShop from 'page/searchShop/searchShop'
+import sellerPage from 'page/sellerPage/sellerPage'
+import shop from 'page/shop/shop'
 
 export default [
     { path: '/',
@@ -105,6 +108,36 @@ export default [
         	meta: {
         		pageTitle: "收货地址"
         	}
+        },
+        {
+        	path: '/addressSearch',
+        	name:'addressSearch',
+        	component: addressSearch,
+        	meta: {
+        		pageTitle: "地址"
+        	}
+        },
+        {
+        	path: '/searchShop',
+        	name:'searchShop',
+        	component: searchShop,
+        	meta: {
+        		pageTitle: "搜索"
+        	}
+        },
+        {
+        	path: '/sellerPage',
+        	name:'sellerPage',
+        	component: sellerPage,
+        	meta: {
+        		pageTitle: "商家"
+        	}
+        },
+        {
+        	path: '/shop',
+        	name:'shop',
+        	component: shop,
+        	meta:{ keepAlive: true }
         }
       ]
     }

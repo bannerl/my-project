@@ -3,8 +3,7 @@
  * @example '?id=1234&collect=true'
  * @return object id:1234,collect:true
  */
-export function loadUrl() {
-	let url = window.location.search;
+export function loadUrl(url) {
 	let obj = {};
 	let reg = /[?&][^?&]+=[^?&]+/g;
 	let arr = url.match(reg);
