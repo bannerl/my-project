@@ -157,7 +157,7 @@
 						<ul>
 							<li class="item" v-for="item in data.foodEntry">
 								<!--<router-link :to="{path:'/shop',query:{max_type:item.maxType}}">-->
-									<div @click="intoShop(item.maxType)">
+									<div @click="intoShop(item.maxType,item.name)">
 								<div  :key="item.maxType" class="item-content">
 									<img :src="item.image" />
 									<span class="text">{{item.name}}</span>
@@ -230,8 +230,8 @@
       	toSearchPage: function (text) {
       		this.$router.push('/searchShop?keyword='+text)
       	},
-      	intoShop: function(arg) {
-      		this.$router.push({path:'shop',query:{'max_type':arg}})
+      	intoShop: function(arg,title) {
+      		this.$router.push({path:'shop',query:{'max_type':arg,'title':title}})
       	}
       },
       created: function () {

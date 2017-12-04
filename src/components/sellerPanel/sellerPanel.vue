@@ -124,7 +124,34 @@
 					justify-content: space-between;
 					margin-top: 4px;
 					.minPrice{
-						font-size: 12px;
+						font-size: 11px;
+						color: #555;
+						.deliveryPrice{
+							position: relative;
+							padding: 0 6px;
+							&:before{
+								position: absolute;
+								left: 0;
+								top: 1px;
+								height: 10px;
+								border-left: 1px solid #ddd;
+								content: "";
+							}
+							&:after{
+								position: absolute;
+								right: 0;
+								top: 1px;
+								height: 10px;
+								border-left: 1px solid #ddd;
+								content: "";
+							}
+						}
+						.perConsume{
+							margin-left: 2px;
+						}
+						.text{
+							margin-right: 2px;
+						}
 					}
 					.address{
 						font-size: 10px;
@@ -141,7 +168,7 @@
 </style>
 <template>
 	<ul class="sellerPanel-container">
-		<router-link :to="{name:'sellerPage',params:{id:seller.id}}" v-for="seller in sellers">
+		<router-link :to="{name:'sellerPage',params:{id:seller.id}}" v-for="seller in sellers" :key="seller.id">
 			<li class="item border-1px" >
 				<div class="image">
 					<img width="60" height="60" :src="seller.image" />
@@ -163,7 +190,11 @@
 						</ul>
 					</div>
 					<div class="three-line">
-						<span class="minPrice">￥{{seller.minPrice}}起送</span>
+						<p class="minPrice">
+							<span class="text">￥{{seller.minPrice}}起送</span>
+							<span class="deliveryPrice">配送费￥{{seller.deliveryPrice}}</span>
+							<span class="perConsume">￥{{seller.perConsume}}元/人</span>
+						</p>
 						<div class="right">
 							<span class="address">2.4km</span>
 							<span class="deliveryTime">{{seller.deliveryTime}}分钟</span>
@@ -186,7 +217,7 @@
 		props: {
 			sellers:{
 				type: Array,
-				default:function () {
+				default: function () {
 					return []
 				}
 			}
@@ -197,20 +228,7 @@
 			}
 		},
 		methods: {
-			returnPrev: function(){
-				this.$router.go(-1)
-			},
-			intoSeller: function() {
-//				this.$router.push('/seller/goods')
-			}
-		},
-		created: function(){
-			//let id = 
 			
-//			let self = this
-//			setTimeout(function(){
-//				self._loadData()
-//			},20)
 		},
 		components:{
 			star

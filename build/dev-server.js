@@ -67,9 +67,17 @@ apiRoutes.get('/user',function(req,res){
 
 apiRoutes.get('/shops',function(req,res){
 	console.log(req.query)
+	let data = []
+	for(var i=0;i<shops.length;i++) {
+			console.log(req.query.max_type)
+		if((shops[i].maxType-0) === (req.query.max_type-0)) {
+			data = shops[i]
+			console.log(shops[i])
+		}
+	}
 		res.json({
 			status:0,
-			data:shops
+			data:data
 		});
 });
 
