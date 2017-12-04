@@ -1,6 +1,7 @@
 <template>
 	<div>
 		<div class="cart-container">
+			<div class="back_cover"></div>
 			<div class="content-left"  @click="toggleList">
 				<div class="cart">
 					<div class="icon" :class="{highLight:totalCount>0}">
@@ -150,9 +151,18 @@
 		bottom: 0;
 		height: 52px;
 		display: flex;
-		background: #141d27;
 		width: 100%;
 		z-index:100;
+		&:after{
+			position: absolute;
+			top: 0;
+			left: 0;
+			background: rgba(0,0,0,.7);
+			width: 100%;
+			height: 52px;
+			content: '';
+			z-index: -1;
+		}
 	}
 	.content-left{
 		flex: 1;
@@ -164,13 +174,13 @@
 			padding:6px;
 			width: 56px;
 			height: 56px;
-			background:#141d27;
+			background: #4c4c4c;
 			border-radius: 50%;
 			box-sizing:border-box;
 			.icon{
 				width:44px;
 				height: 44px;
-				background: rgba(255,255,255,.1);
+				background: #333;
 				border-radius: 50%;
 				text-align: center;
 				&.highLight{
@@ -181,8 +191,8 @@
 				}
 			}
 			.iconfont{
-				color: rgba(255,255,255,.4);
-				font-size: 22px;
+				color: rgba(255,255,255,.3);
+				font-size: 30px;
 				line-height: 44px;
 			}
 			.count{
@@ -206,6 +216,7 @@
 			&.highLight{
 				span{
 					color: #fff;
+					font-weight: 700;
 				}
 			}
 			&:after{
@@ -222,7 +233,7 @@
 				vertical-align: middle;
 				font-size: 16px;
 				font-weight: 700;
-				color: rgba(255,255,255,.4);
+				color: #999;
 				line-height: 16px;
 			}
 		}
@@ -232,22 +243,24 @@
 			span{
 				vertical-align: middle;
 				font-size: 12px;
-				color: rgba(255,255,255,.4);
+				color: #999;
+				font-weight: 700;
 				line-height: 16px;
 			}
 		}
 	}
 	.content-right{
-		width:106px;
-		background: rgba(255,255,255,.1);
+		background: #666;
 		text-align: center;
 		.text{
+			padding: 0 8px;
 			line-height: 52px;
 			color: rgba(255,255,255,.4);
-			font-size: 12px;
+			font-size: 14px;
 		}
 		.balance{
-			background: #42B983;
+			padding: 0 25px;
+			background: rgba(29, 220, 100, 0.8);
 			color: #fff;
 		}
 	}

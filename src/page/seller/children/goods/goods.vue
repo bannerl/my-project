@@ -14,10 +14,10 @@
 			<div class="item-right" ref="itemright">
 				<div class="itemright-wrapper">
 					<ul v-if="goods" v-for='item in goods' ref="foodsList">
-						<h3 class="title">{{item.name}}</h3>
+						<h3 class="title border-1px">{{item.name}}</h3>
 						<li @click="openFoodPage(food)"  v-for="food in item.foods">
 							<div class="avatar">
-								<img width="78" height="78" :src="food.image" />
+								<img width="66" height="66" :src="food.image" />
 							</div>
 							<div class="food-container">
 								<h3>{{food.name}}</h3>
@@ -47,7 +47,6 @@
 	  	</div>
 	  	<cart-foods v-if="this.seller&&this.goods" :foods="foods" :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice"></cart-foods>
 	  	<div class="food-wrapper">
-	  		
 	  	</div>
 	</div>
 </template>
@@ -170,9 +169,10 @@
 	.goods-container{
 		position: absolute;
 		display:flex;
-		top: 166px;
+		top: 186px;
 		left: 0;
-		bottom: 52px;
+		bottom: 0;
+		padding-bottom: 52px;
 		width: 100%;
 		overflow:hidden;
 		.item-left{
@@ -205,7 +205,7 @@
 			.cell{
 				position: relative;
 				display: table-cell;
-				padding: 22px 0;
+				padding: 16px 0;
 				&:after{
 					@include border-1px();
 				}
@@ -215,18 +215,39 @@
 			flex: 1;
 			overflow: hidden;
 			ul{
-				padding-bottom: 1px
+				padding-bottom: 1px;
+				background: #fff;
+				&:first-child{
+					.title{
+						&:before{
+							display: none;
+						}
+					}
+				}
 			}
 			.title{
-				padding: 10px 16px;
-				border-left: 2px solid #ddd;
-				background: #f5f5f5;
+				position: relative;
+				padding: 10px 16px 10px 0;
+				margin-left: 12px;
+				background: #fff;
 				color: #888;
+				&:before{
+					position: absolute;
+					top: 0;
+					left: 0;
+					width: 100%;
+					border-bottom: 1px solid #ddd;
+					transform: scaleY(.5);
+					 @media (-webkit-min-device-pixel-ratio:3),(min-device-pixel-ratio:3){
+			            transform: scaleY(.3);
+			        }
+					content: '';
+				}
 			}
 			li{
 				position: relative;
 				display: flex;
-				margin: 18px 18px;
+				margin: 18px 18px 18px 12px;
 				padding-bottom:18px; 
 				&:after{
 					@include border-1px();
@@ -243,6 +264,7 @@
 					font-size: 15px;
 					margin: 4px 0;
 					color: #333;
+					font-weight: 700;
 				}
 				.description{
 					max-width: 156px;
@@ -254,12 +276,12 @@
 			}
 			.count-wrapper{
 				position: absolute;
-				right: -18px;
+				right: -36px;
 				bottom: 18px;
 			}
 			.price{
-				margin: 6px 0;
-				font-size: 13px;
+				margin: 14px 0;
+				font-size: 14px;
 				.nowPrice{
 					color: #FF0000;
 				}

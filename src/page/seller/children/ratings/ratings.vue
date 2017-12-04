@@ -180,11 +180,13 @@
 		width: 100%;
 		.ratings-containers{
 			position: absolute;
-			top: 166px;
+			top: 186px;
 			left: 0;
-			bottom: 52px;
+			bottom: 0;
+			padding-bottom: 52px;
 			width: 100%;
 			overflow: hidden;
+			background: #fff;
 		}
 		.ratings-title{
 			display: flex;
@@ -308,7 +310,7 @@
 						line-height: 16px;
 						color: rgba(7,17,27,.2);
 						&.active{
-							color: rgb(0,160,220);
+							color: rgba(38,162,255,1);
 						}
 					}
 					.recommend{

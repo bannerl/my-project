@@ -63,8 +63,9 @@
 			height:24px;
 			span{
 				display: inline-block;
-				font-size: 10px;
-				color: rgb(147,153,159);
+				font-size: 16px;
+				vertical-align: middle;
+				color: #333;
 			}
 		}
 		.add,.decrease{
@@ -72,11 +73,16 @@
 			line-height: 24px;
 			height: 24px;
 			width: 24px;
-			padding: 0 12px;
-			color: rgb(0,160,220);
+			padding: 0 6px;
+			color: #26a2ff;
 			vertical-align: text-bottom;
 			.iconfont{
 				font-size: 24px;
+			}
+		}
+		.decrease{
+			.iconfont{
+				font-size: 22px;
 			}
 		}
 	}

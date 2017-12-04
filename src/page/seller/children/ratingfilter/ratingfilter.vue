@@ -84,22 +84,24 @@
 			.pub{
 				display: inline-block;
 				margin-right: 8px;
-				padding: 8px 12px;
+				padding: 7px 12px;
 				font-size: 12px;
 				line-height: 16px;
+				border-radius: 2px;
 				color: rgb(77,85,93);
 			}
 			.positive{
-				background:rgba(0,160,220,.2);
+				background:rgba(0,150,190,.1);
 				&.active{
-					background:rgba(0,160,220,1);
+					background:rgba(38,162,255,1);
 					color: #fff;
 				}
 			}
 			.negative{
-				background:rgba(77,85,93,.2);
+				background:#f5f5f5;
+				color: #999;
 				&.active{
-					background:rgba(77,85,93,1);
+					background:rgba(77,85,93,.2);
 					color: #fff;
 				}
 			}
@@ -110,7 +112,7 @@
 				font-size: 24px;
 				line-height: 24px;
 				vertical-align: top;
-				color: rgb(154,156,157);
+				color: #ddd;
 			}
 			.text{
 				margin-left: 4px;
@@ -121,7 +123,7 @@
 			}
 			&.active{
 				.iconfont{
-					color: rgb(0,160,220);
+					color: rgba(38,162,255,1);
 				}
 			}
 		}

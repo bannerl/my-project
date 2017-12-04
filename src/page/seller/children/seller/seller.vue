@@ -2,16 +2,18 @@
 	@import '../../../../common/style/mixin';
 	.seller-content{
 		position:absolute;
-		top:166px;
+		top:186px;
 		left:0;
 		bottom:0;
+		padding-bottom: 52px;
 		width:100%;
+		background: #fff;
 		overflow:hidden;
 		.seller-top{
 			position:absolute;
 			top:0;
 			left:0;
-			bottom:52px;
+			bottom:0;
 			width:100%;
 			overflow:hidden;
 			.seller-description{
@@ -86,8 +88,11 @@
 							right:0;
 							top:0;
 							border-right:1px solid #ddd;
-							tranform:scaleX(.5);
+							transform:scaleX(.5);
 							content:'';
+						    @media (-webkit-min-device-pixel-ratio:3),(min-device-pixel-ratio:3){
+					            transform: scaleX(.3);
+					        }
 						}
 						&:last-child:after{
 							border:0;

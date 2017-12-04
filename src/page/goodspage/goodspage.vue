@@ -20,7 +20,6 @@
 
 <script>
 	import goodsHeader from 'components/header/header'
-	import {loadUrl} from '@/common/js/unit'
 	
 	const noError = 0;
 	
@@ -28,12 +27,7 @@
 	  name: 'app',
 	  data(){
 	  	return {
-	  		seller:{
-	  			id:(() => {
-	  				let o = loadUrl()
-						return o.id
-	  			})()
-	  		}
+	  		seller:{}
 	  	}
 	  },
 	  created(){
@@ -41,10 +35,6 @@
 		    response = response.body;
 		    if(response.status === noError){
 		    	this.seller = response.data;
-					let obj = loadUrl()
-					let id = obj.id 
-					this.seller.id = id
-					this.seller = Object.assign({},this.seller,response.data)	
 			  }
 		  });
 	  },

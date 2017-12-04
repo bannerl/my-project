@@ -1,6 +1,10 @@
 <template>
 	<div v-if="seller" class="header">
 		<div class="container">
+			<div class="shopsHeader">
+				<span class="iconfont icon-xiangzuojiantou1"></span>
+				<span class="iconfont icon-gouwuche3"></span>
+			</div>
 			<div class="seller-wrapper">
 				<div class="avatar">
 					<img :src="seller.avatar" />
@@ -21,7 +25,6 @@
 				</div>	
 			</div>
 			<div class="notice-wrapper">
-				
 			</div>
 			<div class="bg-image">
 				<img :src="seller.avatar" />
@@ -88,18 +91,28 @@
 		.container{
 			position: relative;
 			overflow: hidden;
+			.shopsHeader{
+				background:rgba(0,0,0,.1);
+				display: flex;
+				justify-content: space-between;
+				.iconfont{
+					font-size: 20px;
+					color: #fff;
+					padding: 16px 12px 10px 14px;
+				}
+			}
 		}
 		.seller-wrapper{
-			padding:22px 12px 0 22px;
+			padding:10px 12px 0 22px;
 			font-size:0;
-			background:rgba(0,0,0,.7);
+			background:rgba(0,0,0,.1);
 			overflow:hidden;
 			.avatar{
 				display:inline-block;
 				margin:0 14px 20px 0;
 				vertical-align: top;
 				img{
-					width:80px;
+					width:66px;
 				}
 			}
 			.seller-details{
@@ -133,6 +146,7 @@
 			z-index: -1;
 			img{
 				width: 100%;
+				filter: blur(17px);
 			}
 		}
 		.mask-wrapper{
