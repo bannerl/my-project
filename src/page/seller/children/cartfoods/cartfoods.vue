@@ -25,7 +25,7 @@
 				<div class="text" v-if="deliveryStatus === 1">
 					<span>￥{{minPrice}}元起送</span>
 				</div>
-				<div class="text balance" v-if="deliveryStatus === 2">
+				<div @click="toConfirmOrder" class="text balance" v-if="deliveryStatus === 2">
 					<span>去结算</span>
 				</div>
 			</div>
@@ -135,6 +135,10 @@
 		methods:{
 			toggleList:function(event){
 				this.fold = !this.fold
+			},
+			toConfirmOrder: function () {
+				
+				this.$router.push({path:"/confirmOrder", query: {shopid:'2' }})
 			}
 		},
 		components:{
@@ -153,7 +157,8 @@
 		display: flex;
 		width: 100%;
 		z-index:100;
-		&:after{
+		background-image: url(./cartbg.png);
+		/*&:after{
 			position: absolute;
 			top: 0;
 			left: 0;
@@ -162,7 +167,7 @@
 			height: 52px;
 			content: '';
 			z-index: -1;
-		}
+		}*/
 	}
 	.content-left{
 		flex: 1;

@@ -1,24 +1,30 @@
 <template>
-  <div>
-  	<goods-header :seller='seller'></goods-header>
-  	<div class="tab">
-  		<div class="tab-item">
-  			<router-link to='/seller/goods'>商品</router-link>
-  		</div>
-  		<div class="tab-item">
-  			<router-link to='/seller/ratings'>评价</router-link>
-  		</div>
-  		<div class="tab-item">
-  			<router-link to='/seller/description'>商家</router-link>
-  		</div>
-  	</div>
-  	<keep-alive>
-    	<router-view :seller='seller' />
-  	</keep-alive>
-  </div>
+	<transition>
+	  <div>
+	  	<goods-header :seller='seller'></goods-header>
+	  	<div class="tab">
+	  		<div class="tab-item">
+	  			<span @click="toGoods" :class="{active:type==='goods'}">商品</span>
+	  			<!--<router-link to='/seller/goods' replace>商品</router-link>-->
+	  		</div>
+	  		<div class="tab-item">
+	  			<span @click="toRatings" :class="{active:type==='ratings'}">评价</span>
+	  			<!--<router-link to='/seller/ratings' replace>评价</router-link>-->
+	  		</div>
+	  		<div class="tab-item">
+	  			<span @click="toDescription" :class="{active:type==='description'}">商家</span>
+	  			<!--<router-link to='/seller/description' replace>商家</router-link>-->
+	  		</div>
+	  	</div>
+	  	<keep-alive>
+	    	<router-view :seller='seller' />
+	  	</keep-alive>
+	  </div>
+  </transition>
 </template>
 
 <script>
+	import { loadUrl } from '@/common/js/unit'
 	import goodsHeader from './children/header/header'
 	
 	const noError = 0;
@@ -27,16 +33,42 @@
 	  name: 'app',
 	  data(){
 	  	return {
-	  		seller:{}
+	  		seller:{},
+	  		type: '',
+	  		arg: ''
+	  	}
+	  },
+	  beforeRouteEnter (to,from,next) {
+	  	next(vm => {
+	  		let obj = loadUrl(window.location.href)
+	  		let arg = obj.id
+	  		arg = '?id='+arg
+	  		vm.arg = arg
+	  	})
+	  },
+	  methods: {
+	  	toGoods: function () {
+	  		this.type = 'goods'
+	  		this.$router.replace('/seller/goods'+this.arg)
+	  	},
+	  	toRatings: function () {
+	  		this.type = 'ratings'
+	  		this.$router.replace('/seller/ratings'+this.arg)
+	  	},
+	  	toDescription: function () {
+	  		this.type = 'description'
+	  		this.$router.replace('/seller/description'+this.arg)
 	  	}
 	  },
 	  created(){
 	  	this.$http.get('/api/seller').then(response => {
 		    response = response.body;
 		    if(response.status === noError){
-		    	this.seller = response.data;
+		    	this.seller = response.data
+		    	this.type = "goods"
+		    	this.$router.replace('/seller/goods'+this.arg)
 			  }
-		  });
+		  })
 	  },
 	  components:{
 	  	'goods-header':goodsHeader
@@ -61,10 +93,17 @@
 			font-size: 16px;
 			text-align: center;
 			color: #333;
-			a.active{
+			span.active{
 				color:#ff4500;
 			}
 		}
+	}
+	.sellerFade-enter-active,.sellerFade-leave-active{
+		transition: all .2s;
+		transform: translate3d(0,0,0);
+	}
+	.sellerFade-enter,.sellerFade-leave-to {
+		transform: translate3d(100%,0,0);
 	}
 
 </style>

@@ -39,7 +39,7 @@
 </template>
 
 <script>
-	import {getStore} from '@/common/js/savaLocal'
+	import {setStore, getStore} from '@/common/js/savaLocal'
 	
 	export default {
 	  name: 'app',
@@ -50,10 +50,12 @@
 	  		//transitionName:'static'
 	  	}
 	  },
-	  methods: {
-	  },
 	  computed: {
 	  	navbarFixedShow: function(){
+//	  		if(getStore('bottomfixed')) {
+//	  			this.selected = getStore('bottomfixed')
+//	  		}
+	  		
 	  		let str = this.selected
 	  		let id = getStore('user_id')
 	  		if(!id){

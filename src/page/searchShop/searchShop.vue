@@ -122,7 +122,7 @@
 		},
 		methods: {
 			close: function() {
-				this.$emit('close');
+				this.$emit('close')
 			},
 			deleteSearch: function () {
 				MessageBox.confirm('确定删除所有历史记录吗？').then(action => {
@@ -170,6 +170,10 @@
 		  next(vm => {
 		    if(from.name !== "shop" ) {
 		    	let text = loadUrl(window.location.href).keyword
+		    	text = decodeURI(text)
+		    	if(text !== "undefined") {
+		    		vm.searchText = text
+		    	}
 		    	//vm.$router.push('/shop?keyword='+text)
 		    }else {
 		    	

@@ -115,9 +115,16 @@
 	.fadeTop-leave-to,.fadeTop-enter{
 		transform: translate3d(0,-100%,0);
 	}
+	.fadeShops-enter-active,.fadeShops-leave-active{
+		transition: all .2s;
+		transform: translate3d(0,0,0);
+	}
+	.fadeShops-leave-to,.fadeShops-enter{
+		transform: translate3d(100%,0,0);
+	}
 </style>
 <template>
-	<transition>
+	<transition name="fadeShops">
 		<div class="shops-wrapper">
 			<mt-header :title="title">
 				<div @click="$router.go(-1)" slot="left" >

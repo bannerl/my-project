@@ -168,7 +168,7 @@
 </style>
 <template>
 	<ul class="sellerPanel-container">
-		<router-link :to="{name:'sellerPage',query:{'id':seller.id}}" v-for="seller in sellers" :key="seller.id">
+		<router-link :to="{name:'seller',query:{'id':seller.id}}" v-for="seller in sellers" :key="seller.id">
 			<li class="item border-1px" >
 				<div class="image">
 					<img width="60" height="60" :src="seller.image" />

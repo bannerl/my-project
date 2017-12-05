@@ -201,7 +201,7 @@
 <script>
 	import data from "../../../data"
 	import BScroll from "better-scroll"
-	import {getStore} from '@/common/js/savaLocal'
+	import {setStore, getStore} from '@/common/js/savaLocal'
 	import orderFilter from "./children/orderFilter"
 	import orderDesc from "./children/orderDescription"
 	import {formatTime,setDocumentTitle} from "../../common/js/base"

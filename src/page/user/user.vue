@@ -273,25 +273,12 @@
 		},
 		beforeRouteEnter (to, from, next) {
 		  typeof to.meta.pageTitle !== undefined && setDocumentTitle(to.meta.pageTitle)
-		 
-		  next(vm => {
-		    if(from.name === "orderList" || from.name === "index" || from.name === null) {
-		    	vm.closeAnimation()
-		    }else {
-		    	 if(to.name !== "orderList" && to.name !== "index") {
-					//底部导航切换没有动画
-			    	vm.$refs.userDom.style.display = "block"
-			    }
-		    }
-		  })
+		  next( vm => {})
 		},
 		beforeRouteLeave (to, from, next) {
 			if(to.name === "orderList" || to.name === "index") {
 				//底部导航切换没有动画
 		    	this.$refs.userDom.style.display = "none"
-		    }
-			else{
-		    	
 		    }
 		    if(this.acountShow) {
 		    	this.acountShow = false
@@ -345,20 +332,7 @@
 				  position: 'bottom',
 				  duration: 1200
 				})
-			},
-			closeAnimation: function() {
-				this.animationShow = true
-				let self = this
-				self.indexFade = "useredStop"
-				//定时确保下次路由切换仍然有动画
-				setTimeout(function(){
-					self.indexFade = "indexFade"
-				},400)
-			},
-			openAnimation: function() {
-				this.animationShow = true
-//				this.indexFade = "indexFade"
-			},
+			}
 		},
 		mounted: function(){
 			let id = getStore('user_id')
@@ -367,6 +341,7 @@
 			}
 		},
 		created: function(){
+			
 			let self = this
 			setTimeout(function(){
 				self._initPage()

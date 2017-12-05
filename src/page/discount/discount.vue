@@ -108,7 +108,7 @@
 		}
 	}	
 	.fade-enter-active,.fade-leave-active{
-		transition: all .2s linear;
+		transition: all .26s linear;
 		transform: translate3d(0,0,0);
 	}
 	.fade-enter,.fade-leave-to{

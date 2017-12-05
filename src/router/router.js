@@ -18,6 +18,7 @@ import addressSearch from 'page/addressSearch/addressSearch'
 import searchShop from 'page/searchShop/searchShop'
 import sellerPage from 'page/sellerPage/sellerPage'
 import shop from 'page/shop/shop'
+import confirmOrder from 'page/confirmOrder/confirmOrder'
 
 export default [
     { path: '/',
@@ -138,6 +139,12 @@ export default [
         	name:'shop',
         	component: shop,
         	meta:{ keepAlive: true }
+        },
+        {
+        	path: '/confirmOrder',
+        	name:'confirmOrder',
+        	component: confirmOrder,
+        	meta:{ pageTitle: '确认订单' }
         }
       ]
     }

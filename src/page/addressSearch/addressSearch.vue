@@ -112,24 +112,35 @@
 		    }
 		}
 	}
+	.fadeSearch-enter-active,.fadeSearch-leave-active{
+		transition: all .22s;
+		transform: translate3d(0,0,0);
+	}
+	.fadeSearch-enter,.fadeSearch-leave-to{
+		transform: translate3d(100%,0,0);
+	}
 </style>
 <template>
-	<div class="map-wrapper" v-on:click="changeInput" ref="mapBox">
-		<mt-header title="选择收货的地址">
-			 <mt-button icon="back" slot="left">返回</mt-button>
-		</mt-header>
-		<div class="searchBox" :class="{textOn:inputActive}">
-			<!--<div class="city">杭州</div>-->
-			<el-amap-search-box class="search-box" :search-option="searchOption" :on-search-result="onSearchResult"></el-amap-search-box>
+	<transition name="fadeSearch">
+		<div class="map-wrapper" v-on:click="changeInput" ref="mapBox">
+			<mt-header title="选择收货的地址">
+				 <mt-button icon="back" @click="returnIndex" slot="left">返回</mt-button>
+			</mt-header>
+			<div class="searchBox" :class="{textOn:inputActive}">
+				<!--<div class="city">杭州</div>-->
+				<el-amap-search-box class="search-box" :search-option="searchOption" :on-search-result="onSearchResult"></el-amap-search-box>
+			</div>
 		</div>
-	</div>
+	</transition>	
 </template>
 
 <script>
+	import {setStore} from '@/common/js/savaLocal'
+	
 	export default {
       data: function() {
         return {
-        	inputActive: false,
+          inputActive: false,
           markers: [
             [120.36932, 30.27269]
           ],
@@ -137,7 +148,8 @@
             city: '杭州',
             citylimit: true
           },
-          mapCenter: [120.36932, 30.27269]
+          mapCenter: [120.36932, 30.27269],
+          positionText: '',
         };
       },
       methods: {
@@ -161,7 +173,17 @@
               lat: latSum / pois.length
             };
             this.mapCenter = [center.lng, center.lat];
+            if(this.mapCenter && this.positionText) {
+        		let userposition = {}
+        		userposition.position = this.mapCenter
+        		userposition.text = this.positionText
+        		setStore('userposition',userposition)
+        		this.$router.go(-1)
+        	}
           }
+        },
+        returnIndex () {
+    		this.$router.go(-1)
         },
         changeInput: function (el) {
         	this.$refs.mapBox.getElementsByTagName('input')[0].setAttribute("placeholder","请输入地址")
@@ -171,9 +193,12 @@
         		this.inputActive = false
         	}
         	if(el.target.nodeName === "LI") {
-        		console.log(el.target.innerText)
+        		this.positionText = el.target.innerText
         	}
         }
-      }
+      },
+     mounted () {
+     	this.$refs.mapBox.getElementsByTagName('input')[0].setAttribute("placeholder","请输入地址")
+     }
     }
 </script>

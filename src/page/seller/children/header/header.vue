@@ -2,8 +2,7 @@
 	<div v-if="seller" class="header">
 		<div class="container">
 			<div class="shopsHeader">
-				<span class="iconfont icon-xiangzuojiantou1"></span>
-				<span class="iconfont icon-gouwuche3"></span>
+				<span @click="$router.go(-1)" class="iconfont icon-xiangzuojiantou1"></span>
 			</div>
 			<div class="seller-wrapper">
 				<div class="avatar">
@@ -70,10 +69,10 @@
 		    }
 	  	},
 	  	methods:{
-	  		close:function(){
+	  		close: function () {
 	  			this.mask = false
 	  		},
-	  		open:function(){
+	  		open: function () {
 	  			this.mask = true
 	  		}
 	  	},
