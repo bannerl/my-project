@@ -45,7 +45,7 @@
 				</div>
 			</div>
 	  	</div>
-	  	<cart-foods v-if="this.seller&&this.goods" :foods="foods" :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice"></cart-foods>
+	  	<cart-foods v-if="this.seller&&this.goods" :foods="foods" :sellerName="seller.name" :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice"></cart-foods>
 	  	<div class="food-wrapper"></div>
 	</div>
 </template>

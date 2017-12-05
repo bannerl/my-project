@@ -1,12 +1,16 @@
 <style lang="scss" type="text/css">
 	@import "../../common/style/mixin";
 	.confirmOrder-wrapper{
-		position: fixed;
+		position: absolute;
 		top: 0;
 		left: 0;
-		bottom: 0;
+		bottom: 48px;
 		width: 100%;
+		overflow: hidden;
 		background: #f5f5f5;
+		>div{
+			padding-bottom: 24px;
+		}
 		.address-container{
 			background: #fff;
 			.item{
@@ -92,68 +96,190 @@
 		.deliveryTime-container{
 			display: flex;
 			align-items: center;
-			justify-content: space-between;
-			margin-top: 12px;
-			padding: 12px 14px;
-			border-left: 3px solid #26A2FF;
+			margin: 12px 10px;
+			background: #fff;
+			padding: 16px 16px;
+			.text{
+				margin-right: 4px;
+				color: #000;
+				font-weight: 700;
+				font-size: 15px;
+			}
+			.time{
+				position: relative;
+				color: #000;
+				font-weight: 700;
+				padding:0 8px;
+				font-size: 15px;
+				&:before{
+					content: '[';
+					position: absolute;
+					display: inline-block;
+					margin-top: -1px;
+					left: -1px;
+				}
+				&:after{
+					content: ']';
+					position: absolute;
+					display: inline-block;
+					margin-top: -1px;
+					right: 0px;
+				}
+				i{
+					font-style: normal;	
+					font-weight: 700;
+				}
+			}
+		}
+		.food-container{
+			padding: 0 14px;
+			margin: 10px;
 			background: #fff;
 			.title{
-				height: 100%;
-				font-size: 16px;
+				display: flex;
+				text-align: center;
+				padding: 16px 0;
+				.text{
+					font-weight: 700;
+					font-size: 16px;
+					padding:0 18px;
+				}
+				.leftLine,.rightLine{
+					flex: 1;
+					border-top: 1px solid #ddd;
+					margin-top: 5px;
+					transform: scaleY(.5);
+				}
+			}
+			.friendTips{
+				margin: 4px 0 16px;
+				font-size: 14px;
+				color: #999;
+			}
+			.description{
+				.mint-cell .mint-cell-wrapper{
+					background-origin: border-box;
+				}
+				.mint-cell-text{
+					font-size: 15px;
+					color: #000;
+				}
+				.count{
+					margin-right: 16px;
+					font-size: 12px;
+					color: #000;
+				}
+				.price{
+					display: inline-block;
+					text-align: right;
+					min-width: 26px;
+					font-size: 13px;
+					color: #000;
+					i{
+						color: #000;
+						font-style: normal;
+						margin-left: -3px;
+					}
+				}
+			}
+			.discount{
+				.mint-cell-text{
+					font-size: 16px;
+					font-weight: 700;
+					color: #000000;
+				}
+				.mint-cell-value{
+					font-size: 13px;
+					color: #888;
+				}
+				.mint-cell-value.is-link{
+					margin-right: 14px;
+				}
+			}
+			.totalPrice{
+				.mint-cell {
+					background: none;
+				}
+				.text{
+					font-size: 14px;
+					font-weight: 700;
+					color: #000;
+				}
+				.price{
+					color: #000;
+					font-size: 18px;
+					font-weight: 700;
+					i{
+						font-size: 20px;
+						font-weight: 700;
+						font-style: normal;
+						margin-left: -3px;
+					}
+				}
+			}
+		}
+		.otherNeed{
+			margin:0 10px;
+			padding: 0 12px;
+			background: #fff;
+			.mint-cell{
+				background: none;
+			}
+			.mint-cell-text{
 				font-weight: 700;
 			}
-			.deliveryTime{
-				text-align: right;
-				.need{
-					padding: 12px 0;
-					.text{
-						margin-right: 2px;
-						color: #26A2FF;
-					}
-					.time{
-						position: relative;
-						color: #26A2FF;
-						padding-left: 8px;
-						&:before{
-							position: absolute;
-							left: 0;top: 2px;
-							height: 14px;
-							border-left: 1px solid #26A2FF;
-							content: '';
-						}
-						i{
-							font-style: normal;		
-						}
-					}
+			.mint-cell-value{
+				font-size: 13px;
+				color: rgba(29,220,100,.8);
+			}
+			.iconfont{
+				color:rgba(29,220,100,.8);
+				font-size: 17px;
+			}
+		}
+		.mint-cell-allow-right::after{
+			right: 10px;
+			width: 8px;
+			height: 8px;
+			border: solid 1px #c8c8cd;
+		    border-bottom-width: 0;
+		    border-left-width: 0;
+		}
+	}
+	.confirmOrder-wrapper-a{
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		width: 100%;
+		.fixed-bottom{
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			position: fixed;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			padding: 0 0 0 16px;
+			height: 48px;
+			background: #545454;
+			box-sizing: border-box;
+			.price{
+				font-size: 20px;
+				color: #eee;
+				i{
+					margin-left: -4px;
+					font-style: normal;
 				}
-				.label{
-					.btn-out{
-						display: inline-block;
-						font-size: 10px;
-						border-radius: 2px;
-						vertical-align: middle;
-						color: #fff;
-						height: 14px;
-						width: 44px;
-						background: #ddd;
-						box-sizing: border-box;
-						text-align: left;
-					}
-					.scale{
-						display: block;
-						font-size: 20px;
-						width: 88px;
-						height: 28px;
-						line-height: 28px;
-						text-align: center;
-						font-style: normal;
-						padding: 0;
-						box-sizing: border-box;
-						background:rgba(38,162,255,1);
-						border-radius: 4px;
-						transform: scale(.5) translate3d(-50%,-50%,0);
-					}
-				}
+			}
+			.text{
+				padding: 0 35px;
+				font-size: 17px;
+				color: #f5f5f5;
+				height: 100%;
+				line-height: 48px;
+				background: rgba(29,220,100,.9);
+				font-weight: 700;
 			}
 		}
 	}
@@ -167,64 +293,118 @@
 </style>
 <template>
 	<transition name="confirmOrder">
-		<div class="confirmOrder-wrapper">
-			<mt-header title="确认订单">
-			  <div slot="left">
-			    <mt-button @click="$router.go(-1)" icon="back">返回</mt-button>
-			  </div>
-			</mt-header>
-			<div class="address-container">
-				<div class="item" v-if="defaultAddress">
-					<div class="iconfont icon-dizhi1"></div>
-					<div class="content">
-						<h3 class="title">
-							{{defaultAddress.position}}<i class="details">{{defaultAddress.details}}</i>
-							<span v-show="defaultAddress.type===0" class="btn-in"><i class="scale">默认</i></span>
-						</h3>
-						<p class="user">
-							<i>{{defaultAddress.name}}</i>
-							<i class="sexType" v-if="defaultAddress.sexType===0">先生</i>
-							<i class="sexType" v-else-if="defaultAddress.sexType===1">女士</i>
-							<i class="sexType" v-else></i>
-							<i class="phone">{{defaultAddress.phone}}</i>
-						</p>
+		<div class="confirmOrder-wrapper-a" v-if="shopCar.foods">
+			<div class="confirmOrder-wrapper" ref="confirmOrders">
+				<div>
+					<mt-header title="确认订单">
+					  <div slot="left">
+					    <mt-button @click="$router.go(-1)" icon="back">返回</mt-button>
+					  </div>
+					</mt-header>
+					<div class="address-container">
+						<div class="item" v-if="defaultAddress">
+							<div class="iconfont icon-dizhi1"></div>
+							<div class="content">
+								<h3 class="title">
+									{{defaultAddress.position}}<i class="details">{{defaultAddress.details}}</i>
+									<span v-show="defaultAddress.type===0" class="btn-in"><i class="scale">默认</i></span>
+								</h3>
+								<p class="user">
+									<i>{{defaultAddress.name}}</i>
+									<i class="sexType" v-if="defaultAddress.sexType===0">先生</i>
+									<i class="sexType" v-else-if="defaultAddress.sexType===1">女士</i>
+									<i class="sexType" v-else></i>
+									<i class="phone">{{defaultAddress.phone}}</i>
+								</p>
+							</div>
+							<div class="iconfont icon-dayuhao3"></div>
+						</div>
 					</div>
-					<div class="iconfont icon-dayuhao3"></div>
-				</div>
-			</div>
-			<div class="deliveryTime-container">
-				<div class="title">送达时间</div>
-				<div class="deliveryTime">
-					<div class="need">
+					<div class="deliveryTime-container">
 						<span class="text">尽快送达</span>
 						<span class="time">
-							预计：<i class="">18:20</i>
+							预计 <i class="">18:20</i>
 						</span>
 					</div>
-					<div class="label">
-						<span class="btn-out">
-							<i class="scale">蜂鸟专送</i>
-						</span>
+					<div class="food-container">
+						<h3 class="title">
+							<span class="leftLine"></span>
+							<span class="text">{{shopCar.sellerName}}</span>
+							<span class="rightLine"></span>
+						</h3>
+						<div class="friendTips">您的主食点了吗？</div>
+						<div class="description">
+							<mt-cell v-for="item in shopCar.foods" :title="item.name">
+								<div class="">
+									<span class="count">x{{item.count}}</span>
+									<span class="price">￥<i>{{item.price*item.count}}</i></span>
+								</div>
+							</mt-cell>
+							<mt-cell title="配送费">
+								<span class="price">￥<i>{{shopCar.deliveryPrice}}</i></span>
+							</mt-cell>
+							
+						</div>
+						<div class="discount">
+							<!--<mt-cell title="红包" value="有红包可用" is-link></mt-cell>-->
+							<mt-cell title="红包" value="无可用红包" is-link></mt-cell>
+						</div>
+						<div class="totalPrice">
+							<mt-cell title="">
+								<div>
+									<span class="text">小计</span>
+									<span class="price">￥<i>{{totalPrice}}</i></span>
+								</div>
+							</mt-cell>
+						</div>
+					</div>
+					<div class="otherNeed">
+						<mt-cell title="在线支付"></mt-cell>
+						<mt-cell title="餐具份数/口味偏好" is-link>
+							<span class="iconfont icon-lvye"></span>
+							<span>马上助力环保</span>
+						</mt-cell>
 					</div>
 				</div>
+			</div>
+			<div class="fixed-bottom">
+				<div class="price">
+					￥<i>{{totalPrice}}</i>
+				</div>
+				<div class="text">去支付</div>
 			</div>
 		</div>
 	</transition>
 </template>
 
 <script>
+	import BScroll from 'better-scroll'
 	import { getStore } from '@/common/js/savaLocal'
 	
 	export default {
 		data() {
 			return {
-				defaultAddress: []
+				defaultAddress: [],
+				shopCar:{},
 			}
 		},
 		methods: {
 			close: function(){
-				this.$emit('close');
+				
 			},
+		},
+		computed: {
+			totalPrice: function () {
+				let price = 0
+				if(this.shopCar.foods) {
+					let arr = this.shopCar.foods
+					for(let i = 0;i<arr.length;i++) {
+						price += arr[i].count*arr[i].price
+					}
+					price += this.shopCar.deliveryPrice
+					return price 
+				}
+			}
 		},
 		created: function () {
 			let address = []
@@ -245,8 +425,24 @@
 				address = null
 			}
 			this.defaultAddress = address
+			
+			if(!getStore('shopCar')){
+				console.log('出错了。。。')
+			} else {
+				this.shopCar = JSON.parse(getStore('shopCar'))
+			}
+			
+			this.$nextTick(() => {
+				console.log(1)
+				if(!this.scroll) {
+					console.log(2)
+					this.scroll = new BScroll(this.$refs.confirmOrders,{
+						click: true
+					})
+				} else {
+					this.scroll.refresh()
+				}
+			})
 		}
-		
-		
 	}
 </script>

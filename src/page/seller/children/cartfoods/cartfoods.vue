@@ -54,6 +54,7 @@
 
 <script>
 	import countEdit from '../countedit/countedit'
+	import {setStore} from '@/common/js/savaLocal'
 	import BScroll from 'better-scroll'
 	
 	export default {
@@ -72,6 +73,9 @@
 				default:function(){
 					return []
 				}
+			},
+			sellerName: {
+				type:String
 			}
 		},
 		data(){
@@ -137,7 +141,17 @@
 				this.fold = !this.fold
 			},
 			toConfirmOrder: function () {
-				
+				let shopCar = {}
+				let arr = []
+				for(let i=0;i<this.foods.length;i++) {
+					if(this.foods[i].count) {
+						arr.push(this.foods[i])
+					}
+				}
+				shopCar.deliveryPrice = this.deliveryPrice
+				shopCar.foods = arr
+				shopCar.sellerName = this.sellerName
+				setStore('shopCar',shopCar)
 				this.$router.push({path:"/confirmOrder", query: {shopid:'2' }})
 			}
 		},

@@ -222,16 +222,8 @@
       		let self = this
       		axios.get('/api/index').then(function(res){
 				if(res.data.status === noError){
-					if(!getStore('firstLoad')) {
-						setTimeout(function(){
-							self.data = res.data.data
-							Indicator.close()
-							setStore('firstLoad',true)
-						},1000)
-					} else {
-						self.data = res.data.data
-						Indicator.close()
-					}
+					self.data = res.data.data
+					Indicator.close()
 				}
       		}).then(function(error){
       			
@@ -257,11 +249,7 @@
       },
       created: function () {
       	Indicator.open()
-      	//页面开始渲染时没有动画，当dom渲染结束在mounted阶段加上动画
-		this.leftLinear = 's'
-      	if(getStore('firstLoad')) {
-      		this.elseShow = true
-      	}
+		this.leftLinear = ''
       	this._initPage()
       	let self = this
       	setTimeout(function(){
@@ -282,10 +270,15 @@
 	  },
       mounted () {
       	let userposition = getStore('userposition')
-      	userposition = JSON.parse(userposition)
-      	if(userposition) {
+      	if(!userposition) {
+      		let obj = {}
+      		obj.text = this.positionText
+      		obj.position = this.position
+      		setStore('userposition',obj)
+      	} else {
+      		userposition = JSON.parse(userposition)
       		this.positionText =  userposition.text
-      		this.positions =  userposition.position
+      		this.position =  userposition.position
       	}
       },
       components: {

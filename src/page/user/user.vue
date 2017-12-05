@@ -335,13 +335,14 @@
 			}
 		},
 		mounted: function(){
+			console.log(3)
 			let id = getStore('user_id')
 			if(!id) {
 				this.userInfos = {}
 			}
 		},
 		created: function(){
-			
+			console.log(1)
 			let self = this
 			setTimeout(function(){
 				self._initPage()
