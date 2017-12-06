@@ -8,7 +8,7 @@
 		width: 100%;
 		overflow: hidden;
 		background: #f5f5f5;
-		>div{
+		>div.scroll-container{
 			padding-bottom: 24px;
 		}
 		.address-container{
@@ -295,7 +295,7 @@
 	<transition name="confirmOrder">
 		<div class="confirmOrder-wrapper-a" v-if="shopCar.foods">
 			<div class="confirmOrder-wrapper" ref="confirmOrders">
-				<div>
+				<div class="scroll-container">
 					<mt-header title="确认订单">
 					  <div slot="left">
 					    <mt-button @click="$router.go(-1)" icon="back">返回</mt-button>
@@ -346,8 +346,11 @@
 							
 						</div>
 						<div class="discount">
-							<!--<mt-cell title="红包" value="有红包可用" is-link></mt-cell>-->
-							<mt-cell title="红包" value="无可用红包" is-link></mt-cell>
+							<div @click="discountedShow">
+								<mt-cell title="红包" v-if="isDiscount===1" :value="discountText" is-link></mt-cell>
+							</div>
+							<mt-cell title="红包" v-if="isDiscount===0" value="无可用红包" is-link></mt-cell>
+							
 						</div>
 						<div class="totalPrice">
 							<mt-cell title="">
@@ -360,13 +363,17 @@
 					</div>
 					<div class="otherNeed">
 						<mt-cell title="在线支付"></mt-cell>
-						<mt-cell title="餐具份数/口味偏好" is-link>
-							<span class="iconfont icon-lvye"></span>
-							<span>马上助力环保</span>
-						</mt-cell>
+						<div @click="reMarkedShow">
+							<mt-cell title="餐具份数/口味偏好" is-link>
+								<span class="iconfont icon-lvye"></span>
+								<span>马上助力环保</span>
+							</mt-cell>
+						</div>
 					</div>
 				</div>
 			</div>
+			<use-discount v-on:close="discountedShow" :show="discountShow" :discounts="discounts"></use-discount>
+			<re-marks :show="reMarkShow"></re-marks>
 			<div class="fixed-bottom">
 				<div class="price">
 					￥<i>{{totalPrice}}</i>
@@ -378,20 +385,51 @@
 </template>
 
 <script>
+	import axios from 'axios'
 	import BScroll from 'better-scroll'
+	import useDiscount from './children/usediscount'
+	import reMarks from './children/reMarks'
 	import { getStore } from '@/common/js/savaLocal'
+	
+	const noError = 0
 	
 	export default {
 		data() {
 			return {
-				defaultAddress: [],
-				shopCar:{},
+				defaultAddress: [], //默认地址
+				shopCar:{}, //购物车
+				discounts: [],//优惠券
+				discountShow:false,
+				discountText: '有红包可用',
+				discountPrice: 0,
+				reMarkShow: false //控制备注的显示
 			}
 		},
 		methods: {
-			close: function(){
-				
+			_initDiscount: function() {
+				let self = this
+				let id = getStore('user_id')
+				axios.get('/api/user',{
+					params: {id: id}
+				}).then(function(res){
+					if(res.data.status === noError) {
+						self.discounts = res.data.data.discounts
+						
+					}
+				}).then(function(error){
+					
+				})
 			},
+			discountedShow: function(item){
+				if(item.price) {
+					this.discountText = "已选择 满"+item.maxPrice+"减"+item.price
+					this.discountPrice = item.price
+				}
+				this.discountShow = !this.discountShow
+			},
+			reMarkedShow () {
+				this.reMarkShow = ! this.reMarkShow
+			}
 		},
 		computed: {
 			totalPrice: function () {
@@ -402,8 +440,23 @@
 						price += arr[i].count*arr[i].price
 					}
 					price += this.shopCar.deliveryPrice
+					price = price - this.discountPrice
 					return price 
 				}
+			},
+			isDiscount: function() {
+				let price = this.totalPrice
+				let show = 0
+				let arr = []
+				let time = new Date().getTime()
+				for(let i=0;i<this.discounts.length;i++) {
+					if(this.discounts[i].maxPrice<price && time<this.discounts[i].limitTime) {
+						arr.push(this.discounts[i])
+						show = 1
+					}
+				}
+				this.discounts = arr
+				return show
 			}
 		},
 		created: function () {
@@ -424,6 +477,7 @@
 			} else {
 				address = null
 			}
+			this._initDiscount()
 			this.defaultAddress = address
 			
 			if(!getStore('shopCar')){
@@ -433,9 +487,7 @@
 			}
 			
 			this.$nextTick(() => {
-				console.log(1)
 				if(!this.scroll) {
-					console.log(2)
 					this.scroll = new BScroll(this.$refs.confirmOrders,{
 						click: true
 					})
@@ -443,6 +495,10 @@
 					this.scroll.refresh()
 				}
 			})
+		},
+		components: {
+			useDiscount,
+			reMarks
 		}
 	}
 </script>
