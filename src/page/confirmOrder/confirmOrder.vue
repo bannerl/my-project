@@ -227,6 +227,11 @@
 			}
 			.mint-cell-text{
 				font-weight: 700;
+				white-space: nowrap;
+			    overflow: hidden;
+			    text-overflow: ellipsis;
+			    display: inline-block;
+			    max-width: 300px;
 			}
 			.mint-cell-value{
 				font-size: 13px;
@@ -364,21 +369,21 @@
 					<div class="otherNeed">
 						<mt-cell title="在线支付"></mt-cell>
 						<div @click="reMarkedShow">
-							<mt-cell title="餐具份数/口味偏好" is-link>
-								<span class="iconfont icon-lvye"></span>
-								<span>马上助力环保</span>
+							<mt-cell :title="need.text" is-link>
+								<span v-show="need.show" class="iconfont icon-lvye"></span>
+								<span v-show="need.show">马上助力环保</span>
 							</mt-cell>
 						</div>
 					</div>
 				</div>
 			</div>
 			<use-discount v-on:close="discountedShow" :show="discountShow" :discounts="discounts"></use-discount>
-			<re-marks :show="reMarkShow"></re-marks>
+			<re-marks v-on:close="reMarkedShow" :show="reMarkShow"></re-marks>
 			<div class="fixed-bottom">
 				<div class="price">
 					￥<i>{{totalPrice}}</i>
 				</div>
-				<div class="text">去支付</div>
+				<div class="text" >去支付</div>
 			</div>
 		</div>
 	</transition>
@@ -402,6 +407,10 @@
 				discountShow:false,
 				discountText: '有红包可用',
 				discountPrice: 0,
+				need: {
+					text:"餐具份数/口味偏好",
+					show:true
+				},
 				reMarkShow: false //控制备注的显示
 			}
 		},
@@ -427,7 +436,19 @@
 				}
 				this.discountShow = !this.discountShow
 			},
-			reMarkedShow () {
+			reMarkedShow (obj) {
+				if(obj.arr || obj.text) {
+					let str = ''
+					for(let i=0;i<obj.arr.length;i++) {
+						if(i === (obj.arr.length-1)){
+							str += obj.arr[i].text
+						} else {
+							str += obj.arr[i].text+','
+						}
+					}
+					this.need.text = str
+					this.need.show = false
+				}
 				this.reMarkShow = ! this.reMarkShow
 			}
 		},
