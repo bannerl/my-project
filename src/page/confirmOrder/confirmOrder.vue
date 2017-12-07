@@ -383,7 +383,9 @@
 				<div class="price">
 					￥<i>{{totalPrice}}</i>
 				</div>
-				<div class="text" >去支付</div>
+				<div class="text" >
+				<router-link to="/payMent">去支付</router-link>	
+				</div>
 			</div>
 		</div>
 	</transition>

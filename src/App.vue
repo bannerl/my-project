@@ -11,7 +11,7 @@
 	}
 </style>
 <template>
-  <div id="app">
+  <div>
   	<div class="main-top">
 	  	  <router-view>
 	  	  	<mt-tabbar slot="fixed-navbar" v-model="selected">
@@ -56,17 +56,17 @@
 //	  			this.selected = getStore('bottomfixed')
 //	  		}
 	  		
-	  		let str = this.selected
-	  		let id = getStore('user_id')
-	  		if(!id){
-	  			id = 0
-	  		}
-	  		if(str === "user"){
-	  			this.$emit('deleteFade')
-	  			this.$router.push({name:this.selected,params:{'userId':id}})
-	  		}else{
-	  			this.$router.push({name:this.selected})
-	  		}
+//	  		let str = this.selected
+//	  		let id = getStore('user_id')
+//	  		if(!id){
+//	  			id = 0
+//	  		}
+//	  		if(str === "user"){
+//	  			this.$emit('deleteFade')
+//	  			this.$router.push({name:this.selected,params:{'userId':id}})
+//	  		}else{
+//	  			this.$router.push({name:this.selected})
+//	  		}
 
 	  		return false
 	  	}

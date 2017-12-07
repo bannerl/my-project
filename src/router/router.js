@@ -19,6 +19,7 @@ import searchShop from 'page/searchShop/searchShop'
 import sellerPage from 'page/sellerPage/sellerPage'
 import shop from 'page/shop/shop'
 import confirmOrder from 'page/confirmOrder/confirmOrder'
+import payMent from 'page/payment/payment'
 
 export default [
     { path: '/',
@@ -145,6 +146,12 @@ export default [
         	name:'confirmOrder',
         	component: confirmOrder,
         	meta:{ pageTitle: '确认订单' }
+        },
+        {
+        	path: '/payMent',
+        	name:'payMent',
+        	component: payMent,
+        	meta:{ pageTitle: '选择付款方式' }
         }
       ]
     }

@@ -44,14 +44,22 @@ const router = new Router({
 
 
 
+//new Vue({
+//el: '#app',
+//router,
+//store,
+//template: '<App/>',
+//created:function(){
+//	console.log(this.$options)
+//},
+//components: { App }
+//})
+
 new Vue({
-  el: '#app',
   router,
   store,
-  template: '<App/>',
   created:function(){
   	console.log(this.$options)
   },
-  components: { App }
-})
+}).$mount('#app')
 

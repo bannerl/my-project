@@ -244,7 +244,7 @@
       		this.$router.push('/searchShop?keyword='+text)
       	},
       	intoShop: function(arg,title) {
-      		this.$router.push({path:'shop',query:{'max_type':arg,'title':title}})
+      		this.$router.push({path:'/shop',query:{'max_type':arg,'title':title}})
       	}
       },
       created: function () {
