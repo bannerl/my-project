@@ -75,16 +75,16 @@
 			}
 		}
 	}
-	.fade-enter-active,.fade-leave-active{
+	.userEditFade-enter-active,.userEditFade-leave-active{
 		transition: all .2s;
 		transform: translate3d(0,0,0);
 	}
-	.fade-enter,.fade-leave-to{
+	.userEditFade-enter,.userEditFade-leave-to{
 		transform: translate3d(100%,0,0);
 	}
 </style>
 <template>
-	<transition name="fade">
+	<transition name="userEditFade">
 		<div v-if="userInfo"  v-show="acountShow" class="userEdit-wrapper">
 			<mt-header title="账号与安全">
 			  <div slot="left">

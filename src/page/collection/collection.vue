@@ -149,16 +149,30 @@
 		}
 		
 	}
-	.fade-enter-active,.fade-leave-active{
+	/*.fade-enter-active{
 		transition: all .3s;
 		transform: translate3d(0,0,0);
 	}
-	.fade-enter,.fade-leave-to{
+	.fade-leave-active{
+		transition: all .2s;
+		transform: translate3d(0,0,0);
+	}
+	.fade-enter{
+		transform: translate3d(100%,0,0);
+	}
+	.fade-leave-to{
+		transform: translate3d(0,0,0);
+	}*/
+	.collectionFade-enter-active,.collectionFade-leave-active{
+		transition: all .2s;
+		transform: translate3d(0,0,0);
+	}
+	.collectionFade-enter,.collectionFade-leave-to {
 		transform: translate3d(100%,0,0);
 	}
 </style>
 <template>
-	<transition name="fade">
+	<transition name="collectionFade">
 		<div class="collection-wrapper" v-if="collections">
 			<mt-header title="我的收藏">
 			  <div @click="returnPrev" slot="left">

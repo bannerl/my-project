@@ -3,9 +3,10 @@
 	.shops-wrapper{
 		position: absolute;
 		left: 0;
-		bottom: 0;
 		top: 0;
+		bottom: 0;
 		width: 100%;
+		background: #f5f5f5;
 		.mint-header{
 			z-index: 10;
 		}

@@ -115,7 +115,7 @@
 				let id = getStore('user_id').id
 				axios.get('/api/user',{id:id}).then(function(res){
 			  		if(res.data.status === noError){
-			  			self.userInfo=res.data.data;
+			  			self.userInfo=res.data.data
 			  		}	
 		  		});
 			},
@@ -135,9 +135,9 @@
 				this.aboutUsShow = !this.aboutUsShow
 			},
 			signOut: function() {
+				this.OUT_LOGIN()
 				setStore('user_id','')
 				this.$router.go(-1)
-				this.OUT_LOGIN()
 			}
 		},
 		created: function(){

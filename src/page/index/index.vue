@@ -189,7 +189,7 @@
 					</div>
 				</div>	
 			</div>	
-			<slot name="fixed-navbar"></slot>
+			<slot value="index" name="fixed-navbar"></slot>
 		</div>
 		<!--<div :class="{hide:elseShow}" class="index-loading" v-else>
 			<img src="../../common/image/index-loading.svg" />
@@ -210,7 +210,7 @@
 	export default {
       data: function() {
         return {
-        	leftLinear:'index',
+        	leftLinear:'noAnimate',
         	data:null,
         	elseShow: false,
         	position:[120.36932, 30.27269], //默认经纬度

@@ -1,5 +1,5 @@
 <template>
-	<transition>
+	<transition name="sellerFade">
 	  <div>
 	  	<goods-header :seller='seller'></goods-header>
 	  	<div class="tab">
@@ -103,7 +103,7 @@
 		transform: translate3d(0,0,0);
 	}
 	.sellerFade-enter,.sellerFade-leave-to {
-		transform: translate3d(100%,0,0);
+		transform: translate3d(-100%,0,0);
 	}
 
 </style>

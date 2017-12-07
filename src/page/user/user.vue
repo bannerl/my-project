@@ -257,23 +257,31 @@
 	
 	export default {
 		name:"user",
+		props:{
+			animateName:{
+				type:Boolean
+			}
+		},
 		data(){
 			return {
 				userInfos: {},
 				acountShow: false, //控制账号安全的打开
-				fadeuser: 'fadeuser',
-				animationShow:false,
+				fadeuser: 'fadeuser'
 			}
 		},
 		computed: {
 			...mapState([
-				'loginStatus',
-				'systemFade'
+				'loginStatus'
 			])
 		},
 		beforeRouteEnter (to, from, next) {
 		  typeof to.meta.pageTitle !== undefined && setDocumentTitle(to.meta.pageTitle)
-		  next( vm => {})
+		  next( vm => {
+		  	setTimeout(function(){
+		  		vm._initPage()
+		  	},200)
+
+		  })
 		},
 		beforeRouteLeave (to, from, next) {
 			if(to.name === "orderList" || to.name === "index") {
@@ -289,10 +297,10 @@
 		},
 		methods: {
 			_initPage: function(){
+				
 				let self = this
-				//底部导航激活
-				self.$parent.selected = "user"
 				let id = getStore('user_id')
+				
 				if(!self.loginStatus&&!id){
 //					self.$router.push({name:'login'})
 				}
@@ -300,24 +308,21 @@
 					let self = this
 					axios.get('/api/user').then(function(res){
 				  		if(res.data.status === noError){
-				  			self.userInfos=res.data.data;
+				  			self.userInfos=res.data.data
 				  		}	
 			  		})
 				} else {
 					this.userInfos = this.UserInfo
 				}
-				if(this.systemFade){
-					this.acountShow = true
-				}
-				
-				
 			},
 			toggleAcount: function(){
 				let id = getStore('user_id')
-				if(!id) {
-					this.$router.push('/login')
+				if(!this.loginStatus && !id) {
+					this.userInfo = {}
+					this.$router.push({name:'login'})
+				} else {
+					this.acountShow = !this.acountShow
 				}
-				this.acountShow = !this.acountShow
 			},
 			helpingMessage: function(){
 				Toast({
@@ -335,21 +340,29 @@
 			}
 		},
 		mounted: function(){
-			console.log(3)
 			let id = getStore('user_id')
 			if(!id) {
 				this.userInfos = {}
 			}
 		},
 		created: function(){
-			console.log(1)
+			if(this.animateName) {
+				this.fadeuser = ""
+			}
 			let self = this
 			setTimeout(function(){
 				self._initPage()
 			},20)
 		},
+		updated () {
+			if(this.animateName) {
+				this.fadeuser = "fadeuser"
+			} else {
+				this.fadeuser = ""
+			}
+		},
 		components:{
-			userEdit,
+			userEdit
 		}
 	}
 </script>
