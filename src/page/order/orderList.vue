@@ -190,7 +190,7 @@
 						<mt-button type="primary">立即登录</mt-button>
 					</router-link>
 				</div>
-				<slot name="fixed-navbar"></slot>
+				<slot value="orderList" name="fixed-navbar"></slot>
 			</div>
 			<order-desc v-on:close="closeDesc" :orderInfo="orderInfo" :orderShow="orderDescShow"></order-desc>
 			<order-filter v-on:selected="timeFilter" v-on:close="closeFilter" :filterArr="filterArr" :show="orderFilterShow"></order-filter>

@@ -224,6 +224,7 @@
 				if(res.data.status === noError){
 					self.data = res.data.data
 					Indicator.close()
+					self._initBScroll()
 				}
       		}).then(function(error){
       			

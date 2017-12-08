@@ -123,12 +123,19 @@
 	.fadeShops-leave-to,.fadeShops-enter{
 		transform: translate3d(100%,0,0);
 	}
+	.fadeShopLeft-enter-active,.fadeShopLeft-leave-active{
+		transition: all .2s;
+		transform: translate3d(0,0,0);
+	}
+	.fadeShopLeft-leave-to,.fadeShopLeft-enter{
+		transform: translate3d(-100%,0,0);
+	}
 </style>
 <template>
-	<transition name="fadeShops">
+	<transition :name="animate">
 		<div class="shops-wrapper">
 			<mt-header :title="title">
-				<div @click="$router.go(-1)" slot="left" >
+				<div @click="returnBack" slot="left" >
 				    <mt-button icon="back">返回</mt-button>
 				</div>
 			</mt-header>
@@ -183,6 +190,7 @@
 		data() {
 			return {
 				title: '', //标题
+				animate:'fadeShops',
 				category: category,
 				filterShow: false,
 				category_id: 0,
@@ -207,8 +215,15 @@
 					this.shops.sort((a,b) => {return b.sellMonthCount - a.sellMonthCount})
 				}
 			},
+			returnBack () {
+				this.animate = 'fadeShops'
+				this.$router.go(-1)
+			},
 			categoryShow: function () {
 				this.filterShow = !this.filterShow
+			},
+			animateChange () {
+				this.animate = 'fadeShopLeft'
 			},
 			filterType: function(i) {
 				if(typeof i === 'number') {

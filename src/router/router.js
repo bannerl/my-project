@@ -25,10 +25,6 @@ export default [
     { path: '/',
       component: App,
       children: [
-      	{
-          path: '/',
-          redirect:'/index'
-        },
 		{
           path: '/login',
           name: 'login',

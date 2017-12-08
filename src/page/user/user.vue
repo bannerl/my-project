@@ -239,7 +239,7 @@
 					</mt-cell>
 				</div>
 			</div>
-			<slot name="fixed-navbar"></slot>
+			<slot value="user" id='1234' name="fixed-navbar"></slot>
 			<user-edit v-on:close="toggleAcount" :show="acountShow" :userInfo="userInfos"></user-edit>
 		</div>
 	</transition>

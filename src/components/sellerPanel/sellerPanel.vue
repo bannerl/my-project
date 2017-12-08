@@ -168,7 +168,7 @@
 </style>
 <template>
 	<ul class="sellerPanel-container">
-		<router-link :to="{name:'seller',query:{'id':seller.id}}" v-for="seller in sellers" :key="seller.id">
+		<div @click="_go(seller)" v-for="seller in sellers" :key="seller.id">
 			<li class="item border-1px" >
 				<div class="image">
 					<img width="60" height="60" :src="seller.image" />
@@ -202,12 +202,13 @@
 					</div>
 				</div>
 			</li>
-		</router-link>
+		</div>
 	</ul>
 </template>
 
 <script>
 	import { Indicator } from 'mint-ui'
+	
 	import star from 'components/star/star'
 	
 	const noError = 0
@@ -228,7 +229,9 @@
 			}
 		},
 		methods: {
-			
+			_go (seller) {
+				this.$router.push({path:'seller',query:{id:seller.id}})
+			}
 		},
 		components:{
 			star

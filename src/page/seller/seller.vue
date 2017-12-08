@@ -1,6 +1,6 @@
 <template>
 	<transition name="sellerFade">
-	  <div>
+	  <div class="sellerPage">
 	  	<goods-header :seller='seller'></goods-header>
 	  	<div class="tab">
 	  		<div class="tab-item">
@@ -80,6 +80,13 @@
 
 <style lang="scss" scoped="" type="text/css">
 	@import '../../common/style/mixin';
+	.sellerPage{
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		bottom: 0;
+	}
 	.tab{
 		position:relative;
 		display:flex;
@@ -100,10 +107,10 @@
 	}
 	.sellerFade-enter-active,.sellerFade-leave-active{
 		transition: all .2s;
-		transform: translate3d(0,0,0);
+		opacity: 1;
 	}
 	.sellerFade-enter,.sellerFade-leave-to {
-		transform: translate3d(-100%,0,0);
+		opacity: 0;
 	}
 
 </style>
