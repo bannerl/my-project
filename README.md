@@ -1,30 +1,24 @@
-# my-project
+# 主要内容
+  本项目参照饿了么APP，属于高仿饿了么，部分功能尚未完善，尚在修改中。。。
+  
+ 
+## 技术栈
+ vue2 + vuex + vue-router + vue-amap + mint-ui +webpack + ES6 + axios + sass + flex + 高德地图 
+ 
+## 项目运行
+    git clone git@github.com:bannerl/my-project.git
 
-> A Vue.js project
+    cd my-project
 
-## Build Setup
+    npm install
+    
+    npm run dev
 
-``` bash
-# install dependencies
-npm install
+    访问 http://localhost:8080
+    
+## 效果演示
+    地址。。。尚未完成
+    
+### 移动端扫描下方二维码
 
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
-```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## 截图

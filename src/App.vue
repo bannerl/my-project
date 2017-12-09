@@ -59,37 +59,9 @@
 	  	])
 	  },
 	  created () {
-	  	console.log(this.childData)
-//	  	let url = (window.location.href).split('#')
-//		if(url[0].indexOf('index')) {
-//			this.selected = 'index'
-//		} else if(url[0].indexOf('user')){
-//			this.selected = 'user'
-//		} else {
-//			this.selected = 'orderList'
-//		}
+
 	  },
 	  watch: {
-	 	'selected' () {
-//	 		let str = this.selected
-//	  		let id = getStore('user_id')
-//	  		if(!id && !this.loginStatus){
-//	  			id = 0
-//	  		}
-//	  		if(str === "user"){
-//	  			this.$router.push({name:this.selected,params:{'userId':id}})
-//	  			return true
-//	  		}else if(str === "orderList"){
-//	  			this.$router.push({name:this.selected})
-//	  			return true
-//	  		} else if(str === "index") {
-//	  			this.$router.push({name:this.selected})
-//	  			return true
-//	  		} else {
-//	  			return false
-//	  		}
-//	  		return false
-	 	},
 	    '$route' (to, from) {
 		   if(to.name !== "index" && to.name !== "orderList" && to.name !== "user") {
 		   	this.selected = ''

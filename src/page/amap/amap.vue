@@ -128,7 +128,7 @@
 			</mt-header>
 			<div class="searchBox" :class="{textOn:inputActive}">
 				<!--<div class="city">杭州</div>-->
-				<el-amap-search-box class="search-box" :search-option="searchOption" :on-search-result="onSearchResult"></el-amap-search-box>
+				<el-amap-search-box  class="search-box" :search-option="searchOption" :on-search-result="onSearchResult"></el-amap-search-box>
 			</div>
 		</div>
 	</transition>	
@@ -136,12 +136,12 @@
 
 <script>
 	import {setStore} from '@/common/js/savaLocal'
-	import {mapState,mapMutations} from 'vuex'
 	
 	export default {
       data: function() {
         return {
           inputActive: false,
+          
           markers: [
             [120.36932, 30.27269]
           ],
@@ -154,9 +154,6 @@
         };
       },
       methods: {
-      	...mapMutations([
-      		'RECORD_ADDRESS'
-      	]),
         addMarker: function() {
           let lng = 121.5 + Math.round(Math.random() * 1000) / 10000;
           let lat = 31.197646 + Math.round(Math.random() * 500) / 10000;
@@ -180,9 +177,8 @@
             if(this.mapCenter && this.positionText) {
         		let userposition = {}
         		userposition.position = this.mapCenter
-        		userposition.address = this.positionText
+        		userposition.text = this.positionText
         		setStore('userposition',userposition)
-        		this.RECORD_ADDRESS(userposition)
         		this.$router.go(-1)
         	}
           }

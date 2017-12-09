@@ -21,10 +21,20 @@ import shop from 'page/shop/shop'
 import confirmOrder from 'page/confirmOrder/confirmOrder'
 import payMent from 'page/payment/payment'
 
+import amap from 'page/amap/amap'
+
 export default [
     { path: '/',
       component: App,
       children: [
+     	{	
+          path: '/',
+          component:index
+        },
+        {	
+          path: '/amap',
+          component:amap
+        },
 		{
           path: '/login',
           name: 'login',

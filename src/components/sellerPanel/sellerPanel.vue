@@ -196,8 +196,8 @@
 							<span class="perConsume">￥{{seller.perConsume}}元/人</span>
 						</p>
 						<div class="right">
-							<span class="address">2.4km</span>
-							<span class="deliveryTime">{{seller.deliveryTime}}分钟</span>
+							<span class="address">{{distance(seller.address)}}</span>
+							<span class="deliveryTime">{{distance(seller.address,1)}}分钟</span>
 						</div>
 					</div>
 				</div>
@@ -208,7 +208,8 @@
 
 <script>
 	import { Indicator } from 'mint-ui'
-	
+	import {mapState,mapMutations} from 'vuex'
+	import {getStore} from '@/common/js/savaLocal'
 	import star from 'components/star/star'
 	
 	const noError = 0
@@ -228,9 +229,30 @@
 				descArr:desc
 			}
 		},
+		computed: {
+			...mapState([
+				'recordAddress'
+			])
+		},
 		methods: {
 			_go (seller) {
 				this.$router.push({path:'seller',query:{id:seller.id}})
+			},
+			distance (position,delivery) {
+				let _position = this.recordAddress.position
+				let lnglat = {}
+				if(_position){
+					lnglat = new AMap.LngLat(_position[0], _position[1])
+				} else {
+					let a = JSON.parse(getStore('userposition'))
+					lnglat = new AMap.LngLat(a.position[0], a.position[1])
+				}
+				let diff = Math.round(lnglat.distance(position)/100)/10
+				if(delivery){
+					return Math.floor(diff*10+(Math.random()*10))
+				}
+				
+			    return diff+'km'
 			}
 		},
 		components:{

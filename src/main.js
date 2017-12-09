@@ -14,24 +14,20 @@ import '@/common/js/vue-touch.js'
 import '@/common/js/directive.js'
 
 import App from './App'
-//console.log(store)
-//import seller from 'components/seller/seller'
-//import goods from 'components/goods/goods'
-//import ratings from 'components/ratings/ratings'
-
 
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 import VueAMap from 'vue-amap';
-Vue.use(VueAMap);
+Vue.use(VueAMap)
 
 // 初始化vue-amap
 VueAMap.initAMapApiLoader({
   // 高德的key
   key: 'f2a958cc4b3a27356374ac1f9ca229f4',
   // 插件集合
-  plugin: ['AMap.Autocomplete', 'AMap.PlaceSearch', 'AMap.Scale', 'AMap.OverView', 'AMap.ToolBar', 'AMap.MapType', 'AMap.PolyEditor', 'AMap.CircleEditor']
+  plugin: ['AMap.Autocomplete', 'AMap.PlaceSearch', 'AMap.Scale', 'AMap.OverView', 'AMap.ToolBar', 'AMap.MapType', 'AMap.PolyEditor', 'AMap.CircleEditor'],
+ 
 })
 Vue.use(Router)
 Vue.use(Resource)
@@ -42,24 +38,11 @@ const router = new Router({
   'linkActiveClass':'active'
 })
 
-
-
-//new Vue({
-//el: '#app',
-//router,
-//store,
-//template: '<App/>',
-//created:function(){
-//	console.log(this.$options)
-//},
-//components: { App }
-//})
-
 new Vue({
   router,
   store,
   created:function(){
-  	console.log(this.$options)
+  	
   },
 }).$mount('#app')
 

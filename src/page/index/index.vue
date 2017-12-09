@@ -117,6 +117,62 @@
 				}
 			}
 		}
+		#position-wrapper {
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background: rgba(0,0,0,.5);
+			#result{
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				width: 200px;
+				height: 80px;
+				padding: 36px 14px;
+				background: #fff;
+				border-radius: 4px;
+				transform: translate3d(-50%,-50%,0);
+				.iconfont{
+					position: absolute;
+					right: 0;
+					top: 0;
+					padding: 14px;
+					font-size: 18px;
+					color: #777;
+				}
+				.text{
+					position: relative;
+					font-size: 18px;
+					padding-bottom: 10px;
+					&:after{
+						position: absolute;
+						bottom: 0;
+						left: 0;
+						width: 100%;
+						border-bottom: 1px solid #ddd;
+						transform: scaleY(.5);
+						content: '';
+					}
+				}
+				.address{
+					font-size: 18px;
+					padding: 28px 0 0;
+					text-align: center;
+				}
+				.loading{
+					color: #333;
+					.mint-spinner-snake{
+						display: block;
+						margin: 28px auto;
+						border-top-color: #777 !important;
+					    border-left-color: #777 !important;
+					    border-bottom-color: #777 !important;
+					}
+				}
+			}
+		}
 	}
 	.index-loading{
 		position: absolute;
@@ -148,7 +204,7 @@
 						<div class="selectAddress-wrapper">
 							<router-link to="/addressSearch">
 								<span class="iconfont icon-dizhi1"></span>
-								<span class="address">{{positionText}}</span>
+								<span class="address">{{address}}</span>
 							</router-link>
 						</div>
 						<div class="searchFood-wrapper">
@@ -188,8 +244,18 @@
 						</div>
 					</div>
 				</div>	
-			</div>	
+			</div>	 
 			<slot value="index" name="fixed-navbar"></slot>
+			<div id="position-wrapper"  v-show="positionShow">
+			    <span id="result">
+			    	<span class="iconfont icon-guanbi" @click="_closePosition"></span>
+			    	<p class="text">当前位置</p>
+			    	<p class="address" v-if="address">{{address}}</p>
+			    	<p class="loading" v-else>
+			    		<mt-spinner type="snake"></mt-spinner>
+			    	</p>
+			    </span>
+			</div>
 		</div>
 		<!--<div :class="{hide:elseShow}" class="index-loading" v-else>
 			<img src="../../common/image/index-loading.svg" />
@@ -197,27 +263,34 @@
 	</transition>
 </template>
 
+<script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js"></script>
 <script>
 	import axios from 'axios'
 	import { Indicator } from 'mint-ui'
 	import BScroll from 'better-scroll'
+	import {mapState,mapMutations} from 'vuex'
 	import {setStore, getStore} from '@/common/js/savaLocal'
 	import {setDocumentTitle} from '@/common/js/base'
 	import sellerPanel from 'components/sellerPanel/sellerPanel'
 	
 	const noError = 0
 	
+	
 	export default {
       data: function() {
         return {
         	leftLinear:'noAnimate',
         	data:null,
+        	position:'', //经纬度和地址
+        	address:'',
         	elseShow: false,
-        	position:[120.36932, 30.27269], //默认经纬度
-        	positionText: "下沙江滨"        //默认地址
+        	positionShow:true
         }
       },
       methods: {
+      	...mapMutations([
+      		'RECORD_ADDRESS'
+      	]),
       	_initPage: function () {
       		let self = this
       		axios.get('/api/index').then(function(res){
@@ -230,6 +303,87 @@
       			
       		})
       	},
+      	_initPosition () {
+      		let self = this
+			let map = new AMap.Map("container", {
+			    resizeEnable: true,
+				zoom: 18
+		    }),lnglatXY = [120.33234,30.299182],geocoder,geolocation;
+		    
+		    map.plugin('AMap.Geocoder', function() {
+		        geocoder = new AMap.Geocoder({
+		        	city:"全国",
+		           radius: 1000,
+		           extensions: "all"
+		        })
+		    })
+    
+		    map.plugin('AMap.Geolocation', function() {
+		        geolocation = new AMap.Geolocation({
+		            enableHighAccuracy: true,//是否使用高精度定位，默认:true
+		            timeout: 10000,          //超过10秒后停止定位，默认：无穷大
+		            buttonOffset: new AMap.Pixel(10, 20),//定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
+		            zoomToAccuracy: false,      //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
+		            buttonPosition:'RB'
+		        });
+		        map.addControl(geolocation);
+		        geolocation.getCurrentPosition();
+		        AMap.event.addListener(geolocation, 'complete', onComplete);//返回定位信息
+		        AMap.event.addListener(geolocation, 'error', onError);      //返回定位出错信息
+		    })
+		    //解析定位结果
+		    function onComplete(data) {
+		        lnglatXY = []
+		        lnglatXY.push(data.position.getLng())
+		        lnglatXY.push(data.position.getLat())
+		        self.position = lnglatXY
+		        regeocoder()
+		        
+		        if(data.accuracy){
+		             //str.push('精度：' + data.accuracy + ' 米');
+		        }
+		    }
+		    //解析定位错误信息
+		    function onError(data) {
+		        console.log('定位失败')
+		    }
+    
+		    function regeocoder() {  //逆地理编码
+		        geocoder.getAddress(lnglatXY, function(status, result) {
+		            if (status === 'complete' && result.info === 'OK') {
+		                geocoder_CallBack(result);
+		            }
+		        });   
+		        
+//		        let marker = new AMap.Marker({  //加点
+//		            map: map,
+//		            position: lnglatXY
+//		        });
+//		        map.setFitView();
+		    }
+	    	let address = ''
+	    	function geocoder_CallBack(data) {
+		        //let address = data.regeocode.formattedAddress; //返回地址描述
+		        if(data.regeocode.addressComponent.building){
+		        	address = data.regeocode.addressComponent.building
+		        }else if(data.regeocode.aois[0]) {
+		       	 	address = data.regeocode.aois[0].name
+		        }else if(data.regeocode.crosses[0]) {
+		       	 	address = data.regeocode.crosses[0].first_name
+		        }
+		        self.address = address
+		        //console.log(self.address)
+		        //console.log(address)
+		        let obj = {}
+		        if(self.position&&self.address) {
+		        	obj.position = self.position
+		        	obj.address = self.address
+		        
+		        	 self.RECORD_ADDRESS(obj)
+		        }
+		    }
+      	
+      	},
       	_initBScroll: function () {
       		if(!this.scroll&&this.$refs.scrollWrapper) {
       	 		this.scroll = new BScroll(this.$refs.scrollWrapper,{
@@ -241,6 +395,9 @@
       	 		
       	 	}
       	},
+      	_closePosition () {
+      		this.positionShow = false
+      	},
       	toSearchPage: function (text) {
       		this.$router.push('/searchShop?keyword='+text)
       	},
@@ -248,11 +405,23 @@
       		this.$router.push({path:'/shop',query:{'max_type':arg,'title':title}})
       	}
       },
+      computed:{
+      	...mapState([
+      		'recordAddress'
+      	])
+      },
       created: function () {
       	Indicator.open()
 		this.leftLinear = ''
       	this._initPage()
       	let self = this
+      	
+      	if(this.recordAddress.address){
+      		this.positionShow = false
+      		this.address = this.recordAddress.address
+      	} else {
+      		this._initPosition()
+      	}
       	setTimeout(function(){
       	 	self._initBScroll()
       	},1200)
@@ -270,17 +439,7 @@
 	    }
 	  },
       mounted () {
-      	let userposition = getStore('userposition')
-      	if(!userposition) {
-      		let obj = {}
-      		obj.text = this.positionText
-      		obj.position = this.position
-      		setStore('userposition',obj)
-      	} else {
-      		userposition = JSON.parse(userposition)
-      		this.positionText =  userposition.text
-      		this.position =  userposition.position
-      	}
+		
       },
       components: {
       	sellerPanel

@@ -43,7 +43,7 @@ export default {
 		setStore('user_id', info.id);
 	},
 	[RECORD_ADDRESS](state,info) {
-		state.recordAddress.push(info)
+		state.recordAddress = info 
 	},
 	[OUT_LOGIN](state) {
 		state.userInfo = {}
