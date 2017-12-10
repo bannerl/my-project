@@ -3,9 +3,9 @@
 		position: absolute;
 		top: 0;
 		left: 0;
+		bottom: 0;
 		width: 100%;
 		background: #f5f5f5;
-		height: 600px;
 		.mint-cell-value{
 			color: rgb(38,162,255);
 		}

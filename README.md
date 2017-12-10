@@ -17,16 +17,16 @@
     访问 http://localhost:8080
     
 ## 效果演示
-  [戳这里](http://122.112.239.212:8080/#/index)
+  [戳这里](http://122.112.239.212:8080/#/index)（请用chrome手机模式预览）
     
 ### 移动端扫描下方二维码
  ![Alt text](./img/erweima.png)
 
 ## 截图
-  ![Alt text](./img/index.jpg) 
-  ![Alt text](./img/user.jpg) 
-  ![Alt text](./img/order.jpg) 
-  ![Alt text](./img/address.jpg) 
-  ![Alt text](./img/shop.jpg) 
-  ![Alt text](./img/user-1.jpg) 
-  ![Alt text](./img/pay.jpg) 
+  <img src="./img/index.jpg" width="365" />  
+  <img src="./img/user.jpg" width="365" />
+  <img src="./img/order.jpg" width="365" />
+  <img src="./img/address.jpg" width="365" />
+  <img src="./img/shop.jpg" width="365" />
+  <img src="./img/user-1.jpg" width="365" />
+  <img src="./img/user-1.jpg" width="365" />
