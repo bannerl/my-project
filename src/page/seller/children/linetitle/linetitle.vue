@@ -36,6 +36,12 @@
 			margin-top: 16px;
 			border-top: 1px solid #aaa;
 			background: none;
+			&:after{
+				display: none;
+			}
+			&:before{
+				display: none;
+			}
 		}
 		.title{
 			padding: 6px 10px;

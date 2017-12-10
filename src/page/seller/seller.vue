@@ -26,6 +26,7 @@
 <script>
 	import { loadUrl } from '@/common/js/unit'
 	import goodsHeader from './children/header/header'
+	import axios from 'axios'
 	
 	const noError = 0;
 	
@@ -61,10 +62,10 @@
 	  	}
 	  },
 	  created(){
-	  	this.$http.get('/api/seller').then(response => {
-		    response = response.body;
-		    if(response.status === noError){
-		    	this.seller = response.data
+	  	axios.get('/api/seller').then(res => {
+		    res = res.data;
+		    if(res.status === noError){
+		    	this.seller = res.data
 		    	this.type = "goods"
 		    	this.$router.replace('/seller/goods'+this.arg)
 			  }

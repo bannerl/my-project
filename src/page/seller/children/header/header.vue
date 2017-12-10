@@ -34,7 +34,7 @@
 				<h3>{{seller.name}}</h3>
 			</div>
 			<div class="star-wrapper">
-				<star :score="seller.serviceScore-0" size="48"></star>
+				<star :score="seller.serviceScore-0" size="36"></star>
 			</div>
 			<div class="line-wrapper">
 				<line-title title="优惠信息"></line-title>

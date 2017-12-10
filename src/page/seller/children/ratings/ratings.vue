@@ -70,6 +70,7 @@
 <script>
 	import BScroll from 'better-scroll'
 	import star from '../star/star'
+	import axios from 'axios'
 	import {formatTime} from '@/common/js/base.js'
 	import cartFoods from '../cartfoods/cartfoods'
 	import countEdit from '../countedit/countedit'
@@ -104,8 +105,8 @@
 	    }
 	  },
 	  created:function(){
-	  	this.$http.get('/api/ratings').then(response => {
-		    response = response.body
+	  	axios.get('/api/ratings').then(response => {
+		    response = response.data
 		    if(response.status === noError){
 		    	this.ratings = response.data
 		    	let i = 0

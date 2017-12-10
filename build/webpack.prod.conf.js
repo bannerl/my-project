@@ -15,6 +15,10 @@ const env = process.env.NODE_ENV === 'testing'
   : config.build.env
 
 const webpackConfig = merge(baseWebpackConfig, {
+	externals:{
+    'vue':'Vue',
+    'vuex':'Vuex'
+	},
   module: {
     rules: utils.styleLoaders({
       sourceMap: config.build.productionSourceMap,

@@ -52,6 +52,7 @@
 
 <script>
 	import BScroll from 'better-scroll'
+	import axios from 'axios'
 	import cartFoods from '../cartfoods/cartfoods'
 	import countEdit from '../countedit/countedit'
 	import foodPage from '../foodpage/foodpage'
@@ -76,8 +77,8 @@
 	    }
 	  },
 	  created(){
-	  	this.$http.get('/api/goods').then(response => {
-		    response = response.body;
+	  	axios.get('/api/goods').then(response => {
+		    response = response.data;
 		    if(response.status === noError){
 		    	this.goods = response.data;
 		    	this.$nextTick( ( ) =>{

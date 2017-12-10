@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Resource from 'vue-resource'
+//import Resource from 'vue-resource'
 
 import routes from '@/router/router'
 import store from '@/store/index'
 
 import MintUI from 'mint-ui'
-import 'mint-ui/lib/style.css' 
+//import 'mint-ui/lib/style.min.css' 
 import '@/common/style/_mixin.scss'
 import '@/common/style/mintReset.scss'
 
@@ -30,7 +30,7 @@ VueAMap.initAMapApiLoader({
  
 })
 Vue.use(Router)
-Vue.use(Resource)
+//Vue.use(Resource)
 Vue.use(MintUI)
 
 const router = new Router({

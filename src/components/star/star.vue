@@ -133,21 +133,4 @@
 			@include bg-image('star24_off');
 		}
 	}
-	.star-48{
-		span{
-			margin: 0 24px 0 0;
-			width: 28px;
-			height: 28px;
-			background-size: 28px 28px;
-		}
-		.on{
-			@include bg-image('star24_on');
-		}
-		.half{
-			@include bg-image('star24_half');
-		}
-		.off{
-			@include bg-image('star24_off');
-		}
-	}
 </style>
