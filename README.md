@@ -20,6 +20,13 @@
   [戳这里](http://122.112.239.212:8080/#/index)
     
 ### 移动端扫描下方二维码
- ![Alt text](./erweima.png)
+ ![Alt text](./img/erweima.png)
 
 ## 截图
+  ![Alt text](./img/index.jpg) 
+  ![Alt text](./img/user.jpg) 
+  ![Alt text](./img/order.jpg) 
+  ![Alt text](./img/address.jpg) 
+  ![Alt text](./img/shop.jpg) 
+  ![Alt text](./img/user-1.jpg) 
+  ![Alt text](./img/pay.jpg) 

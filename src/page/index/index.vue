@@ -266,7 +266,7 @@
 <script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js"></script>
 <script>
 	import axios from 'axios'
-	import { Indicator } from 'mint-ui'
+	import { Indicator,Toast } from 'mint-ui'
 	import BScroll from 'better-scroll'
 	import {mapState,mapMutations} from 'vuex'
 	import {setStore, getStore} from '@/common/js/savaLocal'
@@ -283,6 +283,7 @@
         	data:null,
         	position:'', //经纬度和地址
         	address:'',
+        	locationState:true,
         	elseShow: false,
         	positionShow:true
         }
@@ -345,7 +346,16 @@
 		    }
 		    //解析定位错误信息
 		    function onError(data) {
-		        console.log('定位失败')
+		        console.log('由于Chrome、IOS10等已不再支持非安全域的浏览器定位请求，该定位失败，请手动搜索地址，或者用手机端或其他浏览器访问')
+		        self.position = [120.1824591,30.270627400000002]
+		        self.positionShow = false
+		        self.locationState = false
+		        Toast({
+				  message: '定位失败，请手动搜索',
+				  position: 'middle',
+				  duration: 1300
+				});
+		        regeocoder()
 		    }
     
 		    function regeocoder() {  //逆地理编码
@@ -371,7 +381,12 @@
 		        }else if(data.regeocode.crosses[0]) {
 		       	 	address = data.regeocode.crosses[0].first_name
 		        }
-		        self.address = address
+		        if(self.locationState) {
+		        	 self.address = address
+		        } else {
+		        	 self.address = '定位失败'
+		        }
+		       
 		        //console.log(self.address)
 		        //console.log(address)
 		        let obj = {}

@@ -285,6 +285,9 @@
 				line-height: 48px;
 				background: rgba(29,220,100,.9);
 				font-weight: 700;
+				a{
+					color: #fff;
+				}
 			}
 		}
 	}

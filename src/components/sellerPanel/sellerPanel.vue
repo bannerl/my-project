@@ -243,9 +243,13 @@
 				let lnglat = {}
 				if(_position){
 					lnglat = new AMap.LngLat(_position[0], _position[1])
-				} else {
+				}else {
 					let a = JSON.parse(getStore('userposition'))
-					lnglat = new AMap.LngLat(a.position[0], a.position[1])
+					if(a){
+						lnglat = new AMap.LngLat(a.position[0], a.position[1])
+					} else {
+						lnglat = new AMap.LngLat(120.1824591,30.270627400000002)
+					}
 				}
 				let diff = Math.round(lnglat.distance(position)/100)/10
 				if(delivery){

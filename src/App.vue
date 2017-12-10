@@ -2,6 +2,17 @@
 	.fixed-icon{
 		font-size: 28px;
 	}
+	.mint-tabbar .mint-tab-item{
+		.iconfont{
+			font-size: 23px;
+			color: #26A2FF;
+		}
+	}
+	.mint-tabbar .mint-tab-item[href^="#"]{
+		.iconfont{
+			color: #888;
+		}
+	}
 </style>
 <template>
   <div>
@@ -9,27 +20,27 @@
 	  	  <router-view :animateName="animation">
 	  	  	<mt-tabbar slot="fixed-navbar" v-model="props.value" slot-scope="props">
 			  <mt-tab-item id="index" v-if="props.value!=='index'" href="#/index">
-			    <span slot="icon"  class="fixed-icon iconfont icon-waimai"></span>
+			    <span slot="icon"  class="fixed-icon iconfont icon-eliaomo"></span>
 			    	外卖
 			  </mt-tab-item>
 			   <mt-tab-item id="index" v-else>
-			    <span slot="icon" style="font-size: 25px;" class="fixed-icon iconfont icon-waimai1"></span>
+			    <span slot="icon" class="fixed-icon iconfont icon-eliaomo"></span>
 			    	外卖
 			  </mt-tab-item>
-			  <mt-tab-item v-if="props.value!=='orderList'" href="#/orderList" >
-			     <span slot="icon" class="fixed-icon iconfont icon-mingxi"></span>
+			  <mt-tab-item id="orderlist" v-if="props.value!=='orderlist'" href="#/orderList">
+			     <span slot="icon" class="fixed-icon iconfont icon-activity" style="font-size: 26px;" ></span>
 			    	订单
 			  </mt-tab-item>
-			  <mt-tab-item v-else>
-			     <span slot="icon" style="font-size: 26px;" class="fixed-icon iconfont icon-dingdan6"></span>
+			  <mt-tab-item id="orderlist" v-else>
+			     <span slot="icon" class="fixed-icon iconfont icon-activity_fill" style="font-size: 26px;" ></span>
 			    	订单
 			  </mt-tab-item>
 			  <mt-tab-item id="user" v-if="props.value!=='user'" href="#/user/1234" >
-			     <span slot="icon" class="fixed-icon iconfont icon-wode2"></span>
+			     <span slot="icon" class="fixed-icon iconfont icon-account"></span>
 			    	我的
 			  </mt-tab-item>
 			  <mt-tab-item id="user" v-else >
-			     <span slot="icon" class="fixed-icon iconfont icon-wode11"></span>
+			     <span slot="icon" class="fixed-icon iconfont icon-accountfilling"></span>
 			    	我的
 			  </mt-tab-item>
 			</mt-tabbar>
