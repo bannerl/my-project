@@ -23,10 +23,10 @@
  ![Alt text](./img/erweima.png)
 
 ## 截图
-  <img src="./img/index.jpg" width="365" />  
-  <img src="./img/user.jpg" width="365" />
-  <img src="./img/order.jpg" width="365" />
-  <img src="./img/address.jpg" width="365" />
-  <img src="./img/shop.jpg" width="365" />
-  <img src="./img/user-1.jpg" width="365" />
+  <img src="./img/index.jpg" width="365" /> <img src="./img/user.jpg" width="365" />
+  
+  <img src="./img/order.jpg" width="365" /> <img src="./img/address.jpg" width="365" />
+  
+  <img src="./img/shop.jpg" width="365" /> <img src="./img/user-1.jpg" width="365" />
+  
   <img src="./img/user-1.jpg" width="365" />
