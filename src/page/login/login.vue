@@ -2,7 +2,7 @@
 	<div class="loginPage">
 		<!--验证码登录-->
 		<transition name="fadeCode">
-			<div v-show="loginWay">
+			<div class="login-wrapper" v-show="loginWay">
 				<mt-header title="登录">
 				    <mt-button @click="$router.go(-1)" icon="back" slot="left">返回</mt-button>
 					<router-link to="/login" slot="right">
@@ -58,6 +58,7 @@
 				passwords: '12345678',
 				code: '7656',
 				phoneMsg: "发送验证码",
+				prevRouter: '',
 				type:'primary', //错误提示
 				loginWay: true //登录方式
 			}
@@ -79,6 +80,12 @@
 				}
 				
 			}
+		},
+		beforeRouteEnter (to, from, next) {
+//		  typeof to.meta.pageTitle !== undefined && setDocumentTitle(to.meta.pageTitle)/
+		  next( vm => {
+			vm.prevRouter = from.name
+		  })
 		},
 		methods: {
 			...mapMutations([
@@ -113,7 +120,11 @@
 			  		if(response.data.status === noError){
 			  			let id = response.data.data[0].id
 			  			self.loadInfo()
-			  			self.$router.push({name: 'user',params:{userId:id}})
+			  			if(self.prevRouter === 'goods') {
+			  				self.$router.go(-1)
+			  			} else {
+			  				self.$router.push({name: 'user',params:{userId:id}})
+			  			}
 			  		}
 			  		
 			 	 })
@@ -128,6 +139,11 @@
 			  .then(function (response) {
 					if(response.data.status === noError){
 			  			let id = response.data.data[0].id
+			  			if(this.prevRouter === 'shop') {
+			  				self.$router.go(-1)
+			  			} else {
+			  				self.$router.push({name: 'user',params:{userId:id}})
+			  			}
 			  			self.$router.push({name: 'user',params:{userId:id}});
 			  			self.$emit('userInfo');
 			  		}
@@ -141,6 +157,9 @@
 </script>
 
 <style lang="scss" type="text/css">
+	.login-wrapper{
+		background: #F5F5F5;
+	}
 	.login{
 		display: block;
 		margin-top: 16px;

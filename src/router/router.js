@@ -96,6 +96,7 @@ export default [
         	children: [
 	        	{
 	        		path: 'goods',
+	        		name:'goods',
 	        		component: goods
 	        	},
 	        	{

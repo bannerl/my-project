@@ -412,6 +412,7 @@
       	},
       	_closePosition () {
       		this.positionShow = false
+      		this._initBScroll()
       	},
       	toSearchPage: function (text) {
       		this.$router.push('/searchShop?keyword='+text)

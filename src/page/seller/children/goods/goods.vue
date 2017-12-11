@@ -46,13 +46,16 @@
 			</div>
 	  	</div>
 	  	<cart-foods v-if="this.seller&&this.goods" :foods="foods" :sellerName="seller.name" :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice"></cart-foods>
-	  	<div class="food-wrapper"></div>
+	  	<div class="food-wrapper">
+	  		<food-page ref='foodAll' :food="clickFood"></food-page>
+	  	</div>
 	</div>
 </template>
 
 <script>
 	import BScroll from 'better-scroll'
 	import axios from 'axios'
+	import {getStore} from '@/common/js/savaLocal'
 	import cartFoods from '../cartfoods/cartfoods'
 	import countEdit from '../countedit/countedit'
 	import foodPage from '../foodpage/foodpage'
@@ -63,7 +66,10 @@
 	  name: 'goods',
 	  props:{
 	  	seller:{
-	  		type:Object
+	  		type:Object,
+	  		default:function(){
+	  			return {}
+	  		}
 	  	}
 	  },
 	  data () {
@@ -78,9 +84,32 @@
 	  },
 	  created(){
 	  	axios.get('/api/goods').then(response => {
-		    response = response.data;
+		    response = response.data
 		    if(response.status === noError){
-		    	this.goods = response.data;
+		    	let _goods = response.data
+		    	let foods = []
+		    	_goods.forEach((item)=>{
+		  			item.foods.forEach((food)=>{
+		  				foods.push(food)
+		  			})
+		  		})
+		    	let _d = []
+		    	if(getStore('shopCount')){
+		    		let shopCount = JSON.parse(getStore('shopCount'))
+		    		let i = 0
+		    		if(shopCount.length === foods.length) {
+		    			_goods.forEach((item)=>{
+				  			item.foods.forEach((food)=>{
+				  				food.count = shopCount[i]
+				  				i++
+				  			})
+				  		})
+		    		}
+		    		this.goods = _goods
+		    	} else {
+		    		this.goods = _goods
+		    	}
+		    	this.goods = _goods
 		    	this.$nextTick( ( ) =>{
 					this._initScroll();
 					this._initFoods();
@@ -154,6 +183,9 @@
 	  		let arr = []
 	  		this.goods.forEach((item)=>{
 	  			item.foods.forEach((food)=>{
+	  				if(food.count) {
+	  					
+	  				}
 	  				arr.push(food)
 	  			});
 	  		});
@@ -278,6 +310,9 @@
 				position: absolute;
 				right: -36px;
 				bottom: 18px;
+				.count-edit-container{
+					text-align: left;
+				}
 			}
 			.price{
 				margin: 14px 0;

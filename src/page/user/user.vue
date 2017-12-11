@@ -125,7 +125,7 @@
 </style>
 <template>
 	<transition :name="fadeuser">
-		<div class="user-wrapper" ref="userDom">
+		<div class="user-wrapper" ref="userDom" >
 			<mt-header title="">
 			  <div slot="left">
 			    <mt-button>我的</mt-button>
@@ -140,7 +140,7 @@
 			<div class="userInfo-wrapper" @click="toggleAcount">
 				<div class="image" >
 					<img v-if="userInfos" width="72" height="72" :src="userInfos.avatar" />
-					<img v-else  width="72" height="72" alt="头像" />
+					<img v-else  width="72" height="72" alt="头像" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAEsASsDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAorn77xXY2NyYMSTsv3zFjCn05PNMXxppZGSlyp9DGP8aAOjornD410sfwXJ/7Zj/GmHxrp3aC5P/AV/wAaAOmorlz44se1rcn/AL5/xqN/HNuB8llMT7sBQB1lFcRL44uT/qrKJP8Afct/LFdDouuQaxb5XCToP3kWenuPUUAa1FFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRSE4GTWHqPinTrAlEc3Mo/hiPA+p6UAbTusaM7sFVRksTgAVxGu+KXud9rYMUh6NKOC/09BWbquv3mrDy5CIoAciJOh+p71k0AFFFFABRRRQAUUUUAFSW9xNazrNBI0ci9GU81HRQB2eleMUfbFqQ2N085BwfqO34V1cciTRrJG6ujDKspyCK8hrsfBuqZD6bK3TLw59O4/r+dAHY0UUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABTWYIpZjhQMk06sXxRe/Y9Dm2nDzful/Hr+maAOL1TXr3U5HDzMtuWO2JeBjtn1/GsuiigAooooAKKKKACiiigAooooAKKKKACpbe4ktbmO4hOJI2DKaiooA9YsLuO+sYbqP7si5x6HuPzq1XG+CtQ/1unuf+mkf/sw/kfzrsqACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiio3kWKNpHOFUEk+gFADbm5itLd553CRoMsxrzfW9al1i53HKW6H93H6e596k17XZNWuNqZS0Q/In97/aP+eKx6ACiiigAooooAKKKKACiiigAooooAKKKKACiiigCxY3clhew3UX3o2zj1HcfiK9QsryG+tI7iA5Rxn3B7g+9eT1u+GtZ/s288iZv9FmPzZ/gbs3+NAHotFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFZ2uOYtDvWHXyWH5jFaNZPiQ48PXv/XPH6igDzOiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKD0NFPiXfNGh/icD8zQB6tYRmLT7aM9ViUHP0FWaQDAwOlLQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABWR4mOPDl5/ugf+PCtesbxUceHLr32j/x4UAebUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABUtt/x9Q/9dF/mKiooA9iorC8Map/aOmBJGzPBhH9x2P+fSt2gAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACsfxMnmeHrv1VQ35EGtiqWrRedpN5GBktC4H1xQB5VRR1FFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAa3hu7mtdctxECwlby3X1B/wAOv4V6ZXA+DbPzdWe5I+WBOP8Aebgfpmu+oAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA8w17TjpurSxhcQud8R7YPb8DxWZXput6Umr2DRcCZPmic9j/ga80kjeGV4pFKuhKsp6gigBtFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRUkEL3E8cCDLyMEH1JxQB33hG0+zaKspHz3DF/w6D+X610FRQQrb28cKDCRqFH0AxUtABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABXI+LtF82I6jbr86D98o7r/e/D+X0rrqaQGBBAIPUGgDx+itHXbJNP1m4t4hiMEMg9ARnFZ1ABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABXQ+ELE3WrfaGH7u2G7/gR4H9TXPV6T4ZsPsGjRBlxJL+8f8eg/LFAGzRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAcJ41tXTUYboIfLkjCFu24E8flXMV6vfWUN/ZyW065Rx17g9iPevNdT0y40u7ME4yDyjgcOPUf4UAUqKKKACiiigAooooAKKKKACiiigAooooA0dDsP7S1eCAjMYO+T/dH+PA/GvUa5bwZYeTYyXrr885wmf7o/wAT/KupoAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAqnqWm2+qWjW9wuQeVYdVPqKuUUAeVanptxpd2YJxkHlHHRx6j/CqVei+LLUXGhSuBloWEg+nQ/oa86oAKKKKACiiigAooooAKKKKACuw0LwopCXWoANkBkgB4+rf4Vx56H6V65bjbbRD0QD9KAJAAqhQAAOABTqKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAIbmFbi1lgb7siFD+IxXkjo0bsjDDKSp+or0/W9QGmaXLcceZjbGPVj0/x/CvMGYsxZiSxOST3NACUUUUAFFFFABRRRQAUUUUAAGSB617Agwij0FeQKcMD1wc16tY3sN/Zx3MDZRx07g9wfegC3RRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRWVr2pDS9LlmBHmt8kQ/2j/h1oA5HxZqf23Uvs8bZhtsrx3fuf6fnWBQSSSSSSepPeigAooooAKKKKACiiigAooooAK2vDmtnSrzZKT9llOHH90/3v8axaKAPYFYMoZSCCMgjvTq43wlrmdum3Lf8AXBj/AOg/4V2VABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUx3WNGd2CqoySTgAUANnnitoHmmcJGgyzHsK821zWJNXu92CsEeREh/mfc1Y8Q662qz+TCStpGflH98/wB4/wBKw6ACiiigAooooAKKKKACiiigAooooAKKKKAFVijBlJDA5BHUGut03xoyhY9Ri3Dp5sY5/Ef4VyNFAHrFnfW19F5ltOkq99p5H1HarVeQwTzW0olgleOQdGQ4NdNp3jKaMiPUI/NX/nrGMN+I6GgDuKKqWWo2uoxeZazpIO4B5H1HUVboAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACisXUfEun6dlPM8+Yf8s4ucfU9BXI6l4n1C/yiv9nhP8ER5P1br/KgDs9S1/T9MBWWXfKP+WUfLfj6fjXGav4kutVQwBRDbE5KKclvqf6Vi0UAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAPilkgkEkUjRyL0ZTgiuk03xlcwYjv4/PT/novDj+h/SuYooA9Ptde0u7A8u8iDH+FztP5GtFWV1DKQwPcHNeP1JDcTW7boZpIz6oxH8qAPXqK80g8Tavb8C7Mg9JVDfr1rTt/G9yuBcWcTj1jYqf1zQB3FFc3b+M9OlwJUmhPuu4fpV3/hJtG/5/o/yP+FAGvRRRQAUUVQ1HVrPS4w11KFJ+6gGWb6CgC/UU9xDbRmSeVI0HVnbArjL/AMaXEpKWMIhX++/zN+XQfrXN3N1cXkvmXMzyv6uc4/woA7S/8Z2kJKWcbXD/AN4/Kn+JrmL/AF/UdRystwUjP/LOP5V/xP41mUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAexUhIAyelLXH+NLy4ie3to5WWKQHeo/i+tAE2s+LY7fdb6eVll6GU8qv09T+lcXPPLczNNPI0kjdWY5JqOigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/9k="/>
 				</div>
 				<div class="userInfo">
 					<div class="nickName" v-if="userInfos">{{userInfos.nickName}}</div>
@@ -219,13 +219,13 @@
 				<mt-cell class="address" v-if="userInfos" title="收货地址" to="/address" is-link>
 				  <span slot="icon" class="iconfont icon-dizhi1"></span>
 				</mt-cell>
-				<mt-cell class="address" v-else title="收货地址" to="/address" is-link>
+				<mt-cell class="address" v-else title="收货地址" to="/login" is-link>
 				  <span slot="icon" class="iconfont icon-dizhi1"></span>
 				</mt-cell>
 				<mt-cell class="collection" v-if="userInfos" title="我的收藏" to="/collection" is-link>
 				  <span slot="icon" class="iconfont icon-xin"></span>
 				</mt-cell>
-				<mt-cell class="collection" v-else title="我的收藏" to="/collection" is-link>
+				<mt-cell class="collection" v-else title="我的收藏" to="/login" is-link>
 				  <span slot="icon" class="iconfont icon-xin"></span>
 				</mt-cell>
 				<div @click="helpingMessage">
@@ -302,7 +302,7 @@
 				let id = getStore('user_id')
 				
 				if(!self.loginStatus&&!id){
-//					self.$router.push({name:'login'})
+					self.$router.push({name:'login'})
 				}
 				if(id){
 					let self = this

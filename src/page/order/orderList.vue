@@ -9,6 +9,11 @@
 		.mint-navbar{
 			position: relative;
 			z-index: 10;
+			.mint-tab-item-label{
+				.on{
+					color: #26A2FF;
+				}
+			}
 		}
 		.orderList{
 			position: fixed;
@@ -109,6 +114,7 @@
 				font-weight: 700;
 			}
 			.login{
+				display: block;
 				text-align: center;
 				.mint-button{
 					font-size: 15px;
@@ -144,15 +150,15 @@
 						</div>
 					</mt-button>
 				</mt-header>
-				<mt-navbar v-model="orderTypes" class="border-1px">
+				<mt-navbar class="border-1px">
 					<mt-tab-item id="0">
-						<div @click="allType">全部</div >
+						<div @click="allType" :class="{on:orderTypes===0}">全部</div >
 					</mt-tab-item>
 					<mt-tab-item id="1">
-						<div @click="cancelType">已取消</div >
+						<div @click="cancelType" :class="{on:orderTypes===1}">已取消</div >
 					</mt-tab-item>
 					<mt-tab-item id="2">
-						<div @click="returnPay">退款</div >
+						<div @click="returnPay" :class="{on:orderTypes===2}">退款</div >
 					</mt-tab-item>
 				</mt-navbar>
 				<div class="orderList" ref="orderList">
@@ -186,9 +192,9 @@
 				<div class="content">
 					<img width="100%" src="../../common/image/orderList.jpg" alt="背景" />
 					<div class="text">登录后查看外卖订单</div>
-					<router-link class="login" to="/login">
+					<div class="login" @click="login">
 						<mt-button type="primary">立即登录</mt-button>
-					</router-link>
+					</div>
 				</div>
 			</div>
 			<order-desc v-on:close="closeDesc" :orderInfo="orderInfo" :orderShow="orderDescShow"></order-desc>
@@ -219,7 +225,7 @@
 				orderDescShow: false, //详情页
 				orderFilterShow: false, //筛选页
 				ordersFade: "ordersFade", //动画名称
-				orderTypes: ALL + '',//订单的类型
+				orderTypes: ALL,//订单的类型
 				filterArr: filterArr,
 				filterResult: 1, //时间筛选结果
 				loginState: false
@@ -236,6 +242,17 @@
 				this.orderInfo = data
 				this.orderDescShow = !this.orderDescShow
 			},
+			_initScroll () {
+				this.$nextTick(() => {
+					if(!this.scroll) {
+						this.scroll = new BScroll(this.$refs.orderList,{
+							'click': true
+						})
+					} else {
+						this.scroll.refresh()
+					}
+				})
+			},
 			closeDesc: function () {
 				this.orderDescShow = !this.orderDescShow
 			},
@@ -247,7 +264,7 @@
 			},
 			fitlerOrder: function(order) {
 				//mint是字符串，这里隐式转换一下
-				let type = (this.orderTypes - 0)
+				let type = this.orderTypes
 				if(type === ALL ) {
 					return true
 				}else {
@@ -280,6 +297,10 @@
 				} else {
 					return false
 				}
+			},
+			login:function(){
+				this.$router.push({name:'user'})
+				this.$router.push({name:'login'})
 			}
 		},
 		beforeRouteEnter (to, from, next) {

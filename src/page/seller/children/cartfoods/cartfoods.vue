@@ -34,7 +34,7 @@
 			<div v-show="listShow" class="foods-list">
 		  		<h3>
 		  			<span class="car">购物车</span>
-		  			<span class="empty">清空</span>
+		  			<span class="empty" @click="deleteCar">清空</span>
 		  		</h3>
 		  		<div class="list-wrapper" ref="listWrapper">
 			  		<ul>
@@ -54,7 +54,7 @@
 
 <script>
 	import countEdit from '../countedit/countedit'
-	import {setStore} from '@/common/js/savaLocal'
+	import {setStore, getStore} from '@/common/js/savaLocal'
 	import BScroll from 'better-scroll'
 	
 	export default {
@@ -140,19 +140,36 @@
 			toggleList:function(event){
 				this.fold = !this.fold
 			},
+			deleteCar () {
+				for(let i=0;i<this.foods.length;i++){
+					if(this.foods[i].count){
+						this.foods[i].count = 0					
+					}
+				}
+				setStore('shopCount','')
+			},
 			toConfirmOrder: function () {
 				let shopCar = {}
 				let arr = []
+				let arrCount = []
 				for(let i=0;i<this.foods.length;i++) {
 					if(this.foods[i].count) {
+						arrCount.push(this.foods[i].count)
 						arr.push(this.foods[i])
+					} else {
+						arrCount.push(0)
 					}
 				}
+				setStore('shopCount',arrCount)
 				shopCar.deliveryPrice = this.deliveryPrice
 				shopCar.foods = arr
 				shopCar.sellerName = this.sellerName
 				setStore('shopCar',shopCar)
-				this.$router.push({path:"/confirmOrder", query: {shopid:'2' }})
+				if(!getStore('user_id')) {
+					this.$router.push('/login')
+				} else {
+					this.$router.push({path:"/confirmOrder", query: {shopid:'2' }})
+				}
 			}
 		},
 		components:{
@@ -292,7 +309,7 @@
 		background: #fff;
 		z-index: 1;
 		&.fade-enter-active{
-			transition:all .9s;
+			transition:all .3s;
 			transform:translate3d(0,0,0)
 			
 		}
@@ -303,7 +320,7 @@
 			transform:translate3d(0,0,0)
 		}
 		&.fade-leave-active{
-			transition:all .9s;
+			transition:all .3s;
 			transform:translate3d(0,100%,0)
 			
 		}

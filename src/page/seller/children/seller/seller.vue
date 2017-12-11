@@ -4,7 +4,7 @@
 		position:absolute;
 		top:186px;
 		left:0;
-		bottom:0;
+		bottom:52px;
 		padding-bottom: 52px;
 		width:100%;
 		background: #fff;
@@ -13,8 +13,9 @@
 			position:absolute;
 			top:0;
 			left:0;
-			bottom:0;
+			bottom: 52px;
 			width:100%;
+			padding-bottom: 52px;
 			overflow:hidden;
 			.seller-description{
 				padding:18px;

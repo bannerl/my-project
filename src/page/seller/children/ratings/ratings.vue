@@ -183,7 +183,7 @@
 			position: absolute;
 			top: 186px;
 			left: 0;
-			bottom: 0;
+			bottom: 52px;
 			padding-bottom: 52px;
 			width: 100%;
 			overflow: hidden;

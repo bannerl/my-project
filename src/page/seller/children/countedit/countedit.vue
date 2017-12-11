@@ -54,6 +54,7 @@
 	.count-edit-container{
 		width: 110px;
 		font-size: 0;
+		text-align: right;
 		.count{
 			display: inline-block;
 			width: 12px;
