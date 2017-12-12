@@ -150,7 +150,7 @@
 						</div>
 					</mt-button>
 				</mt-header>
-				<mt-navbar class="border-1px">
+				<mt-navbar class="border-1px" v-model="orderTypes">
 					<mt-tab-item id="0">
 						<div @click="allType" :class="{on:orderTypes===0}">全部</div >
 					</mt-tab-item>
@@ -225,7 +225,7 @@
 				orderDescShow: false, //详情页
 				orderFilterShow: false, //筛选页
 				ordersFade: "ordersFade", //动画名称
-				orderTypes: ALL,//订单的类型
+				orderTypes: ALL+'',//订单的类型
 				filterArr: filterArr,
 				filterResult: 1, //时间筛选结果
 				loginState: false
@@ -264,7 +264,7 @@
 			},
 			fitlerOrder: function(order) {
 				//mint是字符串，这里隐式转换一下
-				let type = this.orderTypes
+				let type = (this.orderTypes - 0)
 				if(type === ALL ) {
 					return true
 				}else {

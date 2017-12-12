@@ -1,27 +1,26 @@
 import App from '../App'
-import index from 'page/index/index'
-import login from 'page/login/login'
-import user from 'page/user/user'
-import orderDescription from 'page/order/children/orderDescription'
-import orderList from 'page/order/orderList'
-import wallet from 'page/wallet/wallet'
-import discount from 'page/discount/discount'
-import score from 'page/score/score'
-import systemSetup from 'page/systemSetup/systemSetup'
-import collection from 'page/collection/collection'
-import seller from 'page/seller/seller'
-import receiveAddress from 'page/receiveAddress/receiveAddress'
-import goods from 'page/seller/children/goods/goods'
-import ratings from 'page/seller/children/ratings/ratings'
-import description from 'page/seller/children/seller/seller'
-import addressSearch from 'page/addressSearch/addressSearch'
-import searchShop from 'page/searchShop/searchShop'
-import sellerPage from 'page/sellerPage/sellerPage'
-import shop from 'page/shop/shop'
-import confirmOrder from 'page/confirmOrder/confirmOrder'
-import payMent from 'page/payment/payment'
+const index = r => require.ensure([], () => r(require('../page/index/index')), 'index')
+const login = r => require.ensure([], () => r(require('../page/login/login')), 'login')
+const user = r => require.ensure([], () => r(require('../page/user/user')), 'user')
+const orderDescription = r => require.ensure([], () => r(require('../page/order/children/orderDescription')), 'orderList')
+const orderList = r => require.ensure([], () => r(require('../page/order/orderList')), 'orderList')
+const wallet = r => require.ensure([], () => r(require('../page/wallet/wallet')), 'wallet')
+const discount = r => require.ensure([], () => r(require('../page/discount/discount')), 'discount')
+const score = r => require.ensure([], () => r(require('../page/score/score')), 'score')
+const systemSetup = r => require.ensure([], () => r(require('../page/systemSetup/systemSetup')), 'systemSetup')
+const collection = r => require.ensure([], () => r(require('../page/collection/collection')), 'collection')
+const seller = r => require.ensure([], () => r(require('../page/seller/seller')), 'seller')
+const receiveAddress = r => require.ensure([], () => r(require('../page/receiveAddress/receiveAddress')), 'receiveAddress')
+const goods = r => require.ensure([], () => r(require('../page/seller/children/goods/goods')), 'goods')
+const description = r => require.ensure([], () => r(require('../page/seller/children/seller/seller')), 'seller')
+const ratings = r => require.ensure([], () => r(require('../page/seller/children/ratings/ratings')), 'ratings')
+const addressSearch = r => require.ensure([], () => r(require('../page/addressSearch/addressSearch')), 'addressSearch')
+const searchShop = r => require.ensure([], () => r(require('../page/searchShop/searchShop')), 'searchShop')
+const shop = r => require.ensure([], () => r(require('../page/shop/shop')), 'shop')
+const confirmOrder = r => require.ensure([], () => r(require('../page/confirmOrder/confirmOrder')), 'confirmOrder')
+const payMent = r => require.ensure([], () => r(require('../page/payMent/payMent')), 'payMent')
 
-import amap from 'page/amap/amap'
+//import amap from 'page/amap/amap'
 
 export default [
     { path: '/',
@@ -31,10 +30,10 @@ export default [
           path: '/',
           component:index
         },
-        {	
-          path: '/amap',
-          component:amap
-        },
+//      {	
+//        path: '/amap',
+//        component:amap
+//      },
 		{
           path: '/login',
           name: 'login',
@@ -131,14 +130,6 @@ export default [
         	component: searchShop,
         	meta: {
         		pageTitle: "搜索"
-        	}
-        },
-        {
-        	path: '/sellerPage',
-        	name:'sellerPage',
-        	component: sellerPage,
-        	meta: {
-        		pageTitle: "商家"
         	}
         },
         {

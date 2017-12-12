@@ -4,7 +4,7 @@
 		position:absolute;
 		top:186px;
 		left:0;
-		bottom:52px;
+		bottom:0;
 		padding-bottom: 52px;
 		width:100%;
 		background: #fff;

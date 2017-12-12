@@ -302,7 +302,7 @@
 				let id = getStore('user_id')
 				
 				if(!self.loginStatus&&!id){
-					self.$router.push({name:'login'})
+					//self.$router.push({name:'login'})
 				}
 				if(id){
 					let self = this

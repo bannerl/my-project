@@ -310,7 +310,7 @@
 					  </div>
 					</mt-header>
 					<div class="address-container">
-						<div class="item" v-if="defaultAddress">
+						<div class="item" v-if="defaultAddress" @click="tips">
 							<div class="iconfont icon-dizhi1"></div>
 							<div class="content">
 								<h3 class="title">
@@ -397,6 +397,7 @@
 <script>
 	import axios from 'axios'
 	import BScroll from 'better-scroll'
+	import { Toast } from 'mint-ui'
 	import useDiscount from './children/usediscount'
 	import reMarks from './children/reMarks'
 	import { getStore } from '@/common/js/savaLocal'
@@ -441,18 +442,27 @@
 				}
 				this.discountShow = !this.discountShow
 			},
+			tips() {
+				Toast({
+				  message: '暂时只能选择默认地址',
+				  position: 'middle',
+				  duration: 1200
+				})
+			},
 			reMarkedShow (obj) {
-				if(obj.arr || obj.text) {
-					let str = ''
-					for(let i=0;i<obj.arr.length;i++) {
-						if(i === (obj.arr.length-1)){
-							str += obj.arr[i].text
-						} else {
-							str += obj.arr[i].text+','
+				if(obj){
+					if(obj.arr || obj.text) {
+						let str = ''
+						for(let i=0;i<obj.arr.length;i++) {
+							if(i === (obj.arr.length-1)){
+								str += obj.arr[i].text
+							} else {
+								str += obj.arr[i].text+','
+							}
 						}
+						this.need.text = str
+						this.need.show = false
 					}
-					this.need.text = str
-					this.need.show = false
 				}
 				this.reMarkShow = ! this.reMarkShow
 			}
@@ -501,8 +511,20 @@
 					}
 				}
 			} else {
-				address = null
+				let self = this
+				let id = getStore('user_id')
+				axios.get('/api/users/address',{
+					params: {
+						id:id
+					}
+				}).then(function(res){
+					if(res.data.status === noError){
+						address = res.data.data[0]
+						self.defaultAddress = address
+					}	
+				})
 			}
+			
 			this._initDiscount()
 			this.defaultAddress = address
 			
