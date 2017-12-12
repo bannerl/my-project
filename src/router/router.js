@@ -1,9 +1,9 @@
 import App from '../App'
 const index = r => require.ensure([], () => r(require('../page/index/index')), 'index')
-const login = r => require.ensure([], () => r(require('../page/login/login')), 'login')
-const user = r => require.ensure([], () => r(require('../page/user/user')), 'user')
+const login = r => require.ensure([], () => r(require('../page/login/login')), 'index')
+const user = r => require.ensure([], () => r(require('../page/user/user')), 'index')
 const orderDescription = r => require.ensure([], () => r(require('../page/order/children/orderDescription')), 'orderList')
-const orderList = r => require.ensure([], () => r(require('../page/order/orderList')), 'orderList')
+const orderList = r => require.ensure([], () => r(require('../page/order/orderList')), 'index')
 const wallet = r => require.ensure([], () => r(require('../page/wallet/wallet')), 'wallet')
 const discount = r => require.ensure([], () => r(require('../page/discount/discount')), 'discount')
 const score = r => require.ensure([], () => r(require('../page/score/score')), 'score')
@@ -21,6 +21,7 @@ const confirmOrder = r => require.ensure([], () => r(require('../page/confirmOrd
 const payMent = r => require.ensure([], () => r(require('../page/payMent/payMent')), 'payMent')
 
 //import amap from 'page/amap/amap'
+import sellerPage from 'page/sellerPage/sellerPage'
 
 export default [
     { path: '/',
@@ -34,6 +35,11 @@ export default [
 //        path: '/amap',
 //        component:amap
 //      },
+        {	
+          path: '/sellerpage',
+          name:'sellerPage',
+          component:sellerPage
+        },
 		{
           path: '/login',
           name: 'login',

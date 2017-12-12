@@ -192,7 +192,7 @@
 				<div class="content">
 					<img width="100%" src="../../common/image/orderList.jpg" alt="背景" />
 					<div class="text">登录后查看外卖订单</div>
-					<div class="login" @click="login">
+					<div class="login" @click="logins">
 						<mt-button type="primary">立即登录</mt-button>
 					</div>
 				</div>
@@ -209,6 +209,7 @@
 	import {setStore, getStore} from '@/common/js/savaLocal'
 	import orderFilter from "./children/orderFilter"
 	import orderDesc from "./children/orderDescription"
+	import { Indicator,Toast } from 'mint-ui'
 	import {formatTime,setDocumentTitle} from "../../common/js/base"
 	
 	const ALL = 0 
@@ -298,8 +299,7 @@
 					return false
 				}
 			},
-			login:function(){
-				this.$router.push({name:'user'})
+			logins:function(e){
 				this.$router.push({name:'login'})
 			}
 		},
@@ -317,7 +317,9 @@
 				//底部导航切换没有动画
 		    	this.$refs.userDom.style.display = "none"
 		    	next(true)
-		    }
+		   } else {
+		   	next(true)
+		   }
 		},
 		watch:{
 			orderInfo: function() {
@@ -357,10 +359,10 @@
 		},
 		created: function(){
 			//底部导航激活
-			this.$parent.selected = "orderList"
 			let id = getStore('user_id')
 			if(!id) {
 				this.loginState = false
+				//this.$router.push('/login')
 			} else {
 				this.loginState = true
 				this.$nextTick(() => {
@@ -372,7 +374,11 @@
 						this.scroll.refresh()
 					}
 				})
-			}	
+			}
+			
+		},
+		mounted:function(){
+			
 		},
 		components: {
 			orderDesc,
