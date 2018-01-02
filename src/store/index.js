@@ -9,7 +9,8 @@ Vue.use(Vuex)
 const state = {
 	userInfo: null, //用户信息
 	loginStatus: false,//是否登录
-	recordAddress: {}
+	recordAddress: {},
+	index_firstshow: false
 }
 
 export default new Vuex.Store({

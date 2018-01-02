@@ -184,7 +184,7 @@
 			display: none;
 		}
 		img{
-			margin-top: -10px;
+			display: block;
 		}
 	}
 	/*.index-enter-active,.index-leave-active{
@@ -257,9 +257,9 @@
 			    </span>
 			</div>
 		</div>
-		<!--<div :class="{hide:elseShow}" class="index-loading" v-else>
-			<img src="../../common/image/index-loading.svg" />
-		</div>-->
+		<div :class="{hide:index_firstshow}" class="index-loading" v-else>
+			<img src="./loading.svg" width="100%" height="100%" />
+		</div>
 	</transition>
 </template>
 
@@ -284,13 +284,12 @@
         	position:'', //经纬度和地址
         	address:'',
         	locationState:true,
-        	elseShow: false,
         	positionShow:true
         }
       },
       methods: {
       	...mapMutations([
-      		'RECORD_ADDRESS'
+      		'RECORD_ADDRESS','INDEX_FIRSTSHOW'
       	]),
       	_initPage: function () {
       		let self = this
@@ -299,6 +298,7 @@
 					self.data = res.data.data
 					Indicator.close()
 					self._initBScroll()
+					self.INDEX_FIRSTSHOW()
 				}
       		}).then(function(error){
       			
@@ -387,8 +387,6 @@
 		        	 self.address = '定位失败'
 		        }
 		       
-		        //console.log(self.address)
-		        //console.log(address)
 		        let obj = {}
 		        if(self.position&&self.address) {
 		        	obj.position = self.position
@@ -423,7 +421,7 @@
       },
       computed:{
       	...mapState([
-      		'recordAddress'
+      		'recordAddress','index_firstshow'
       	])
       },
       created: function () {
@@ -440,7 +438,7 @@
       	}
       	setTimeout(function(){
       	 	self._initBScroll()
-      	},1200)
+      	},400)
       },
       beforeRouteLeave (to, from, next) {
 		if(to.name === "orderList" || to.name === "user") {

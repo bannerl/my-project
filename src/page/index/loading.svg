@@ -1,0 +1,62 @@
+<svg width="375" height="667" xmlns="http://www.w3.org/2000/svg" style="vector-effect: non-scaling-stroke;" stroke="null">
+ <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+ <g stroke="null">
+  <title stroke="null">background</title>
+  <rect stroke="null" fill="#fff" id="canvas_background" height="669" width="377" y="-1" x="-1"/>
+  <g style="vector-effect: non-scaling-stroke;" stroke="null" display="none" overflow="visible" y="0" x="0" height="100%" width="100%" id="canvasGrid">
+   <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%" width="100%"/>
+  </g>
+ </g>
+ <g stroke="null">
+  <title stroke="null">Layer 1</title>
+  <rect id="svg_70" height="50" width="390" y="621" x="0" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#eae8e8"/>
+  <rect stroke="#000" id="svg_69" height="134.999992" width="378.00001" y="0.000008" x="-2.000012" stroke-opacity="null" stroke-width="0" fill="#b0b2b2"/>
+  <rect stroke="#000" id="svg_1" height="20" width="163" y="25" x="17" stroke-width="0" fill="#dee0e0"/>
+  <rect stroke="#000" id="svg_2" height="36" width="338" y="57" x="17" stroke-width="0" fill="#dee0e0"/>
+  <ellipse stroke="#000" ry="24" rx="24" id="svg_11" cy="167.5" cx="52.5" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#dee0e0"/>
+  <rect stroke="#000" style="vector-effect: non-scaling-stroke;" id="svg_12" height="16" width="42" y="202" x="31" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#dee0e0"/>
+  <ellipse stroke="#000" style="vector-effect: non-scaling-stroke;" ry="24" rx="24" id="svg_17" cy="169" cx="320.5" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#dee0e0"/>
+  <rect stroke="#000" style="vector-effect: non-scaling-stroke;" id="svg_18" height="16" width="42" y="203" x="299" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#dee0e0"/>
+  <ellipse stroke="#000" style="vector-effect: non-scaling-stroke;" ry="24" rx="24" id="svg_27" cy="168" cx="140.5" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#dee0e0"/>
+  <rect stroke="#000" style="vector-effect: non-scaling-stroke;" id="svg_28" height="16" width="42" y="202" x="119" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#dee0e0"/>
+  <ellipse stroke="#000" style="vector-effect: non-scaling-stroke;" ry="24" rx="24" id="svg_31" cy="168" cx="233.5" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#dee0e0"/>
+  <rect stroke="#000" style="vector-effect: non-scaling-stroke;" id="svg_32" height="16" width="42" y="202" x="212" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#dee0e0"/>
+  <rect stroke="#000" id="svg_35" height="12" width="139" y="356" x="121" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#dee0e0"/>
+  <rect stroke="#000" style="vector-effect: non-scaling-stroke;" id="svg_36" height="62" width="62" y="388" x="29" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#dee0e0"/>
+  <rect stroke="#000" style="vector-effect: non-scaling-stroke;" id="svg_37" height="12" width="125.000005" y="392" x="114.000001" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#dee0e0"/>
+  <rect stroke="#000" style="vector-effect: non-scaling-stroke;" id="svg_38" height="12" width="192.000006" y="411" x="113.999995" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#dee0e0"/>
+  <rect stroke="#000" style="vector-effect: non-scaling-stroke;" id="svg_39" height="12" width="214.000001" y="433" x="113.999992" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#dee0e0"/>
+  <rect stroke="#000" style="vector-effect: non-scaling-stroke;" id="svg_41" height="62" width="62" y="469" x="29" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#dee0e0"/>
+  <rect stroke="#000" style="vector-effect: non-scaling-stroke;" id="svg_42" height="12" width="125.000005" y="473" x="114.000001" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#dee0e0"/>
+  <rect stroke="#000" style="vector-effect: non-scaling-stroke;" id="svg_43" height="12" width="192.000006" y="492" x="113.999995" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#dee0e0"/>
+  <rect stroke="#000" style="vector-effect: non-scaling-stroke;" id="svg_44" height="12" width="214.000001" y="514" x="113.999992" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#dee0e0"/>
+  <rect stroke="#000" style="vector-effect: non-scaling-stroke;" id="svg_45" height="62" width="62" y="544" x="30" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#dee0e0"/>
+  <rect stroke="#000" style="vector-effect: non-scaling-stroke;" id="svg_46" height="12" width="125.000005" y="548" x="115.000001" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#dee0e0"/>
+  <rect stroke="#000" style="vector-effect: non-scaling-stroke;" id="svg_47" height="12" width="192.000006" y="567" x="114.999995" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#dee0e0"/>
+  <rect stroke="#000" id="svg_48" height="12" width="214.000001" y="589" x="114.999992" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#dee0e0"/>
+  <ellipse stroke="#000" style="vector-effect: non-scaling-stroke;" ry="24" rx="24" id="svg_49" cy="258.5" cx="52.5" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#dee0e0"/>
+  <rect stroke="#000" id="svg_50" height="16" width="42" y="293" x="31" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#dee0e0"/>
+  <ellipse stroke="#000" style="vector-effect: non-scaling-stroke;" ry="24" rx="24" id="svg_51" cy="260" cx="320.5" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#dee0e0"/>
+  <rect stroke="#000" style="vector-effect: non-scaling-stroke;" id="svg_52" height="16" width="42" y="294" x="299" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#dee0e0"/>
+  <ellipse stroke="#000" style="vector-effect: non-scaling-stroke;" ry="24" rx="24" id="svg_53" cy="259" cx="140.5" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#dee0e0"/>
+  <rect stroke="#000" style="vector-effect: non-scaling-stroke;" id="svg_54" height="16" width="42" y="293" x="119" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#dee0e0"/>
+  <ellipse stroke="#000" style="vector-effect: non-scaling-stroke;" ry="24" rx="24" id="svg_55" cy="259" cx="233.5" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#dee0e0"/>
+  <rect stroke="#000" id="svg_56" height="16" width="42" y="293" x="212" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#dee0e0"/>
+  <rect stroke="#000" style="vector-effect: non-scaling-stroke;" id="svg_57" height="13" width="48" y="104" x="20" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#dee0e0"/>
+  <rect stroke="#000" style="vector-effect: non-scaling-stroke;" id="svg_63" height="13" width="48" y="104" x="89" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#dee0e0"/>
+  <rect stroke="#000" style="vector-effect: non-scaling-stroke;" id="svg_64" height="13" width="48" y="105" x="159" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#dee0e0"/>
+  <rect stroke="#000" id="svg_65" height="13" width="48" y="105" x="228" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#dee0e0"/>
+  <rect stroke="#000" style="vector-effect: non-scaling-stroke;" id="svg_66" height="13" width="48" y="104" x="20" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#dee0e0"/>
+  <rect stroke="#000" id="svg_67" height="13" width="48" y="104" x="89" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#dee0e0"/>
+  <rect stroke="#000" id="svg_68" height="13" width="48" y="105" x="297" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#dee0e0"/>
+  <rect stroke="#000" id="svg_71" height="45.999997" width="120.999994" y="622.000001" x="-0.999994" stroke-opacity="null" stroke-width="0" fill="#939393"/>
+  <rect stroke="#000" id="svg_74" height="43.999996" width="131.999997" y="622.000002" x="119.000006" stroke-opacity="null" stroke-width="0" fill="#dddddd"/>
+  <rect stroke="#000" id="svg_75" height="43.999996" width="149.999995" y="622.000002" x="248.000007" stroke-opacity="null" stroke-width="0" fill="#dddddd"/>
+  <ellipse stroke="#000" ry="8" rx="8.5" id="svg_80" cy="639.5" cx="57" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#dee0e0"/>
+  <rect stroke="#000" id="svg_81" height="6" width="20.000001" y="652" x="46.999999" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#dee0e0"/>
+  <ellipse stroke="#000" ry="8" rx="8.5" id="svg_82" cy="639.5" cx="191" stroke-opacity="null" stroke-width="0" fill="#8c9191"/>
+  <rect stroke="#000" id="svg_83" height="6" width="20.000001" y="652" x="180.999999" stroke-opacity="null" stroke-width="0" fill="#8c9191"/>
+  <ellipse stroke="#000" ry="8" rx="8.5" id="svg_84" cy="640.5" cx="317" stroke-opacity="null" stroke-width="0" fill="#939696"/>
+  <rect stroke="#000" id="svg_85" height="6" width="20.000001" y="653" x="306.999999" stroke-opacity="null" stroke-width="0" fill="#939696"/>
+ </g>
+</svg>

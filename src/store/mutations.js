@@ -1,7 +1,8 @@
 import {
 	OUT_LOGIN,
 	RECORD_USERINFO,
-	RECORD_ADDRESS
+	RECORD_ADDRESS,
+	INDEX_FIRSTSHOW
 } from './mutation-types.js'
 
 import {setStore, getStore} from '@/common/js/savaLocal'
@@ -20,5 +21,8 @@ export default {
 	[OUT_LOGIN](state) {
 		state.userInfo = {}
 		state.loginStatus = false
+	},
+	[INDEX_FIRSTSHOW](state) {
+		state.index_firstshow = true
 	}
 }
