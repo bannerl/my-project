@@ -285,13 +285,12 @@
 				this.filterResult = index
 			},
 			timeSelected: function (time) {
-				let monthTime = 1000*60*60*24*30
+				let monthTime = 1000*60*60*24*90;
 				let threeMTime = monthTime*3
 				let sixTime = monthTime*6
 				let yearTime = monthTime*12
 				let nowTime = new Date().getTime()
 				let arr = [nowTime,monthTime,threeMTime,sixTime,yearTime]
-				
 				let diff = nowTime - arr[this.filterResult]
 				if(time>diff) {
 					return true

@@ -272,6 +272,7 @@
 	import {setStore, getStore} from '@/common/js/savaLocal'
 	import {setDocumentTitle} from '@/common/js/base'
 	import sellerPanel from 'components/sellerPanel/sellerPanel'
+	import {hotFoods} from '../../service/getData'
 	
 	const noError = 0
 	
@@ -291,18 +292,16 @@
       	...mapMutations([
       		'RECORD_ADDRESS','INDEX_FIRSTSHOW'
       	]),
-      	_initPage: function () {
+      	async _initPage() {
       		let self = this
-      		axios.get('/api/index').then(function(res){
-				if(res.data.status === noError){
-					self.data = res.data.data
-					Indicator.close()
-					self._initBScroll()
-					self.INDEX_FIRSTSHOW()
-				}
-      		}).then(function(error){
-      			
-      		})
+			var y = await 20;
+			let res = await hotFoods();
+			if(res.data.status === noError){
+				self.data = res.data.data
+				Indicator.close()
+				self._initBScroll()
+				self.INDEX_FIRSTSHOW()
+			}
       	},
       	_initPosition () {
       		let self = this

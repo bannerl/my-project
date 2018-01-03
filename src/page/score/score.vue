@@ -125,7 +125,7 @@
 	import {getStore} from '@/common/js/savaLocal'
 	import axios from 'axios'
 	import {formatTime} from '@/common/js/base'
-	
+	import {userInfo} from '../../service/getData'
 	const noError = 0
 	
 	export default {
@@ -138,14 +138,13 @@
 		computed: {
 		},
 		methods: {
-			_initData: function(){
+			async _initData(){
 				let self = this
 				let id = getStore('user_id')
-				axios.get('/api/user',{id:id}).then(function(res){
-			  		if(res.data.status === noError){
-			  			self.userInfo=res.data.data;
-			  		}	
-		  		});
+				let res = await userInfo(id);
+		  		if(res.data.status === noError){
+		  			self.userInfo=res.data.data;
+		  		}	
 			},
 			close: function(){
 				this.$router.go(-1)

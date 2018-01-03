@@ -342,7 +342,7 @@
 						</h3>
 						<div class="friendTips">您的主食点了吗？</div>
 						<div class="description">
-							<mt-cell v-for="item in shopCar.foods" :title="item.name">
+							<mt-cell v-for="(item,i) in shopCar.foods" :title="item.name" :key="i">
 								<div class="">
 									<span class="count">x{{item.count}}</span>
 									<span class="price">￥<i>{{item.price*item.count}}</i></span>
