@@ -14,7 +14,6 @@ const proxyMiddleware = require('http-proxy-middleware')
 const webpackConfig = (process.env.NODE_ENV === 'testing' || process.env.NODE_ENV === 'production')
   ? require('./webpack.prod.conf')
   : require('./webpack.dev.conf')
-
 // default port where dev server listens for incoming traffic
 const port = process.env.PORT || config.dev.port
 // automatically open browser, if not set will be false
@@ -174,6 +173,7 @@ devMiddleware.waitUntilValid(() => {
     if (err) {
       _reject(err)
     }
+    
     process.env.PORT = port
     var uri = 'http://localhost:' + port
     console.log('> Listening at ' + uri + '\n')
