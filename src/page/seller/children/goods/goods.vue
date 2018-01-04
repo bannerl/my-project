@@ -54,11 +54,11 @@
 
 <script>
 	import BScroll from 'better-scroll'
-	import axios from 'axios'
 	import {getStore} from '@/common/js/savaLocal'
 	import cartFoods from '../cartfoods/cartfoods'
 	import countEdit from '../countedit/countedit'
 	import foodPage from '../foodpage/foodpage'
+	import {getSellerGoods} from '../../../../service/getData'
 	
 	const noError = 0;
 	
@@ -83,7 +83,18 @@
 	    }
 	  },
 	  created(){
-	  	axios.get('/api/goods').then(response => {
+		this._getFoods()
+	  },
+	  components:{
+	  	cartFoods,
+	  	countEdit,
+	  	foodPage
+	  },
+	  methods:{
+	  	async _getFoods() {
+	  		let a = window.location.href
+	  	    a = a.split('=')[1]
+	  		let response = await getSellerGoods(a)
 		    response = response.data
 		    if(response.status === noError){
 		    	let _goods = response.data
@@ -115,14 +126,7 @@
 					this._initFoods();
 		    	});
 		    }
-		});
-	  },
-	  components:{
-	  	cartFoods,
-	  	countEdit,
-	  	foodPage
-	  },
-	  methods:{
+	  	},
 	  	_initScroll:function(){
 	  		let height = 0
 	  		for(let i=0;i<this.$refs.foodsList.length;i++){

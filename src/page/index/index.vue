@@ -265,7 +265,6 @@
 
 <script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js"></script>
 <script>
-	import axios from 'axios'
 	import { Indicator,Toast } from 'mint-ui'
 	import BScroll from 'better-scroll'
 	import {mapState,mapMutations} from 'vuex'
@@ -384,6 +383,7 @@
 		        	 self.address = address
 		        } else {
 		        	 self.address = '定位失败'
+		        	 self._initBScroll()
 		        }
 		       
 		        let obj = {}

@@ -1,15 +1,15 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-//import Resource from 'vue-resource'
 
 import routes from '@/router/router'
 import store from '@/store/index'
+//import 'lib-flexible/flexible'
 
 import MintUI from 'mint-ui'
-//import 'mint-ui/lib/style.min.css' 
+import 'mint-ui/lib/style.min.css'
 import '@/common/style/_mixin.scss'
 import '@/common/style/mintReset.scss'
-
+import './config/rem'
 import '@/common/js/vue-touch.js'
 import '@/common/js/directive.js'
 

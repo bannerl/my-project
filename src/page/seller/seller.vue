@@ -26,8 +26,7 @@
 <script>
 	import { loadUrl } from '@/common/js/unit'
 	import goodsHeader from './children/header/header'
-	import axios from 'axios'
-	
+	import {getSellerInfo} from '../../service/getData'
 	const noError = 0;
 	
 	export default {
@@ -59,17 +58,22 @@
 	  	toDescription: function () {
 	  		this.type = 'description'
 	  		this.$router.replace('/seller/description'+this.arg)
-	  	}
-	  },
-	  created(){
-	  	axios.get('/api/seller').then(res => {
+	  	},
+	  	async getSellerInfo(){
+	  		let id = window.location.href
+	  		id = id.split('=')[1]
+	  		let res = await getSellerInfo(id)
 		    res = res.data;
+		    
 		    if(res.status === noError){
 		    	this.seller = res.data
 		    	this.type = "goods"
 		    	this.$router.replace('/seller/goods'+this.arg)
-			  }
-		  })
+			}
+	  	}
+	  },
+	  created(){
+	  	this.getSellerInfo();
 	  },
 	  components:{
 	  	'goods-header':goodsHeader

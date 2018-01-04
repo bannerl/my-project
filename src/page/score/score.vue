@@ -123,7 +123,6 @@
 
 <script>
 	import {getStore} from '@/common/js/savaLocal'
-	import axios from 'axios'
 	import {formatTime} from '@/common/js/base'
 	import {userInfo} from '../../service/getData'
 	const noError = 0

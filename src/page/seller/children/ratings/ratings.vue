@@ -70,12 +70,12 @@
 <script>
 	import BScroll from 'better-scroll'
 	import star from '../star/star'
-	import axios from 'axios'
 	import {formatTime} from '@/common/js/base.js'
 	import cartFoods from '../cartfoods/cartfoods'
 	import countEdit from '../countedit/countedit'
 	import lineDivide from '../linedivide/linedivide'
 	import ratingFilter from '../ratingfilter/ratingfilter'
+	import {getSellerRatings} from '../../../../service/getData'
 	
 	const noError = 0
 	const ALL = 2
@@ -105,7 +105,20 @@
 	    }
 	  },
 	  created:function(){
-	  	axios.get('/api/ratings').then(response => {
+	  	this._initData()
+	  },
+	  components:{
+	  	star,
+	  	lineDivide,
+	  	ratingFilter,
+	  	cartFoods,
+	  	countEdit
+	  },
+	  methods:{
+	  	async _initData() {
+	  		let id = window.location.href
+	  		id = id.split('=')[1]
+	  		let response = await getSellerRatings(id)
 		    response = response.data
 		    if(response.status === noError){
 		    	this.ratings = response.data
@@ -125,18 +138,7 @@
 		    		this._initScroll()
 		    	});
 		    }
-		});
-	  },
-	  computed:{
-	  },
-	  components:{
-	  	star,
-	  	lineDivide,
-	  	ratingFilter,
-	  	cartFoods,
-	  	countEdit
-	  },
-	  methods:{
+	  	},
 	  	_initScroll:function(){
 	  		this.scroll = new BScroll(this.$refs.ratingContent,{
 	  			click:true

@@ -395,12 +395,12 @@
 </template>
 
 <script>
-	import axios from 'axios'
 	import BScroll from 'better-scroll'
 	import { Toast } from 'mint-ui'
 	import useDiscount from './children/usediscount'
 	import reMarks from './children/reMarks'
 	import { getStore } from '@/common/js/savaLocal'
+	import {userAddress,userInfo} from '../../service/getData'
 	
 	const noError = 0
 	
@@ -421,19 +421,26 @@
 			}
 		},
 		methods: {
-			_initDiscount: function() {
+			async _initDiscount() {
 				let self = this
 				let id = getStore('user_id')
-				axios.get('/api/user',{
-					params: {id: id}
-				}).then(function(res){
-					if(res.data.status === noError) {
-						self.discounts = res.data.data.discounts
-						
-					}
-				}).then(function(error){
+				const res = await userInfo(id)
+				if(res.data.status === noError) {
+					self.discounts = res.data.data.discounts
 					
-				})
+				}
+				
+			},
+			async _getAdress() {
+				let self = this
+				let id = getStore('user_id')
+				const res = await userAddress(id);
+				let address = []
+				if(res.data.status === noError){
+					address = res.data.data[0]
+					self.defaultAddress = address
+				}	
+				
 			},
 			discountedShow: function(item){
 				if(item.price) {
@@ -511,18 +518,7 @@
 					}
 				}
 			} else {
-				let self = this
-				let id = getStore('user_id')
-				axios.get('/api/users/address',{
-					params: {
-						id:id
-					}
-				}).then(function(res){
-					if(res.data.status === noError){
-						address = res.data.data[0]
-						self.defaultAddress = address
-					}	
-				})
+				this._getAdress();
 			}
 			
 			this._initDiscount()

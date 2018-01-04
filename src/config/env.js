@@ -12,7 +12,8 @@ if (process.env.NODE_ENV == 'development') {
     baseUrl = 'http://localhost:8080';
 
 }else if(process.env.NODE_ENV == 'production'){
-	baseUrl = 'http://112.2.2.2:8001';
+	baseUrl = 'http://localhost:8080';
+	//baseUrl = 'http://122.112.239.212:8080';
 }
 
 export {

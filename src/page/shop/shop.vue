@@ -177,11 +177,11 @@
 </template>
 
 <script>
-	import axios from 'axios'
 	import sellerPanel from 'components/sellerPanel/sellerPanel'
 	import { Indicator } from 'mint-ui'
 	import { setStore, getstore } from'@/common/js/savaLocal'
 	import { loadUrl } from '@/common/js/unit'
+	import {getShops} from '../../service/getData'
 	
 	const noError = 0
 	const category = ["综合排序","速度最快","评分最高","起送价最低","配送费最低","人均高到低","人均低到高"]
@@ -240,6 +240,20 @@
 				} else if(i === "filter") {
 					this.filterNumber = 3
 				}
+			},
+			async getShops () {
+				let self = this
+				let url = window.location.href
+				let a = loadUrl(url)
+				this.title = decodeURI(a.title)
+				let res = await getShops(a.max_type);
+				if(res.data.status === noError ) {
+					if(res.data.data.foods){
+						self.shops = res.data.data.foods
+					} else {
+						self.noDataShow = true
+					}
+				}
 			}
 		},
 		watch:{
@@ -267,31 +281,7 @@
 			},
 		},
 		created: function(){
-			let self = this
-			let url = window.location.href
-			let a = loadUrl(url)
-			this.title = decodeURI(a.title)
-			axios.get('/api/shops',{
-				params:{
-					max_type: a.max_type
-				}
-			}).then(function(res){
-				if(res.data.status === noError ) {
-					if(res.data.data.foods){
-						self.shops = res.data.data.foods
-					} else {
-						self.noDataShow = true
-					}
-				}
-			}).then(function(error){
-				
-			})
-			axios.get('/api/category')
-			.then(function(res){
-//				self.category = res.data.data
-			}).then(function(error){
-				
-			})
+			this.getShops()
 		},
 		components:{
 			sellerPanel

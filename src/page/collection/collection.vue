@@ -217,11 +217,11 @@
 </template>
 
 <script>
-	import axios from 'axios'
 	import {mapState,mapMutations} from 'vuex'
 	import {getStore} from '@/common/js/savaLocal'
 	import { Indicator } from 'mint-ui'
 	import star from 'components/star/star'
+	import {userInfo} from '../../service/getData'
 	
 	const noError = 0
 	const desc = ['准时达','蜂鸟专送']
@@ -237,16 +237,15 @@
 			
 		},
 		methods: {
-			_loadData: function(){
+			async _loadData(){
 				let self = this
 				let id = getStore('user_id')
-				axios.get('/api/user',{params:{id:id}})
-				.then(function(res){
-					if(res.data.status === noError){
-						self.collections = res.data.data.collections
-						Indicator.close()
-					}
-				})
+				const res = await userInfo(id)
+				if(res.data.status === noError){
+					self.collections = res.data.data.collections
+					Indicator.close()
+				}
+				
 			},
 			returnPrev: function(){
 				this.$router.go(-1)

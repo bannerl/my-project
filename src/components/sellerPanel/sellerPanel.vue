@@ -46,7 +46,7 @@
 						font-size: 16px;
 						vertical-align: middle;
 						color: #000;
-						font-weight: 700;
+						font-weight: 400;
 					}
 				}
 				.two-line{
