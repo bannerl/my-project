@@ -126,7 +126,7 @@
 	import {formatTime} from '@/common/js/base'
 	import {userInfo} from '../../service/getData'
 	const noError = 0
-	
+
 	export default {
 		data() {
 			return {
