@@ -3,6 +3,9 @@
         resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
         recalc = function() {
             var clientWidth = docEl.clientWidth;
+            if(clientWidth>800){
+            	return;
+            }
             if (!clientWidth) return;
             docEl.style.fontSize = 100 * (clientWidth / 375) + 'px';
         };
