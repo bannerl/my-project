@@ -17,7 +17,7 @@
     访问 http://localhost:8080
     
 ## 效果演示
-  [戳这里](http://122.112.239.212:8080/#/index)（请用chrome手机模式预览）
+  [戳这里](http://106.14.169.113:8080/#/index)（请用chrome手机模式预览）
     
 ### 移动端扫描下方二维码
  ![Alt text](./img/erweima.png)
