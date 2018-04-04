@@ -63,7 +63,7 @@
 	  		let id = window.location.href
 	  		id = id.split('=')[1]
 	  		let res = await getSellerInfo(id)
-		    res = res.data;
+		    res = res.data
 		    
 		    if(res.status === noError){
 		    	this.seller = res.data

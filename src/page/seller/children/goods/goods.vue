@@ -74,12 +74,12 @@
 	  },
 	  data () {
 	    return {
-	    	goods:this.goods,
+	    	goods:[],
 	    	foodsArr:[],
 	    	scrollY:0,
 	    	selectFoods:[],
 	    	menuSelect:{},
-	    	clickFood:{},
+	    	clickFood:{}
 	    }
 	  },
 	  created(){
@@ -96,15 +96,16 @@
 	  	    a = a.split('=')[1]
 	  		let response = await getSellerGoods(a)
 		    response = response.data
+		    
 		    if(response.status === noError){
 		    	let _goods = response.data
-		    	let foods = []
+		    	let foods = [] //遍历出food
 		    	_goods.forEach((item)=>{
 		  			item.foods.forEach((food)=>{
 		  				foods.push(food)
 		  			})
 		  		})
-		    	let _d = []
+		    	
 		    	if(getStore('shopCount')){
 		    		let shopCount = JSON.parse(getStore('shopCount'))
 		    		let i = 0
@@ -116,9 +117,9 @@
 				  			})
 				  		})
 		    		}
-		    		this.goods = _goods
+		    		//this.goods = _goods
 		    	} else {
-		    		this.goods = _goods
+		    		//this.goods = _goods
 		    	}
 		    	this.goods = _goods
 		    	this.$nextTick( ( ) =>{
@@ -129,6 +130,7 @@
 	  	},
 	  	_initScroll:function(){
 	  		let height = 0
+	  		
 	  		for(let i=0;i<this.$refs.foodsList.length;i++){
 	  			this.selectFoods.push(height)
 	  			height = height+this.$refs.foodsList[i].clientHeight

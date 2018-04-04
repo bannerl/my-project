@@ -64,6 +64,7 @@
 					</div>
 				</div>
 			</div>
+		
 		</div>	
 	</div>
 	</transition>
@@ -108,11 +109,6 @@
 			countEdit,
 			lineDivide,
 			ratingFilter
-		},
-		computed:{
-		},
-		watch:{
-			
 		},
 		methods:{
 			returnGoods:function(){
@@ -174,8 +170,6 @@
 			},
 			onlyText:function(boo){
 				this.onlyContent = boo
-			},
-			watch:{
 			},
 			ratingShow:function(rating){
 				this.$nextTick( ( ) =>{
