@@ -16,7 +16,7 @@ ceshi
     npm run dev
 
     访问 http://localhost:8080
-    
+ a   
 ## 效果演示
   [戳这里](http://106.14.169.113:8080/#/index)（请用chrome手机模式预览）
     
