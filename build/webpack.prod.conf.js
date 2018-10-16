@@ -10,15 +10,16 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 
+
 const env = process.env.NODE_ENV === 'testing'
   ? require('../config/test.env')
   : config.build.env
 
 const webpackConfig = merge(baseWebpackConfig, {
-	externals:{
-    'vue':'Vue',
-    'vuex':'Vuex'
-	},
+  externals: {
+    'vue': 'Vue',
+    'vuex': 'Vuex'
+  },
   module: {
     rules: utils.styleLoaders({
       sourceMap: config.build.productionSourceMap,
@@ -26,7 +27,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     })
   },
   //devtool: '#cheap-module-eval-source-map',
-	devtool: config.build.productionSourceMap ? '#source-map' : false,
+  devtool: config.build.productionSourceMap ? '#source-map' : false,
   output: {
     path: config.build.assetsRoot,
     filename: utils.assetsPath('js/[name].[chunkhash].js'),
